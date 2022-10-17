@@ -15,7 +15,11 @@ return new class extends Migration
     {
         Schema::create('formulasi', function (Blueprint $table) {
             $table->string('id', 40)->primary();
+            $table->string('indikator_kinerja_id', 40)->index();
             $table->text('formulasi');
+            $table->string('tipe_penghitungan', 20);
+            $table->string('divisi_id', 40)->index();
+            $table->text('alasan');
             $table->timestamps();
         });
     }

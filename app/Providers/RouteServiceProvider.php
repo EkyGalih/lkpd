@@ -38,10 +38,11 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
 
         $this->IkuRealisasiAdmin();
+        $this->SasaranStrategisAdmin();
         $this->IndikatorKinerjaAdmin();
         $this->FormulasiAdmin();
-        $this->PerhitunganAdmin();
 
+        $this->DivisiAdmin();
         $this->RealisasiAnggaranAdmin();
         $this->SaldoAnggaranAdmin();
         $this->NeracaAdmin();
@@ -82,6 +83,13 @@ class RouteServiceProvider extends ServiceProvider
         ->group(base_path('routes/admin/iku-realisasi/IkuRealisasi.php'));
     }
 
+    public function SasaranStrategisAdmin()
+    {
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/admin/iku-realisasi/sasaran-strategis.php'));
+    }
+
     public function IndikatorKinerjaAdmin()
     {
         Route::middleware('web')
@@ -96,11 +104,11 @@ class RouteServiceProvider extends ServiceProvider
         ->group(base_path('routes/admin/iku-realisasi/formulasi.php'));
     }
 
-    public function PerhitunganAdmin()
+    public function DivisiAdmin()
     {
         Route::middleware('web')
         ->namespace($this->namespace)
-        ->group(base_path('routes/admin/iku-realisasi/perhitungan.php'));
+        ->group(base_path('routes/admin/Divisi.php'));
     }
 
     public function mapArusKasAdminRoutes()

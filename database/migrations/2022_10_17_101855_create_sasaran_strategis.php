@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('iku_realisasi', function (Blueprint $table) {
-            $table->foreign('divisi_id')
-                ->references('id')
-                ->on('divisi')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+        Schema::create('sasaran_strategis', function (Blueprint $table) {
+            $table->string('id', 40)->primary();
+            $table->text('sasaran_strategis');
+            $table->timestamps();
         });
     }
 
@@ -29,8 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('iku_realisasi', function (Blueprint $table) {
-            $table->dropIfExists('divisi_id');
-        });
+        Schema::dropIfExists('sasaran_strategis');
     }
 };

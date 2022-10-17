@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Webpatser\Uuid\Uuid;
 
-class IndikatorKinerja extends Model
+class Formulasi extends Model
 {
     use HasFactory;
 
-    protected $table = 'indikator_kinerja';
+    protected $table = 'formulasi';
     protected $guarded = ['created_at', 'updated_at'];
 
     public static function boot()
@@ -22,14 +22,13 @@ class IndikatorKinerja extends Model
         });
     }
 
-    public static function getIK()
+    public function IndikatorKinerja()
     {
-        $indikatorKinerja = IndikatorKinerja::select('id as ik_id', 'indikator_kinerja.indikator_kinerja')->get();
-        return $indikatorKinerja;
+        return $this->belongsTo(IndikatorKinerja::class);
     }
 
-    public function Formula()
+    public function divisi()
     {
-        return $this->hasMany(Formulasi::class);
+        return $this->belongsTo(Divisi::class);
     }
 }

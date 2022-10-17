@@ -17,9 +17,9 @@
                 </a>
                 <ul class="sub @yield('show-menu-iku')">
                     <li class="@yield('iku-realisasi')"><a href="{{ route('iku-realisasi.index') }}"><i class="fas fa-book"></i> Iku & Realisasi</a></li>
+                    <li class="@yield('iku-sasaran')"><a href="{{ route('iku-sasaran') }}"><i class="fas fa-dot-circle"></i> Sasaran Strategis</a></li>
                     <li class="@yield('iku-indikator')"><a href="{{ route('iku-indikator') }}"><i class="fas fa-tachometer-alt"></i> Indikator Kinerja</a></li>
-                    <li class="@yield('iku-formulasi')"><a href="#"><i class="fas fa-file-code"></i> Formulasi</a></li>
-                    <li class="@yield('iku-perhitungan')"><a href="#"><i class="fas fa-calculator"></i> Perhitungan</a></li>
+                    <li class="@yield('iku-formulasi')"><a href="{{ route('iku-formulasi') }}"><i class="fas fa-file-code"></i> Formulasi</a></li>
                 </ul>
             </li>
             <li class="">
@@ -62,6 +62,7 @@
                 </a>
                 <ul class="sub @yield('show-menu-tools')">
                     <li class="@yield('kode-rekening')"><a href="{{ route('kode-rekening-admin') }}"><i class="fas fa-barcode"></i> Kode Rekening</a></li>
+                    <li class="@yield('divisi')"><a href="{{ route('admin-divisi') }}"><i class="fas fa-building"></i> Divisi</a></li>
                 </ul>
             </li>
             @endif

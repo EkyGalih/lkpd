@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('iku_realisasi', function (Blueprint $table) {
-            $table->foreign('formulasi_id')
-                ->references('id')
-                ->on('formulasi')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+        Schema::create('indikator_kinerja', function (Blueprint $table) {
+            $table->string('id', 40)->primary();
+            $table->text('indikator_kinerja');
+            $table->timestamps();
         });
     }
 
@@ -29,8 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('iku_realisasi', function (Blueprint $table) {
-            $table->dropIfExists('formulasi_id');
-        });
+        Schema::drop('indikator_kinerja');
     }
 };

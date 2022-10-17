@@ -15,10 +15,8 @@ return new class extends Migration
     {
         Schema::create('iku_realisasi', function (Blueprint $table) {
             $table->string('id', 40)->primary();
-            $table->string('divisi_id', 40)->index();
+            $table->string('sasaran_strategis_id', 40)->index();
             $table->string('indikator_kinerja_id', 40)->index();
-            $table->string('formulasi_id', 40)->index();
-            $table->string('perhitungan_id', 40)->index();
             $table->string('target', 50);
             $table->string('target_tercapai', 50)->nullable();
             $table->string('user_id', 40)->index();

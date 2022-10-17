@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::table('iku_realisasi', function (Blueprint $table) {
-            $table->foreign('perhitungan_id')
+            $table->foreign('sasaran_strategis_id')
                 ->references('id')
-                ->on('perhitungan')
+                ->on('sasaran_strategis')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
@@ -29,8 +29,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('iku_realisasi', function (Blueprint $table) {
-            $table->dropIfExists('perhitungan_id');
+        Schema::table('indikator_kinerja', function (Blueprint $table) {
+            $table->dropIfExists('sasaran_strategis_id');
         });
     }
 };
