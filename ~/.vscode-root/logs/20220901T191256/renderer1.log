@@ -1,0 +1,6 @@
+[2022-09-01 19:12:58.702] [renderer1] [critical] Extension 'tabnine.tabnine-vscode' wants API proposal 'inlineCompletions' but that proposal DOES NOT EXIST. Likely, the proposal has been finalized (check 'vscode.d.ts') or was abandoned.
+[2022-09-01 19:13:04.047] [renderer1] [error] [Extension Host] (node:40530) [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues. Please use the Buffer.alloc(), Buffer.allocUnsafe(), or Buffer.from() methods instead.
+(Use `code --trace-deprecation ...` to show where the warning was created)
+[2022-09-01 19:13:12.442] [renderer1] [warning] [zobo.php-intellisense]: Cannot register 'php.memoryLimit'. This property is already registered.
+[2022-09-01 19:13:12.443] [renderer1] [warning] [zobo.php-intellisense]: Cannot register 'php.executablePath'. This property is already registered.
+[2022-09-01 19:13:14.305] [renderer1] [error] [Extension Host] validating /var/www/html/laporan-keuangan/~/.vscode-root/User/globalStorage/tabnine.tabnine-vscode/binaries/4.4.137/x86_64-unknown-linux-musl/TabNine timeout

@@ -1,0 +1,50 @@
+[2022-09-01 19:12:58.795] [sharedprocess] [info] Starting worker process with pid 40568 (type: fileWatcher, window: 1).
+[2022-09-01 19:13:01.294] [sharedprocess] [info] Getting Manifest... ctf0.laravel-goto-config
+[2022-09-01 19:13:01.294] [sharedprocess] [info] Getting Manifest... ctf0.laravel-goto-env
+[2022-09-01 19:13:01.295] [sharedprocess] [info] Getting Manifest... xdebug.php-debug
+[2022-09-01 19:13:01.296] [sharedprocess] [info] Getting Manifest... xdebug.php-pack
+[2022-09-01 19:13:01.296] [sharedprocess] [info] Getting Manifest... onecentlin.laravel-extension-pack
+[2022-09-01 19:13:01.297] [sharedprocess] [info] Getting Manifest... shufo.vscode-blade-formatter
+[2022-09-01 19:13:01.919] [sharedprocess] [info] Installing extension: xdebug.php-debug
+[2022-09-01 19:13:02.437] [sharedprocess] [info] Installing extension: onecentlin.laravel-extension-pack
+[2022-09-01 19:13:02.485] [sharedprocess] [info] Installing extension: shufo.vscode-blade-formatter
+[2022-09-01 19:13:02.537] [sharedprocess] [info] Installing extension: xdebug.php-pack
+[2022-09-01 19:13:02.569] [sharedprocess] [info] Installing extension: ctf0.laravel-goto-config
+[2022-09-01 19:13:02.569] [sharedprocess] [info] Installing extension: ctf0.laravel-goto-env
+[2022-09-01 19:13:02.998] [sharedprocess] [info] Getting Manifest... zobo.php-intellisense
+[2022-09-01 19:13:03.470] [sharedprocess] [info] Downloaded extension: xdebug.php-debug /var/www/html/laporan-keuangan/~/.vscode-root/CachedExtensionVSIXs/xdebug.php-debug-1.28.0
+[2022-09-01 19:13:03.956] [sharedprocess] [info] Extracted extension to /root/.vscode/extensions/.d87321e4-c842-4f08-a81a-4a80e7b40aa8: xdebug.php-debug
+[2022-09-01 19:13:03.966] [sharedprocess] [info] Renamed to /root/.vscode/extensions/xdebug.php-debug-1.28.0
+[2022-09-01 19:13:03.967] [sharedprocess] [info] Extracting completed. xdebug.php-debug
+[2022-09-01 19:13:03.971] [sharedprocess] [info] Extension installed successfully: xdebug.php-debug
+[2022-09-01 19:13:04.196] [sharedprocess] [info] Installing extension: zobo.php-intellisense
+[2022-09-01 19:13:04.716] [sharedprocess] [info] Downloaded extension: ctf0.laravel-goto-env /var/www/html/laporan-keuangan/~/.vscode-root/CachedExtensionVSIXs/ctf0.laravel-goto-env-0.2.5
+[2022-09-01 19:13:04.797] [sharedprocess] [info] Downloaded extension: onecentlin.laravel-extension-pack /var/www/html/laporan-keuangan/~/.vscode-root/CachedExtensionVSIXs/onecentlin.laravel-extension-pack-1.1.0
+[2022-09-01 19:13:04.813] [sharedprocess] [info] Extracted extension to /root/.vscode/extensions/.08ed4baa-1110-47cc-98ae-f37d6536c3db: onecentlin.laravel-extension-pack
+[2022-09-01 19:13:04.817] [sharedprocess] [info] Renamed to /root/.vscode/extensions/onecentlin.laravel-extension-pack-1.1.0
+[2022-09-01 19:13:04.819] [sharedprocess] [info] Extracting completed. onecentlin.laravel-extension-pack
+[2022-09-01 19:13:04.822] [sharedprocess] [info] Extension installed successfully: onecentlin.laravel-extension-pack
+[2022-09-01 19:13:04.843] [sharedprocess] [info] Downloaded extension: ctf0.laravel-goto-config /var/www/html/laporan-keuangan/~/.vscode-root/CachedExtensionVSIXs/ctf0.laravel-goto-config-0.2.9
+[2022-09-01 19:13:05.570] [sharedprocess] [info] Extracted extension to /root/.vscode/extensions/.49eb2824-e76b-4470-bcd3-147c764df40c: ctf0.laravel-goto-env
+[2022-09-01 19:13:05.573] [sharedprocess] [info] Renamed to /root/.vscode/extensions/ctf0.laravel-goto-env-0.2.5
+[2022-09-01 19:13:05.574] [sharedprocess] [info] Extracting completed. ctf0.laravel-goto-env
+[2022-09-01 19:13:05.576] [sharedprocess] [info] Extension installed successfully: ctf0.laravel-goto-env
+[2022-09-01 19:13:05.683] [sharedprocess] [info] Extracted extension to /root/.vscode/extensions/.ed885766-2003-44dd-8184-d7a344ae9146: ctf0.laravel-goto-config
+[2022-09-01 19:13:05.686] [sharedprocess] [info] Renamed to /root/.vscode/extensions/ctf0.laravel-goto-config-0.2.9
+[2022-09-01 19:13:05.687] [sharedprocess] [info] Extracting completed. ctf0.laravel-goto-config
+[2022-09-01 19:13:05.690] [sharedprocess] [info] Extension installed successfully: ctf0.laravel-goto-config
+[2022-09-01 19:13:07.420] [sharedprocess] [info] Downloaded extension: shufo.vscode-blade-formatter /var/www/html/laporan-keuangan/~/.vscode-root/CachedExtensionVSIXs/shufo.vscode-blade-formatter-0.17.3
+[2022-09-01 19:13:09.378] [sharedprocess] [info] Downloaded extension: zobo.php-intellisense /var/www/html/laporan-keuangan/~/.vscode-root/CachedExtensionVSIXs/zobo.php-intellisense-1.0.11
+[2022-09-01 19:13:10.244] [sharedprocess] [info] Extracted extension to /root/.vscode/extensions/.e211cd22-bb34-4e80-998e-8d9bab6865d5: shufo.vscode-blade-formatter
+[2022-09-01 19:13:10.248] [sharedprocess] [info] Renamed to /root/.vscode/extensions/shufo.vscode-blade-formatter-0.17.3
+[2022-09-01 19:13:10.249] [sharedprocess] [info] Extracting completed. shufo.vscode-blade-formatter
+[2022-09-01 19:13:10.253] [sharedprocess] [info] Extension installed successfully: shufo.vscode-blade-formatter
+[2022-09-01 19:13:10.957] [sharedprocess] [info] Extracted extension to /root/.vscode/extensions/.91100fe2-b1bc-4cd7-9e5a-db4e2f3042c2: zobo.php-intellisense
+[2022-09-01 19:13:10.967] [sharedprocess] [info] Renamed to /root/.vscode/extensions/zobo.php-intellisense-1.0.11
+[2022-09-01 19:13:10.968] [sharedprocess] [info] Extracting completed. zobo.php-intellisense
+[2022-09-01 19:13:12.421] [sharedprocess] [info] Downloaded extension: xdebug.php-pack /var/www/html/laporan-keuangan/~/.vscode-root/CachedExtensionVSIXs/xdebug.php-pack-1.0.3
+[2022-09-01 19:13:12.426] [sharedprocess] [info] Extracted extension to /root/.vscode/extensions/.0fc3b135-28da-4a2a-b75d-8cc09474e868: xdebug.php-pack
+[2022-09-01 19:13:12.428] [sharedprocess] [info] Renamed to /root/.vscode/extensions/xdebug.php-pack-1.0.3
+[2022-09-01 19:13:12.429] [sharedprocess] [info] Extracting completed. xdebug.php-pack
+[2022-09-01 19:13:12.431] [sharedprocess] [info] Extension installed successfully: zobo.php-intellisense
+[2022-09-01 19:13:12.431] [sharedprocess] [info] Extension installed successfully: xdebug.php-pack
