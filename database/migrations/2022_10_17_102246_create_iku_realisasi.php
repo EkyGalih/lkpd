@@ -17,8 +17,9 @@ return new class extends Migration
             $table->string('id', 40)->primary();
             $table->string('sasaran_strategis_id', 40)->index();
             $table->string('indikator_kinerja_id', 40)->index();
+            $table->string('formula_id', 40)->index();
             $table->string('target', 50);
-            $table->string('target_tercapai', 50)->nullable();
+            $table->string('target_tercapai', 50)->default(0);
             $table->string('user_id', 40)->index();
             $table->timestamps();
         });

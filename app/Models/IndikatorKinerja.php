@@ -32,4 +32,9 @@ class IndikatorKinerja extends Model
     {
         return $this->hasMany(Formulasi::class);
     }
+
+    public function IkuRealisasi()
+    {
+        return $this->hasOne(IkuRealisasi::class, 'id');
+    }
 }

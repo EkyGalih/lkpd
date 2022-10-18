@@ -14,6 +14,21 @@ return new class extends Migration
     public function up()
     {
         Schema::table('iku_realisasi', function (Blueprint $table) {
+            $table->foreign('sasaran_strategis_id')
+                ->references('id')
+                ->on('sasaran_strategis')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('indikator_kinerja_id')
+                ->references('id')
+                ->on('indikator_kinerja')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->foreign('formula_id')
+                ->references('id')
+                ->on('formulasi')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
@@ -30,7 +45,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('iku_realisasi', function (Blueprint $table) {
-            $table->dropIfExists('user_id');
+            $table->dropIfExists('indikator_kinerja_id');
         });
     }
 };

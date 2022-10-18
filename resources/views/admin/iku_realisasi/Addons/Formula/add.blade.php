@@ -31,8 +31,8 @@
                         <textarea name="formulasi" class="form-control"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="tipe_perhitungan">Tipe Perhitungan</label>
-                        <input type="text" name="tipe_perhitungan" class="form-control">
+                        <label for="tipe_penghitungan">Tipe Perhitungan</label>
+                        <input type="text" name="tipe_penghitungan" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="sumber_data">Sumber Data</label>

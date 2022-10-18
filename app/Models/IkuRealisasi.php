@@ -21,4 +21,24 @@ class IkuRealisasi extends Model
             $model->id = (string)Uuid::generate(4);
         });
     }
+
+    public function sasaran()
+    {
+        return $this->belongsTo(SasaranStrategis::class, 'sasaran_strategis_id');
+    }
+
+    public function Divisi()
+    {
+        return $this->belongsTo(Divisi::class);
+    }
+
+    public function IK()
+    {
+        return $this->belongsTo(IndikatorKinerja::class, 'indikator_kinerja_id');
+    }
+
+    public function formula()
+    {
+        return $this->belongsTo(Formulasi::class, 'formula_id');
+    }
 }

@@ -59,6 +59,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->KodeRekeningAdminApi();
         $this->ArusKasAdminApi();
         $this->RealisasiAnggaranAdminApi();
+        $this->IkuRealisasiAdminApi();
     }
 
     public function mapApiRoutes()
@@ -204,6 +205,14 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
         ->namespace($this->namespace)
         ->group(base_path('routes/admin/SubKodeRekening.php'));
+    }
+
+    public function IkuRealisasiAdminApi()
+    {
+        Route::middleware('api')
+        ->prefix('api')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/admin/api/IkuRealisasi.php'));
     }
 
     /**

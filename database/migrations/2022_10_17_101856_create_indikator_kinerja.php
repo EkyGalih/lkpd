@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::drop('indikator_kinerja');
+        Schema::dropIfExists('indikator_kinerja');
     }
 };

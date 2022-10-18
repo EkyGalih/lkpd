@@ -21,4 +21,14 @@ class SasaranStrategis extends Model
             $model->id = (string)Uuid::generate(4);
         });
     }
+
+    public static function getSasaran()
+    {
+        return SasaranStrategis::select('id as sasaran_id', 'sasaran_strategis.*')->get();
+    }
+
+    public function iku()
+    {
+        return $this->hasMany(IkuRealisasi::class, 'id');
+    }
 }

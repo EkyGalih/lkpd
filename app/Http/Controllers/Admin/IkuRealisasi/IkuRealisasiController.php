@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin\IkuRealisasi;
 
 use App\Http\Controllers\Controller;
 use App\Models\IkuRealisasi;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class IkuRealisasiController extends Controller
 {
@@ -15,20 +17,12 @@ class IkuRealisasiController extends Controller
      */
     public function index()
     {
-        $IkuRealisasi = IkuRealisasi::select('id as iku_realisasi_id', 'iku_realisasi.*')->orderBy('created_at', 'ASC')->get();
+        $user = User::select('id as user_id')->where('id', '=', Auth::user()->id)->first();
+        $IkuRealisasi = IkuRealisasi::select('id as iku_realisasi_id', 'iku_realisasi.*')->orderBy('created_at', 'ASC')->where('created_at', 'LIKE', date('Y').'%')->paginate(10);
 
-        return view('admin.iku_realisasi.iku_realisasi', compact('IkuRealisasi'));
+        return view('admin.iku_realisasi.Components.iku_realisasi', compact('IkuRealisasi', 'user'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -38,29 +32,15 @@ class IkuRealisasiController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        IkuRealisasi::create([
+            'sasaran_strategis_id' => $request->sasaran_strategis_id,
+            'indikator_kinerja_id' => $request->indikator_kinerja_id,
+            'formula_id' => $request->formula_id,
+            'target' => $request->target,
+            'user_id' => $request->user_id
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return redirect()->route('iku-realisasi.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
@@ -72,7 +52,7 @@ class IkuRealisasiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
     }
 
     /**
@@ -83,6 +63,9 @@ class IkuRealisasiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $IkuRealisasi = IkuRealisasi::findOrFail($id);
+        $IkuRealisasi->delete();
+
+        return redirect()->route('iku-realisasi.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

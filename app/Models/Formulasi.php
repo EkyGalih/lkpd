@@ -22,6 +22,11 @@ class Formulasi extends Model
         });
     }
 
+    public static function getFormula()
+    {
+        return Formulasi::select('id as formula_id', 'formulasi.*')->get();
+    }
+
     public function IndikatorKinerja()
     {
         return $this->belongsTo(IndikatorKinerja::class);
@@ -30,5 +35,10 @@ class Formulasi extends Model
     public function divisi()
     {
         return $this->belongsTo(Divisi::class);
+    }
+
+    public function Iku()
+    {
+        return $this->hasOne(IkuRealisasi::class, 'id');
     }
 }

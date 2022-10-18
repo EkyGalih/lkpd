@@ -31,4 +31,9 @@ class Divisi extends Model
     {
         return $this->hasMany(Formulasi::class);
     }
+
+    public function IkuRealisasi()
+    {
+        return $this->hasMany(IkuRealisasi::class);
+    }
 }
