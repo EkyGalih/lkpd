@@ -18,7 +18,7 @@ class IkuRealisasiController extends Controller
     public function index()
     {
         $user = User::select('id as user_id')->where('id', '=', Auth::user()->id)->first();
-        
+
         $IkuRealisasi = IkuRealisasi::select('id as iku_realisasi_id', 'iku_realisasi.*')->orderBy('created_at', 'ASC')->where('created_at', 'LIKE', date('Y').'%')->paginate(10);
 
         return view('admin.iku_realisasi.Components.iku_realisasi', compact('IkuRealisasi', 'user'));
@@ -53,7 +53,16 @@ class IkuRealisasiController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $IkuRealisasi = IkuRealisasi::findOrFail($id);
+        $IkuRealisasi->update([
+            'sasaran_strategis_id' => $request->sasaran_strategis_id,
+            'indikator_kinerja_id' => $request->indikator_kinerja_id,
+            'formula_id' => $request->formula_id,
+            'target' => $request->target,
+            'target_tercapai' => $request->target_tercapai
+        ]);
 
+        return redirect()->route('iku-realisasi.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
     /**

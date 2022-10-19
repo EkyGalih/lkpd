@@ -15,8 +15,9 @@
                 </div>
             </div>
             <div class="modal-body">
-                <form action="{{ route('iku-realisasi.store') }}" method="POST">
+                <form action="{{ route('iku-realisasi.update', $data->iku_realisasi_id) }}" method="POST">
                     @csrf
+                    @method('PUT')
                     <div class="form-group">
                         <label for="sasaran_strategis">Sasaran Strategis</label>
                         @php $SasaranStrategis = \App\Models\SasaranStrategis::getSasaran() @endphp
@@ -40,7 +41,7 @@
                     <div class="form-group">
                         <label for="formula">Formulasi Perhitungan</label>
                         <textarea id="formula_edit" class="form-control" readonly="readonly">{{ $data->formula->formulasi }}</textarea>
-                        <input type="hidden" name="formula_id" id="formula_id_edit">
+                        <input type="hidden" name="formula_id" id="formula_id_edit" value="{{ $data->formula_id }}">
                     </div>
                     <div class="form-group">
                         <label for="tipe_penghitungan">Tipe Pernghitungan</label>
