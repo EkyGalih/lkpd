@@ -1,13 +1,13 @@
+<h2 style="text-align: center;">INDIKATOR KINERJA UTAMA (IKU) {{ date('Y') }}</h2>
 <table class="table table-hover table-striped table-bordered">
     <thead>
         <tr>
-            <td>#</td>
-            <td>Sasaran Strategis</td>
-            <td>Indikator Kinerja</td>
-            <td>Penjelasan <br />(Formulasi Pengukuran, Tipe Perhitungan, Sumber Data, Alasan)</td>
-            <td>Target</td>
-            <td>Target Tercapai</td>
-            <td></td>
+            <th>#</th>
+            <th style="font-size: 16px; font-family: 'Times New Roman';">Sasaran Strategis</th>
+            <th style="font-size: 16px; font-family: 'Times New Roman';">Indikator Kinerja</th>
+            <th style="font-size: 16px; font-family: 'Times New Roman';">Penjelasan <br />(Formulasi Pengukuran, Tipe Perhitungan, Sumber Data, Alasan)</th>
+            <th style="font-size: 16px; font-family: 'Times New Roman';">Target</th>
+            <th style="font-size: 16px; font-family: 'Times New Roman';">Target Tercapai</th>
         </tr>
     </thead>
     <tbody>
@@ -18,16 +18,8 @@
                 <td rowspan="4">{{ $data->IK->indikator_kinerja }}</td>
                 <td><strong>Formulasi Pengukuran :</strong> {{ $data->formula->formulasi }}</td>
                 <td rowspan="4">{{ $data->target }}%</td>
-                <td rowspan="4"><label style="font-size: 13px;" class="label label-{{ $data->target > $data->target_tercapai ? 'danger' : 'success' }}">{{ $data->target_tercapai }}%</label></td>
-                <td rowspan="4">
-                    <button type="button" class="btn btn-link btn-xs" data-toggle="modal"
-                        data-target="#EditData{{ $loop->iteration }}">
-                        <i class="fas fa-edit"></i>
-                    </button>
-                    <button type="button" class="btn btn-link btn-xs"
-                        onclick="deleteData('{{ route('iku-realisasi.destroy', $data->iku_realisasi_id) }}')">
-                        <i class="fas fa-trash"></i>
-                    </button>
+                <td rowspan="4"><label style="font-size: 13px;"
+                        class="label label-{{ $data->target > $data->target_tercapai ? 'danger' : 'success' }}">{{ $data->target_tercapai }}%</label>
                 </td>
             </tr>
             <tr>
@@ -62,6 +54,26 @@
                     $('#formula').val(data.formulasi);
                     $('#tipe_penghitungan').val(data.tipe_penghitungan);
                     $('#divisi_id').val(data.nama_divisi)
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function editData() {
+            var formula_id = $('#indikator_kinerja_id_edit').val();
+            $.ajax({
+                type: 'GET',
+                async: true,
+                url: '{{ url('api/iku-realisasi/formulaDetail') }}/' + formula_id,
+                dataType: 'json',
+                success: function(data) {
+                    $('#formula_id_edit').val(data.formula_id);
+                    $('#formula_edit').val(data.formulasi);
+                    $('#tipe_penghitungan_edit').val(data.tipe_penghitungan);
+                    $('#divisi_id_edit').val(data.nama_divisi);
+                    $('#target').val(data.target);
                 },
                 error: function(error) {
                     console.log(error);

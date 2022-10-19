@@ -12,16 +12,25 @@
                     <div class="col-lg-10">
                         <h4 class="title"><i class="fas fa-list"></i> Capaian Iku & Realisasi</h4>
                     </div>
-                    <div class="col-lg-2">
-                        <button type="button" class="btn btn-theme btn-sm" data-toggle="modal" data-target="#TambahData">
-                            <i class="fas fa-plus"></i> Tambah Data
-                        </button>
-                        @include('admin.iku_realisasi.Addons.IkuRealisasi.add')
-
-                    </div>
                 </div>
                 <hr />
-                @include('admin.iku_realisasi.Addons.IkuRealisasi.table')
+                <div class="row">
+                    <div class="col-lg-6">
+                        @include('admin.iku_realisasi.Addons.IkuRealisasi.table-rkt')
+                        @include('admin.iku_realisasi.Addons.IkuRealisasi.add')
+                    </div>
+                    <div class="col-lg-6">
+                        @include('admin.iku_realisasi.Addons.IkuRealisasi.program-anggaran')
+                        @include('admin.iku_realisasi.Addons.IkuRealisasi.add-program-anggaran')
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-1"></div>
+                    <div class="col-lg-10">
+                        @include('admin.iku_realisasi.Addons.IkuRealisasi.table-iku')
+                    </div>
+                    <div class="col-lg-1"></div>
+                </div>
             </div>
         </div>
     </div>

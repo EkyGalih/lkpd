@@ -41,6 +41,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->SasaranStrategisAdmin();
         $this->IndikatorKinerjaAdmin();
         $this->FormulasiAdmin();
+        $this->ProgramAnggaranIkuAdmin();
 
         $this->DivisiAdmin();
         $this->RealisasiAnggaranAdmin();
@@ -103,6 +104,13 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
         ->namespace($this->namespace)
         ->group(base_path('routes/admin/iku-realisasi/formulasi.php'));
+    }
+
+    public function ProgramAnggaranIkuAdmin()
+    {
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/admin/iku-realisasi/program-anggaran.php'));
     }
 
     public function DivisiAdmin()

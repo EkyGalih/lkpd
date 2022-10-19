@@ -51,16 +51,10 @@
                     </div>
                     <input type="hidden" name="user_id" value="{{ $user->user_id }}">
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-12">
                             <div class="form-group">
                                 <label for="target">Target</label>
                                 <input type="text" name="target" class="form-control" placeholder="Tulis angka persentase (tanpa persen)">
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label for="target_tercapai">Target Tercapai</label>
-                                <input type="text" name="target_tercapai" class="form-control" placeholder="Tulis angka persentase (tanpa Persen)">
                             </div>
                         </div>
                     </div>
