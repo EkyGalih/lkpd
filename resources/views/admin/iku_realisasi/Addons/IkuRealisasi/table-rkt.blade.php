@@ -1,39 +1,45 @@
-<h2 style="text-align: center;">RENCANAN KINERJA TAHUNAN (RKT) {{ date('Y') }}<br/>TINGKAT ORGANISASI PERANGKAT DAERAH</h2>
-<button type="button" class="btn btn-theme btn-sm" data-toggle="modal" data-target="#TambahData" style="float: right; margin-bottom: 5px;">
-    <i class="fas fa-plus"></i> Tambah Data
-</button>
-<table class="table table-hover table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th style="font-size: 16px; font-family: 'Times New Roman'; width: 300px;">Sasaran Strategis</th>
-            <th style="font-size: 16px; font-family: 'Times New Roman'; width: 300px;">Indikator Kinerja</th>
-            <th style="font-size: 16px; font-family: 'Times New Roman'; text-align: center;">Target</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($IkuRealisasi as $data)
+<div class="table-responsive">
+    <h2 style="text-align: center;">RENCANAN KINERJA TAHUNAN (RKT) {{ date('Y') }}<br />TINGKAT ORGANISASI PERANGKAT
+        DAERAH</h2>
+    <button type="button" class="btn btn-theme btn-sm" data-toggle="modal" data-target="#TambahData"
+        style="float: right; margin-bottom: 5px;">
+        <i class="fas fa-plus"></i> Tambah Data
+    </button>
+    <table class="table table-hover table-striped table-bordered">
+        <thead>
             <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $data->sasaran->sasaran_strategis }}</td>
-                <td>{{ $data->IK->indikator_kinerja }}</td>
-                <td style="text-align: center;">{{ $data->target }}%</td>
-                <td style="text-align: center;">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#EditData{{ $loop->iteration }}">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button type="button" class="btn btn-link btn-xs" onclick="deleteData('{{ route('iku-realisasi.destroy', $data->iku_realisasi_id) }}')">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                </td>
+                <th>#</th>
+                <th style="font-size: 16px; font-family: 'Times New Roman'; width: 300px;">Sasaran Strategis</th>
+                <th style="font-size: 16px; font-family: 'Times New Roman'; width: 300px;">Indikator Kinerja</th>
+                <th style="font-size: 16px; font-family: 'Times New Roman'; text-align: center;">Target</th>
+                <th></th>
             </tr>
-            @include('admin.iku_realisasi.Addons.IkuRealisasi.edit')
-        @endforeach
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach ($IkuRealisasi as $data)
+                <tr>
+                    <td>{{ $loop->iteration }}</td>
+                    <td>{{ $data->sasaran->sasaran_strategis }}</td>
+                    <td>{{ $data->IK->indikator_kinerja }}</td>
+                    <td style="text-align: center;">{{ $data->target }}%</td>
+                    <td style="text-align: center;">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-link btn-xs" data-toggle="modal"
+                                data-target="#EditData{{ $loop->iteration }}">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button type="button" class="btn btn-link btn-xs"
+                                onclick="deleteData('{{ route('iku-realisasi.destroy', $data->iku_realisasi_id) }}')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                @include('admin.iku_realisasi.Addons.IkuRealisasi.edit')
+            @endforeach
+        </tbody>
+    </table>
+</div>
 {{ $IkuRealisasi->links() }}
 @section('js-additional')
     <script>

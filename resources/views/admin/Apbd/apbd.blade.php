@@ -15,8 +15,8 @@
         <div class="col-lg-12">
             @include('admin.Apbd.Components.table')
         </div>
-            @include('admin.Apbd.Components.import')
-            @include('admin.Apbd.Components.add')
+        @include('admin.Apbd.Components.import')
+        @include('admin.Apbd.Components.add')
     </div>
     <div class="row mt">
         <div class="col-lg-12">
@@ -31,24 +31,33 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ asset('lib/jquery-mask/jquery-mask.js') }}"></script>
     <script>
-        $('#jml_anggaran_sebelum').maskMoney({
+        $('#jml_anggaran_sebelum_add').maskMoney({
             precision: 0
         });
-        $('#jml_anggaran_setelah').maskMoney({
+        $('#jml_anggaran_setelah_add').maskMoney({
             precision: 0
         });
 
-        $('#jml_anggaran_setelah').on('change', function() {
-            split1 = $('#jml_anggaran_sebelum').val().split(',');
-            split2 = $('#jml_anggaran_setelah').val().split(',');
+        $('#jml_anggaran_setelah_add').on('change', function() {
+            split1 = $('#jml_anggaran_sebelum_add').val().split(',');
+            split2 = $('#jml_anggaran_setelah_add').val().split(',');
             join1 = split1.join('');
             join2 = split2.join('');
-            jumlah_anggaran = join1 - join2;
-            persen = (join1 - join2) / join1;
-            $('#selisih').val(jumlah_anggaran).maskMoney({
-                precision: 0
+
+            jumlah_anggaran = parseFloat(join2) - parseFloat(join1);
+            persen = (parseFloat(join2) - parseFloat(join1)) / parseFloat(join1);
+
+            $('#selisih_add').val(jumlah_anggaran).maskMoney({
+                precision: 0,
+                reverse: true,
+                translation: {
+                    '#': {
+                        pattern: /\-|\d/,
+                        recursive: true
+                    }
+                },
             });
-            $('#persen').val(persen * 100);
+            $('#persen_add').val(parseFloat(persen) * 100);
         });
 
         tahun_anggaran = $('#get_ta').val();

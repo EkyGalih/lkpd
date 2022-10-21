@@ -60,8 +60,12 @@ class KodeRekeningController extends Controller
 
     public function getRekening($kode)
     {
-        $kode = KodeRekening::where('kode_rekening', 'LIKE', $kode.'%')->orderBy('kode_rekening', 'ASC')->get();
-        return response()->json($kode);
+        $KodeRekening = KodeRekening::select('id as kode_rekening_id', 'kode_rekening.kode_rekening', 'kode_rekening.nama_rekening')
+        ->where('kode_rekening', 'LIKE', $kode.'%')
+        ->orderBy('kode_rekening', 'ASC')
+        ->get();
+
+        return response()->json($KodeRekening);
     }
 
     public function getSubRekening($kode)

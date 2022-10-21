@@ -11,8 +11,8 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="kode_rekening">Nama Rekening</label>
-                                <select name="kode_rekening" id="kode_rekening" class="form-control"
-                                    onchange="getKodeRekening()">
+                                <select name="kode_rekening" id="kode_rekening_add" class="form-control"
+                                    onchange="KodeRekening()">
                                     <option value="">Pilih</option>
                                     @foreach ($kodeRekening as $kode)
                                         @if (strlen($kode->kode_rekening) == 1)
@@ -21,7 +21,7 @@
                                         @endif
                                     @endforeach
                                 </select>
-                                <input type="hidden" name="nama_rekening" id="nama_rekening" class="form-control">
+                                <input type="hidden" name="nama_rekening" id="nama_rekening_add" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -29,9 +29,9 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="uraian">uraian</label>
-                                <select name="kode_rekening2" id="kode_rekening2" class="form-control"
+                                <select name="kode_rekening2" id="kode_rekening2_add" class="form-control"
                                     onchange="getSubKode()"></select>
-                                <input type="hidden" name="uraian" id="uraian" class="form-control">
+                                <input type="hidden" name="uraian" id="uraian_add" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -39,9 +39,9 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="sub_uraian">Sub Uraian</label>
-                                <select name="kode_rekening3" id="kode_rekening3" class="form-control"
+                                <select name="kode_rekening3" id="kode_rekening3_add" class="form-control"
                                     onchange="getSubUraian()"></select>
-                                <input type="hidden" name="sub_uraian" id="sub_uraian" class="form-control">
+                                <input type="hidden" name="sub_uraian" id="sub_uraian_add" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -49,14 +49,14 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="anggaran_sebelum_perubahan">Anggaran Sebelum Perubahan</label>
-                                <input type="text" name="jml_anggaran_sebelum" id="jml_anggaran_sebelum"
+                                <input type="text" name="jml_anggaran_sebelum" id="jml_anggaran_sebelum_add"
                                     class="form-control" onkeypress="isInputNumber(event)">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="anggaran_setelah_perubahan">Anggaran Setelah Perubahan</label>
-                                <input type="text" name="jml_anggaran_setelah" id="jml_anggaran_setelah"
+                                <input type="text" name="jml_anggaran_setelah" id="jml_anggaran_setelah_add"
                                     class="form-control" onkeypress="isInputNumber(event)">
                             </div>
                         </div>
@@ -64,14 +64,14 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
-                                <label for="selisih">Bertambah/(Berkurang)</label>
-                                <input type="text" name="selisih" id="selisih" class="form-control" readonly>
+                                <label for="selisih" id="label_add">Bertambah/(Berkurang)</label>
+                                <input type="text" name="selisih" id="selisih_add" class="form-control" readonly>
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
                                 <label for="persen">%</label>
-                                <input type="text" name="persen" id="persen" class="form-control" readonly>
+                                <input type="text" name="persen" id="persen_add" class="form-control" readonly>
                             </div>
                         </div>
                     </div>
