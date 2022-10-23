@@ -21,6 +21,7 @@ return new class extends Migration
             $table->text('foto')->nullable();
             $table->string('password');
             $table->enum('jenis_pegawai', ['admin', 'pimpinan', 'pegawai'])->default('pegawai');
+            $table->string('divisi_id', 40)->index();
             $table->rememberToken();
             $table->timestamps();
         });

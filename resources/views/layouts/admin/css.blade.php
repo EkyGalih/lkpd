@@ -9,6 +9,7 @@
 <link href="{{ asset('lib/font-awesome/css/all.css') }}" rel="stylesheet" />
 <link rel="stylesheet" type="text/css" href="{{ asset('css/zabuto_calendar.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('lib/gritter/css/jquery.gritter.css') }}" />
+<link rel="stylesheet" href="{{ asset('plugins/DataTables/datatables.min.css') }}">
 
 <!-- Sweet alert css -->
 <link rel="stylesheet" href="{{ asset('plugins/sweetalert2/sweetalert2.min.css') }}">

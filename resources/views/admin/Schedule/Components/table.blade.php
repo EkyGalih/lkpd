@@ -1,6 +1,5 @@
 <table class="table table-hover table-striped table-bordered table-jadwal">
-    <button type="button" class="btn btn-theme btn-md" data-toggle="modal" data-target="#modalAdd"
-        style="float: right; margin: 10px;">
+    <button type="button" class="btn btn-theme btn-sm" data-toggle="modal" data-target="#modalAdd" style="float: right; margin: 10px;">
         <i class="fas fa-plus"></i> Tambah Jadwal
     </button>
 
@@ -29,7 +28,7 @@
                     <sup><a href="#" data-toggle="modal"
                             data-target="#modalEdit{{ $loop->iteration }}" data-tooltip="tooltip"
                             data-placement="top" title="Perbaharui Jadwal"> <i
-                                class="fas fa-edit"></i></a></sup>
+                                class="fas fa-pencil-alt"></i></a></sup>
                 </td>
                 <td>{{ $jadwal->acara_dari }}</td>
                 <td>{{ $jadwal->user->nama }}</td>

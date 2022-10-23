@@ -9,6 +9,8 @@
 <script src="{{ asset('lib/common-scripts.js') }}"></script>
 <script type="text/javascript" src="{{ asset('lib/gritter/js/jquery.gritter.js') }}"></script>
 <script type="text/javascript" src="{{ asset('lib/gritter-conf.js') }}"></script>
+<!-- data tables -->
+<script src="{{ asset('plugins/DataTables/datatables.min.js') }}"></script>
 <!--script for this page-->
 @yield('js-additional')
 @include('layouts.sweet-alert-notification')

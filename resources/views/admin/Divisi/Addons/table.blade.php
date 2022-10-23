@@ -1,4 +1,4 @@
-<table class="table table-hover table-striped table-borderd">
+<table class="table table-hover table-striped table-borderd" id="data-table">
     <thead>
         <tr>
             <th>#</th>
@@ -15,10 +15,10 @@
                 <td>{{ $divisi->nama_divisi }} - ({{ $divisi->alias_divisi}})</td>
                 <td>
                     <button type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#EditData{{ $loop->iteration }}">
-                        <i class="fas fa-edit"></i>
+                        <i class="fas fa-pencil-alt"></i>
                     </button>
                     <button type="button" class="btn btn-danger btn-xs" onclick="deleteData('{{ route('admin-divisi.destroy', $divisi->divisi_id) }}')">
-                        <i class="fas fa-trash"></i>
+                        <i class="fas fa-minus-circle"></i>
                     </button>
                 </td>
             </tr>

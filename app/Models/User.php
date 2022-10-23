@@ -17,6 +17,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    public $incrementing = false;
     protected $guarded = ['created_at', 'updated_at'];
 
     /**
@@ -38,17 +39,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public static function static()
-    {
-        parent::boot();
+    // public static function static()
+    // {
+    //     parent::boot();
 
-        static::creating(function ($model){
-            $model->id = (string)Uuid::generate(4);
-        });
-    }
+    //     static::creating(function ($model){
+    //         $model->id = (string)Uuid::generate(4);
+    //     });
+    // }
 
     public function Schedule()
     {
         return $this->hasMany(Schedule::class);
+    }
+
+    public function Divisi()
+    {
+        return $this->belongsTo(Divisi::class);
     }
 }

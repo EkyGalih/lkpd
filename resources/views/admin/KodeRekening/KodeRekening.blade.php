@@ -15,7 +15,7 @@
     <div class="col-lg-8">
         <div class="content-panel" style="padding: 10px;">
             <div class="table-responsive">
-                <table class="table table-hover table-bordered table-striper" id="data-table">
+                <table class="table table-hover table-bordered table-striped" id="data-table">
                     <thead>
                         <tr>
                             <th>#</th>

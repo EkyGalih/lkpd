@@ -1,5 +1,5 @@
 @extends('admin.index')
-@section('title', 'Indikator Kinerja')
+@section('title', 'Divisi')
 @section('menu-tools', 'active')
 @section('show-menu-tools', 'show')
 @section('divisi', 'active')

@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <hr />
-                <table class="table table-hover table-striped table-bordered">
+                <table class="table table-hover table-striped table-bordered" id="data-table">
                     <thead>
                         <tr>
                             <td style="text-align: center;">Uraian</td>

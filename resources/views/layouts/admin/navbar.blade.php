@@ -26,7 +26,8 @@
                                 <div class="percent">40%</div>
                             </div>
                             <div class="progress progress-striped">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40"
+                                    aria-valuemin="0" aria-valuemax="100" style="width: 40%">
                                     <span class="sr-only">40% Complete (success)</span>
                                 </div>
                             </div>
@@ -39,7 +40,8 @@
                                 <div class="percent">60%</div>
                             </div>
                             <div class="progress progress-striped">
-                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="60"
+                                    aria-valuemin="0" aria-valuemax="100" style="width: 60%">
                                     <span class="sr-only">60% Complete (warning)</span>
                                 </div>
                             </div>
@@ -52,7 +54,8 @@
                                 <div class="percent">80%</div>
                             </div>
                             <div class="progress progress-striped">
-                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="80"
+                                    aria-valuemin="0" aria-valuemax="100" style="width: 80%">
                                     <span class="sr-only">80% Complete</span>
                                 </div>
                             </div>
@@ -65,7 +68,8 @@
                                 <div class="percent">70%</div>
                             </div>
                             <div class="progress progress-striped">
-                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+                                <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70"
+                                    aria-valuemin="0" aria-valuemax="100" style="width: 70%">
                                     <span class="sr-only">70% Complete (Important)</span>
                                 </div>
                             </div>
@@ -126,7 +130,8 @@
                     </li>
                     <li>
                         <a href="index.html#">
-                            <span class="photo"><img alt="avatar" src="{{ asset('images/ui-sherman.jpg') }}"></span>
+                            <span class="photo"><img alt="avatar"
+                                    src="{{ asset('images/ui-sherman.jpg') }}"></span>
                             <span class="subject">
                                 <span class="from">Dj Sherman</span>
                                 <span class="time">4 hrs.</span>
@@ -198,7 +203,12 @@
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a href="#"><i class="fas fa-address-card"></i> Profile</a></li>
+                    @if (\App\Helper\UserAccess::getRole() == 'admin')
+                        <li><a href="{{ route('admin-pengguna.profile', Auth::user()->id) }}"><i
+                                    class="fas fa-address-card"></i> Profile Admin</a></li>
+                    @else
+                        <li><a href="#"><i class="fas fa-address-card"></i> Profile</a></li>
+                    @endif
                     <li><a href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
                 </ul>
             </li>

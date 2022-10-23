@@ -48,7 +48,6 @@
                     <span>REALISASI ANGGARAN</span>
                 </a>
             </li>
-            @if (Auth::user()->jenis_pegawai == 'admin' || Auth::user()->jenis_pegawai == 'pegawai')
             <li class="">
                 <a class="@yield('jadwal')" href="{{ route('admin.jadwal') }}">
                     <i class="fas fa-calendar-alt"></i>
@@ -63,9 +62,9 @@
                 <ul class="sub @yield('show-menu-tools')">
                     <li class="@yield('kode-rekening')"><a href="{{ route('kode-rekening-admin') }}"><i class="fas fa-barcode"></i> Kode Rekening</a></li>
                     <li class="@yield('divisi')"><a href="{{ route('admin-divisi') }}"><i class="fas fa-building"></i> Divisi</a></li>
+                    <li class="@yield('pengguna')"><a href="{{ route('admin-pengguna') }}"><i class="fas fa-users"></i> Pengguna</a></li>
                 </ul>
             </li>
-            @endif
         </ul>
         <!-- sidebar menu end-->
     </div>

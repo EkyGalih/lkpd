@@ -22,7 +22,7 @@
         <input type="hidden" value="{{ $ta->tahun_anggaran }}" id="get_ta">
     </div>
     <hr />
-    <table class="table table-hover table-striped table-bordered auto">
+    <table class="table table-hover table-striped table-bordered" id="apbd-table">
         <thead>
             <tr>
                 <td style="text-align: center;" rowspan="2">Kode</td>

@@ -24,12 +24,11 @@
                     <td style="text-align: center;">{{ $data->target }}%</td>
                     <td style="text-align: center;">
                         <div class="btn-group">
-                            <button type="button" class="btn btn-link btn-xs" data-toggle="modal"
-                                data-target="#EditData{{ $loop->iteration }}">
+                            <button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#EditData{{ $loop->iteration }}" data-tooltip="tooltip" data-placement="top" title="Ubah Iku">
                                 <i class="fas fa-edit"></i>
                             </button>
                             <button type="button" class="btn btn-link btn-xs"
-                                onclick="deleteData('{{ route('iku-realisasi.destroy', $data->iku_realisasi_id) }}')">
+                                onclick="deleteData('{{ route('iku-realisasi.destroy', $data->iku_realisasi_id) }}')" data-tooltip="tooltip" data-placement="top" title="Hapus Iku">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </div>

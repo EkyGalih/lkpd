@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
 {
@@ -66,11 +67,11 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $request->rememberme))
         {
             if ($user->jenis_pegawai == 'admin') {
-                return redirect()->route('admin');
+                return Redirect::to(env('ADMIN'));
             } elseif ($user->jenis_pegawai == 'pegawai') {
-                return redirect()->route('pegawai');
+                return Redirect::to(env('PEGAWAI'));
             } elseif ($user->jenis_pegawai == 'pimpinan') {
-                return redirect()->route('pimpinan');
+                return Redirect::to(env('PIMPINAN'));
             }
             return redirect()->route('index');
         }

@@ -1,4 +1,33 @@
 <script>
+    $('#jml_anggaran_sebelum_add').maskMoney({
+        precision: 0
+    });
+    $('#jml_anggaran_setelah_add').maskMoney({
+        precision: 0
+    });
+
+    $('#jml_anggaran_setelah_add').on('change', function() {
+        split1 = $('#jml_anggaran_sebelum_add').val().split(',');
+        split2 = $('#jml_anggaran_setelah_add').val().split(',');
+        join1 = split1.join('');
+        join2 = split2.join('');
+
+        jumlah_anggaran = parseFloat(join2) - parseFloat(join1);
+        persen = (parseFloat(join2) - parseFloat(join1)) / parseFloat(join1);
+
+        $('#selisih_add').val(jumlah_anggaran).maskMoney({
+            precision: 0,
+            reverse: true,
+            translation: {
+                '#': {
+                    pattern: /\-|\d/,
+                    recursive: true
+                }
+            },
+        });
+        $('#persen_add').val(parseFloat(persen) * 100);
+    });
+
     function KodeRekening() {
         var kode_rekening = $('#kode_rekening_add').val();
         $.ajax({

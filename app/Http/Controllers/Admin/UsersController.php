@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Divisi;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Webpatser\Uuid\Uuid;
 
 class UsersController extends Controller
 {
@@ -14,18 +18,14 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+        $Pengguna = User::select('id as user_id', 'users.*')
+        ->orderBy('created_at', 'DESC')
+        ->paginate(10);
+        $Divisi = Divisi::select('id as divisi_id', 'divisi.nama_divisi', 'divisi.alias_divisi')->get();
+
+        return view('admin.Pengguna.pengguna', compact('Pengguna', 'Divisi'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +35,17 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        User::create([
+            'id' => (string)Uuid::generate(4),
+            'nama' => $request->nama,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'jenis_pegawai' => $request->jenis_pegawai,
+            'divisi_id' => $request->divisi_id
+        ]);
+
+        return redirect()->route('admin-pengguna')->with(['success' => 'Pengguna Ditambahkan!']);
     }
 
     /**
@@ -44,20 +54,11 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function profile($id)
     {
-        //
-    }
+        $Profile = User::select('id as user_id', 'users.*')->where('id', '=', $id)->first();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return view('admin.Profile.profile', compact('Profile'));
     }
 
     /**
@@ -69,7 +70,18 @@ class UsersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $Pengguna = User::findOrFail($id);
+
+        $Pengguna->update([
+            'nama' => $request->nama,
+            'username' => $request->username,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'jenis_pegawai' => $request->jenis_pegawai,
+            'divisi_id' => $request->divisi_id
+        ]);
+
+        return redirect()->route('admin-pengguna')->with(['success' => 'Pengguna Berhasil Diubah!']);
     }
 
     /**
@@ -80,6 +92,9 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $Pengguna = User::findOrFail($id);
+        $Pengguna->delete();
+
+        return redirect()->route('admin-pengguna')->with(['success' => 'Pengguna Berhasil Dihapus!']);
     }
 }
