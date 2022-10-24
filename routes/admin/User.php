@@ -10,5 +10,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function(
         Route::get('profile/{id}', [UsersController::class, 'profile'])->name('admin-pengguna.profile');
         Route::put('udpate/{id}', [UsersController::class, 'update'])->name('admin-pengguna.update');
         Route::get('destroy/{id}', [UsersController::class, 'destroy'])->name('admin-pengguna.destroy');
+        Route::put('password/{id}', [UsersController::class, 'password'])->name('admin-pengguna.password');
+        Route::put('foto/{id}', [UsersController::class, 'foto'])->name('admin-pengguna.foto');
     });
 });

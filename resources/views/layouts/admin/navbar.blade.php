@@ -203,12 +203,7 @@
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    @if (\App\Helper\UserAccess::getRole() == 'admin')
-                        <li><a href="{{ route('admin-pengguna.profile', Auth::user()->id) }}"><i
-                                    class="fas fa-address-card"></i> Profile Admin</a></li>
-                    @else
-                        <li><a href="#"><i class="fas fa-address-card"></i> Profile</a></li>
-                    @endif
+                    <li><a href="{{ route('admin-pengguna.profile', Auth::user()->id) }}"><i class="fas fa-address-card"></i> Profile</a></li>
                     <li><a href="{{ route('logout') }}"><i class="fas fa-sign-out-alt"></i> Keluar</a></li>
                 </ul>
             </li>

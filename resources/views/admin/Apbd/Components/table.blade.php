@@ -22,6 +22,7 @@
         <input type="hidden" value="{{ $ta->tahun_anggaran }}" id="get_ta">
     </div>
     <hr />
+    <div class="table-responsive">
     <table class="table table-hover table-striped table-bordered" id="apbd-table">
         <thead>
             <tr>
@@ -240,4 +241,5 @@
             @endforeach
         </tbody>
     </table>
+    </div>
 </div>

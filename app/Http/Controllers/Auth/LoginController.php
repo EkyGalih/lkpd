@@ -67,11 +67,14 @@ class LoginController extends Controller
         if (Auth::attempt($credentials, $request->rememberme))
         {
             if ($user->jenis_pegawai == 'admin') {
-                return Redirect::to(env('ADMIN'));
+                return redirect()->route('admin');
+                // return Redirect::to(env('ADMIN'));
             } elseif ($user->jenis_pegawai == 'pegawai') {
-                return Redirect::to(env('PEGAWAI'));
+                return redirect()->route('pegawai');
+                // return Redirect::to(env('PEGAWAI'));
             } elseif ($user->jenis_pegawai == 'pimpinan') {
-                return Redirect::to(env('PIMPINAN'));
+                return redirect()->route('pimpinan');
+                // return Redirect::to(env('PIMPINAN'));
             }
             return redirect()->route('index');
         }

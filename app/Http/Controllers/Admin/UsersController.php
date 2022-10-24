@@ -97,4 +97,48 @@ class UsersController extends Controller
 
         return redirect()->route('admin-pengguna')->with(['success' => 'Pengguna Berhasil Dihapus!']);
     }
+
+    public function password(Request $request, $id)
+    {
+        $Pengguna = User::findOrFail($id);
+        $Pengguna->update([
+            'password' => Hash::make($request->password)
+        ]);
+
+        return redirect()->route('logout')->with(['success' => 'Password Berhasil Diubah']);
+    }
+
+    public function foto(Request $request, $id)
+    {
+        $Pengguna = User::findOrFail($id);
+        $foto = $request->file('foto');
+        $size = array('png','jpg','jpeg','PNG','JPG','JPEG');
+        $filename = $id.'-'.$foto->getClientOriginalName();
+
+        if (in_array($foto->getClientOriginalExtension(), $size)) {
+            if ($foto->getSize() <= 200000) {
+                if ($Pengguna->foto != null) {
+                    unlink($Pengguna->foto);
+                    $foto->move('profile/foto_profile', $filename);
+                    $request->foto = 'profile/foto_profile/'.$filename;
+                    $Pengguna->update([
+                        'foto' => $request->foto
+                    ]);
+                    return redirect()->route('admin-pengguna.profile', $id)->with(['success' => 'Foto Profile Berhasil Disimpan']);
+                } else {
+                    $foto->move('profile/foto_profile', $filename);
+                    $request->foto = 'profile/foto_profile/'.$filename;
+                    $Pengguna->update([
+                        'foto' => $request->foto
+                    ]);
+                    return redirect()->route('admin-pengguna.profile', $id)->with(['success' => 'Foto Profile Berhasil Disimpan']);
+                }
+            } else {
+                return redirect()->route('admin-pengguna.profile', $id)->with(['warning' => 'Ukuran Foto melebihi 200KB']);
+            }
+        } else {
+            return redirect()->route('admin-pengguna.profile', $id)->with(['warning' => 'Extensi Foto Tidak Sesuai dengan standar jpeg, jpg atau png']);
+        }
+
+    }
 }
