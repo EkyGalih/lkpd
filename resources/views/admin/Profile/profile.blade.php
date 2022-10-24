@@ -221,21 +221,29 @@
                                         @csrf
                                         @method('PUT')
                                         <div class="form-group">
-                                            <label class="col-lg-2 control-label">Sandi Baru</label>
-                                            <div class="input-group">
-                                                <div class="col-lg-10">
-                                                    <input type="password" placeholder="Masukkan Sandi Baru" id="newSandi"
+                                            <label class="col-lg-3 control-label">Sandi Baru</label>
+                                            <div class="input-group col-lg-6">
+                                                <input type="password" placeholder="Masukkan Sandi Baru" id="newSandi"
                                                     class="form-control">
-                                                </div>
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default" id="showSandi">
+                                                        <i class="fas fa-eye" id="icon"></i>
+                                                    </button>
+                                                </span>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-lg-2 control-label">Ulang Sandi Baru</label>
-                                            <div class="col-lg-10">
+                                            <label class="col-lg-3 control-label">Ulang Sandi Baru</label>
+                                            <div class="input-group col-lg-6">
                                                 <input type="password" placeholder="Masukkan Ulang Sandi Baru"
                                                     id="confSandi" class="form-control">
-                                                <p class="text-danger" id="message"></p>
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn btn-default" id="showSandi2">
+                                                        <i class="fas fa-eye" id="icon2"></i>
+                                                    </button>
+                                                </span>
                                             </div>
+                                            <p class="text-danger" id="message" style="margin-left: 186px;"></p>
                                         </div>
                                         <div class="btn-group pull-right">
                                             <button type="button" class="btn btn-theme03 btn-sm" id="simpan">
@@ -261,7 +269,28 @@
 @endsection
 @section('js-additional')
     <script>
-        $('#simpan').on('click', function () {
+        $('#showSandi').on('click', function() {
+            const type = $('#newSandi').attr('type');
+            if (type === 'password') {
+                $('#newSandi').prop("type", "text");
+                $('#icon').prop("class", "fas fa-eye-slash");
+            } else {
+                $('#newSandi').prop("type", "password");
+                $('#icon').prop("class", "fas fa-eye");
+            }
+        });
+
+        $('#showSandi2').on('click', function() {
+            const type2 = $('#confSandi').attr('type');
+            if (type2 === 'password') {
+                $('#confSandi').prop("type", "text");
+                $('#icon2').prop("class", "fas fa-eye-slash");
+            } else {
+                $('#confSandi').prop("type", "password");
+                $('#icon2').prop("class", "fas fa-eye");
+            }
+        });
+        $('#simpan').on('click', function() {
             console.log('tes');
         });
         $('#newSandi, #confSandi').on('keyup', function() {
