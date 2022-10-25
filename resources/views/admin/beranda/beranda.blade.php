@@ -15,10 +15,17 @@
                         <div class="content-panel">
                             <h4><i class="fa fa-angle-right"></i> APBD BPKAD NTB</h4>
                             <div class="panel-body">
-                                <input type="hidden" id="pad" value="{{ $pad }}">
-                                <input type="hidden" id="belanja" value="{{ $belanja }}">
-                                <input type="hidden" id="biaya" value="{{ $biaya }}">
-                                <div id="hero-bar" class="graph"></div>
+                                <input type="hidden" id="get_ta" value="{{ date('Y') }}">
+                                <input type="hidden" id="pad_anggaran" value="{{ $PadAnggaran }}">
+                                <input type="hidden" id="pad_perubahan" value="{{ $PadPerubahan }}">
+                                <input type="hidden" id="pad_selisih" value="{{ $PadSelisih }}">
+                                <input type="hidden" id="belanja_anggaran" value="{{ $BelanjaAnggaran }}">
+                                <input type="hidden" id="belanja_perubahan" value="{{ $BelanjaPerubahan }}">
+                                <input type="hidden" id="belanja_selisih" value="{{ $BelanjaSelisih }}">
+                                <input type="hidden" id="biaya_anggaran" value="{{ $BiayaAnggaran }}">
+                                <input type="hidden" id="biaya_perubahan" value="{{ $BiayaPerubahan }}">
+                                <input type="hidden" id="biaya_selisih" value="{{ $BiayaSelisih }}">
+                                <canvas id="beranda-chart"></canvas>
                             </div>
                         </div>
                     </div>
@@ -26,8 +33,23 @@
             </div>
             <!--custom chart end-->
             <div class="row mt">
+                <div class="col-md-12">
+                    <div class="showback">
+                        <h2>CAPAIAN IKU & REALISASI</h2>
+                        <hr/>
+                        @foreach ($iku as $item)
+                            <h4>{{ $loop->iteration }}. {{ $item->IK->indikator_kinerja }}</h4>
+                            <div class="progress active">
+                                <div class="progress-bar progress-bar-{{ $item->target_tercapai < 50 ? 'warning' : 'success' }}" role="progressbar" aria-valuenow="{{ $item->target_tercapai }}" aria-valuemin="0"
+                                    aria-valuemax="{{ $item->target }}" style="width: {{ $item->target_tercapai }}%">
+                                   {{ $item->target_tercapai }}% Terealisasi
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
                 <!-- /col-md-4-->
-                <div class="col-md-4 col-sm-4 mb">
+                {{-- <div class="col-md-4 col-sm-4 mb">
                     <div class="white-panel pn">
                         <div class="white-header">
                             <h5>Pendapatan Asli Daerah (PAD)</h5>
@@ -71,15 +93,15 @@
                         <p class="mt"><b>Rp. 315,108,541,624</b><br /></p>
                     </div>
                     <!--  /darkblue panel -->
-                </div>
+                </div> --}}
                 <!-- /col-md-4 -->
             </div>
             <!-- /row -->
         </div>
         <!-- /col-lg-9 END SECTION MIDDLE -->
         <!-- **********************************************************************************************************************************************************
-                    RIGHT SIDEBAR CONTENT
-                    *********************************************************************************************************************************************************** -->
+                                    RIGHT SIDEBAR CONTENT
+                                    *********************************************************************************************************************************************************** -->
         <div class="col-lg-3 ds">
             <!-- RECENT ACTIVITIES SECTION -->
             <h4 class="centered mt">Jadwal Anda Hari Ini</h4>
@@ -112,9 +134,10 @@
     </div>
 @endsection
 @section('js-additional')
-    <script src="{{ asset('lib/raphael/raphael.min.js') }}"></script>
-    <script src="{{ asset('lib/morris/morris.min.js') }}"></script>
-    <script src="{{ asset('lib/sparkline-chart.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    {{-- <script src="{{ asset('lib/raphael/raphael.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('lib/morris/morris.min.js') }}"></script> --}}
+    {{-- <script src="{{ asset('lib/sparkline-chart.js') }}"></script> --}}
     <script src="{{ asset('lib/zabuto_calendar.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
@@ -137,10 +160,22 @@
 
             return false;
         });
+        tahun_anggaran = $('#get_ta').val();
 
-        pad = $('#pad').val();
-        belanja = $('#belanja').val();
-        biaya = $('#biaya').val();
+        // data pad
+        PadAnggaran = $('#pad_anggaran').val();
+        PadPerubahan = $('#pad_perubahan').val();
+        PadSelisih = $('#pad_selisih').val();
+
+        // data belanja
+        BelanjaAnggaran = $('#belanja_anggaran').val();
+        BelanjaPerubahan = $('#belanja_perubahan').val();
+        BelanjaSelisih = $('#belanja_selisih').val();
+
+        // data pad
+        BiayaAnggaran = $('#biaya_anggaran').val();
+        BiayaPerubahan = $('#biaya_perubahan').val();
+        BiayaSelisih = $('#biaya_selisih').val();
     </script>
-    <script src="{{ asset('lib/morris-conf.js') }}"></script>
+    @include('layouts.admin.Script.chart-beranda')
 @endsection
