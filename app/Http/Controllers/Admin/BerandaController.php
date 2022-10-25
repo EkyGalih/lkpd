@@ -44,18 +44,18 @@ class BerandaController extends Controller
             if ($item->nama_rekening == 'PENDAPATAN DAERAH' && strlen($item->kode_rekening) == 3)
             {
                 array_push($pagu['pad']['anggaran'], $item->jml_anggaran_sebelum);
-                array_push($pagu['pad']['selisih'], $item->jml_anggaran_setelah);
-                array_push($pagu['pad']['perubahan'], $item->selisih_anggaran);
+                array_push($pagu['pad']['selisih'], $item->selisih_anggaran);
+                array_push($pagu['pad']['perubahan'], $item->jml_anggaran_setelah);
             } elseif ($item->nama_rekening == 'BELANJA' && strlen($item->kode_rekening) == 3)
             {
                 array_push($pagu['belanja']['anggaran'], $item->jml_anggaran_sebelum);
-                array_push($pagu['belanja']['selisih'], $item->jml_anggaran_setelah);
-                array_push($pagu['belanja']['perubahan'], $item->selisih_anggaran);
+                array_push($pagu['belanja']['selisih'], $item->selisih_anggaran);
+                array_push($pagu['belanja']['perubahan'], $item->jml_anggaran_setelah);
             } elseif ($item->nama_rekening == 'PEMBIAYAAN' && strlen($item->kode_rekening) == 3)
             {
                 array_push($pagu['pembiayaan']['anggaran'], $item->jml_anggaran_sebelum);
-                array_push($pagu['pembiayaan']['selisih'], $item->jml_anggaran_setelah);
-                array_push($pagu['pembiayaan']['perubahan'], $item->selisih_anggaran);
+                array_push($pagu['pembiayaan']['selisih'], $item->selisih_anggaran);
+                array_push($pagu['pembiayaan']['perubahan'], $item->jml_anggaran_perubahan);
             }
         }
 

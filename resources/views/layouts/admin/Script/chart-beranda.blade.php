@@ -1,53 +1,79 @@
 <script>
-    const Labels = [
-        'PAD',
-        'BELANJA',
-        'PEMBIAYAAN',
-    ];
+    var Script = function () {
 
-    const Data = {
-        labels: Labels,
-        datasets: [{
-                label: 'PAD',
-                backgroundColor: 'hsl(350, 87%, 55%)',
-                borderColor: 'hsl(350, 87%, 55%)',
-                data: [PadAnggaran, PadSelisih, PadPerubahan],
-            },
-            {
-                label: 'BELANJA',
-                backgroundColor: '#1877F2',
-                borderColor: '#1877F2',
-                data: [BelanjaAnggaran, BelanjaSelisih, BelanjaPerubahan],
-            },
-            {
-                label: 'PEMBIAYAAN',
-                backgroundColor: '#2ABBA7',
-                borderColor: '#2ABBA7',
-                data: [BiayaAnggaran, BiayaSelisih, BiayaPerubahan],
-            }
+//morris chart
 
-        ]
-    };
+$(function () {
 
-    const config = {
-        type: 'bar',
-        data: Data,
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    position: 'top',
-                },
-                title: {
-                    display: true,
-                    text: 'Grafik APBD Prov.NTB ' + tahun_anggaran
-                }
-            }
-        }
-    };
+  Morris.Bar({
+    element: 'hero-bar',
+    data: [
+      {jenisapbd: 'PAD', nilaiapbd: PadAnggaran, },
+      {jenisapbd: 'BELANJA', nilaiapbd: BelanjaAnggaran},
+      {jenisapbd: 'PEMBIAYAAN', nilaiapbd: BiayaAnggaran},
+    ],
+    xkey: 'jenisapbd',
+    ykeys: ['nilaiapbd'],
+    labels: ['Total'],
+    barRatio: 0.4,
+    xLabelAngle: 35,
+    hideHover: 'auto',
+    barColors: ['#a8a8a8']
+  });
 
-    const apbd = new Chart(
-        document.getElementById('beranda-chart'),
-        config
-    );
+  Morris.Bar({
+    element: 'pad-bar',
+    data: [
+      {jenisapbd: 'ANGGARAN', nilaiapbd: PadAnggaran, },
+      {jenisapbd: 'SELISIH', nilaiapbd: PadSelisih},
+      {jenisapbd: 'PERUBAHAN', nilaiapbd: PadPerubahan},
+    ],
+    xkey: 'jenisapbd',
+    ykeys: ['nilaiapbd'],
+    labels: ['Total'],
+    barRatio: 0.4,
+    xLabelAngle: 35,
+    hideHover: 'auto',
+    barColors: ['#2a74c2']
+  });
+
+  Morris.Bar({
+    element: 'belanja-bar',
+    data: [
+      {jenisapbd: 'ANGGARAN', nilaiapbd: BelanjaAnggaran, },
+      {jenisapbd: 'SELISIH', nilaiapbd: BelanjaSelisih},
+      {jenisapbd: 'PERUBAHAN', nilaiapbd: BelanjaPerubahan},
+    ],
+    xkey: 'jenisapbd',
+    ykeys: ['nilaiapbd'],
+    labels: ['Total'],
+    barRatio: 0.4,
+    xLabelAngle: 35,
+    hideHover: 'auto',
+    barColors: ['#e41c1c']
+  });
+
+  Morris.Bar({
+    element: 'biaya-bar',
+    data: [
+      {jenisapbd: 'ANGGARAN', nilaiapbd: BiayaAnggaran, },
+      {jenisapbd: 'SELISIH', nilaiapbd: BiayaSelisih},
+      {jenisapbd: 'PERUBAHAN', nilaiapbd: BiayaPerubahan},
+    ],
+    xkey: 'jenisapbd',
+    ykeys: ['nilaiapbd'],
+    labels: ['Total'],
+    barRatio: 0.4,
+    xLabelAngle: 35,
+    hideHover: 'auto',
+    barColors: ['#63e4a9']
+  });
+
+  $('.code-example').each(function (index, el) {
+    eval($(el).text());
+  });
+});
+
+}();
+
 </script>
