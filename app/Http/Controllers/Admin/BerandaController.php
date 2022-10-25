@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apbd;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +17,33 @@ class BerandaController extends Controller
      */
     public function index()
     {
+        $apbd = Apbd::get();
+        $pagu = [
+            'pad' => array(),
+            'belanja' => array(),
+            'pembiayaan' => array()
+        ];
+
+        foreach($apbd as $item)
+        {
+            if ($item->nama_rekening == 'PENDAPATAN DAERAH' && strlen($item->kode_rekening) == 3)
+            {
+                array_push($pagu['pad'], $item->jml_anggaran_setelah);
+            } elseif ($item->nama_rekening == 'BELANJA' && strlen($item->kode_rekening) == 3)
+            {
+                array_push($pagu['belanja'], $item->jml_anggaran_setelah);
+            } elseif ($item->nama_rekening == 'PEMBIAYAAN' && strlen($item->kode_rekening) == 3)
+            {
+                array_push($pagu['pembiayaan'], $item->jml_anggaran_setelah);
+            }
+        }
+
+        $pad = array_sum($pagu['pad']);
+        $belanja = array_sum($pagu['belanja']);
+        $biaya = array_sum($pagu['pembiayaan']);
+
         $jadwals = Schedule::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'asc')->paginate(4);
-        return view('admin.beranda.beranda', compact('jadwals'));
+        return view('admin.beranda.beranda', compact('jadwals','pad','belanja','biaya'));
     }
 
     /**
