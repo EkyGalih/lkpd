@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="modal-body">
-                <form action="{{ route('admin-pengguna.foto', $Profile->user_id) }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin-pengguna.foto', $Profile->user_id) }}" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
                     @csrf
                     @method('PUT')
                     <div class="fileupload fileupload-new" data-provides="fileupload">
@@ -27,7 +27,7 @@
                             <span class="btn btn-theme02 btn-file">
                                 <span class="fileupload-new"><i class="fa fa-paperclip"></i> Pilih Foto</span>
                                 <span class="fileupload-exists"><i class="fa fa-undo"></i> Ganti</span>
-                                <input type="file" name="foto" class="default" />
+                                <input type="file" id="foto" name="foto" class="default" />
                             </span>
                             <a href="#" class="btn btn-theme04 fileupload-exists"
                                 data-dismiss="fileupload"><i class="fa fa-trash-o"></i> Hapus</a>

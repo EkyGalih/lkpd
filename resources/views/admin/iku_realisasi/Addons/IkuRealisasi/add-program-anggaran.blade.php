@@ -23,11 +23,11 @@
                     </div>
                     <div class="form-group">
                         <label for="anggaran">Anggaran</label>
-                        <input type="text" name="anggaran" class="form-control" onkeypress="isInputNumber(event)">
+                        <input type="text" name="anggaran" id="anggaran_program" class="form-control" onkeypress="isInputNumber(event)">
                     </div>
                     <div class="form-group">
                         <label for="keterangan">Keterangan</label>
-                       <textarea name="keterangan" class="form-control"></textarea>
+                        <textarea name="keterangan" class="form-control"></textarea>
                     </div>
             </div>
             <div class="modal-footer">

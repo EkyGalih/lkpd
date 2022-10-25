@@ -1,7 +1,7 @@
 @extends('admin.index')
 @section('title', 'Profile')
 @section('css-additional')
-<link rel="stylesheet" type="text/css" href="{{ asset('lib/bootstrap-fileupload/bootstrap-fileupload.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('lib/bootstrap-fileupload/bootstrap-fileupload.css') }}">
 @endsection
 @section('content')
     <div class="row mt">
@@ -30,14 +30,17 @@
                     <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of
                         classical Latin literature from 45 BC.</p>
                     <br>
-                    <p><button class="badge bg-inverse"><i class="fa fa-building"></i> {{ $Profile->Divisi->nama_divisi }} ({{ $Profile->Divisi->alias_divisi }})</button></p>
+                    <p><button class="badge bg-inverse"><i class="fa fa-building"></i> {{ $Profile->Divisi->nama_divisi }}
+                            ({{ $Profile->Divisi->alias_divisi }})</button></p>
                 </div>
                 <!-- /col-md-4 -->
                 <div class="col-md-4 centered">
                     <div class="profile-pic">
-                        <p><img src="{{ $Profile->foto == null ? asset("images/no-image.PNG") : asset($Profile->foto) }}" class="img-circle"></p>
+                        <p><img src="{{ $Profile->foto == null ? asset('images/no-image.PNG') : asset($Profile->foto) }}"
+                                class="img-circle"></p>
                         <p>
-                            <button class="btn btn-theme" data-toggle="modal" data-target="#ModalFoto"><i class="fa fa-upload"></i> Ganti Foto</button>
+                            <button class="btn btn-theme" data-toggle="modal" data-target="#ModalFoto"><i
+                                    class="fa fa-upload"></i> Ganti Foto</button>
                         </p>
                     </div>
                 </div>
@@ -220,14 +223,15 @@
                             <div class="row">
                                 <div class="col-lg-6 col-lg-offset-2 detailed">
                                     <h4 class="mb">Ubah Kata Sandi</h4>
-                                    <form role="form" class="form-horizontal" method="POST" action="{{ route('admin-pengguna.password', $Profile->user_id) }}">
+                                    <form role="form" class="form-horizontal" method="POST"
+                                        action="{{ route('admin-pengguna.password', $Profile->user_id) }}">
                                         @csrf
                                         @method('PUT')
                                         <div class="form-group">
                                             <label class="col-lg-3 control-label">Sandi Baru</label>
                                             <div class="input-group col-lg-6">
-                                                <input type="password" name="password" placeholder="Masukkan Sandi Baru" id="newSandi"
-                                                    class="form-control">
+                                                <input type="password" name="password" placeholder="Masukkan Sandi Baru"
+                                                    id="newSandi" class="form-control">
                                                 <span class="input-group-btn">
                                                     <button type="button" class="btn btn-default" id="showSandi">
                                                         <i class="fas fa-eye" id="icon"></i>
@@ -249,7 +253,8 @@
                                             <p class="text-danger" id="message" style="margin-left: 186px;"></p>
                                         </div>
                                         <div class="btn-group pull-right">
-                                            <button type="submit" class="btn btn-theme03 btn-sm" id="simpan" disabled>
+                                            <button type="submit" class="btn btn-theme03 btn-sm" id="simpan"
+                                                disabled>
                                                 <i class="fas fa-save"></i> Simpan
                                             </button>
                                         </div>
@@ -271,8 +276,21 @@
     </div>
 @endsection
 @section('js-additional')
-<script type="text/javascript" src="{{ asset('lib/bootstrap-fileupload/bootstrap-fileupload.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('lib/bootstrap-fileupload/bootstrap-fileupload.js') }}"></script>
     <script>
+        function validateForm() {
+            if ($('#foto').val() == "") {
+                Swal.fire({
+                    position: 'top-end',
+                    icon: 'warning',
+                    title: 'Harap menambahkan foto terlebih dahulu',
+                    showConfirmButton: false,
+                    timer: 3000
+                });
+                return false;
+            }
+        }
+
         $('#showSandi').on('click', function() {
             const type = $('#newSandi').attr('type');
             if (type === 'password') {

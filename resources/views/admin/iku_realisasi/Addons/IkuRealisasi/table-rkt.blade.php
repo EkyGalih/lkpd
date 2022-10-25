@@ -1,10 +1,10 @@
 <h2 style="text-align: center;">RENCANAN KINERJA TAHUNAN (RKT) {{ date('Y') }}<br />TINGKAT ORGANISASI PERANGKAT
     DAERAH</h2>
-<button type="button" class="btn btn-theme btn-sm" data-toggle="modal" data-target="#TambahData"
-    style="float: right; margin-bottom: 5px;">
-    <i class="fas fa-plus"></i> Tambah Data
-</button>
 <div class="table-responsive">
+    <button type="button" class="btn btn-theme btn-sm" data-toggle="modal" data-target="#TambahData"
+        style="float: right; margin-bottom: 5px;">
+        <i class="fas fa-plus"></i> Tambah Data
+    </button>
     <table class="table table-hover table-striped table-bordered">
         <thead>
             <tr>
@@ -44,7 +44,15 @@
 </div>
 {{ $IkuRealisasi->links() }}
 @section('js-additional')
+    <script src="{{ asset('lib/jquery-mask/jquery-mask.js') }}"></script>
     <script>
+        $('#anggaran_program').maskMoney({
+            precision: 0
+        });
+        $('#anggaran_terpakai').maskMoney({
+            precision: 0
+        });
+
         function enableForm() {
             $('#indikator_kinerja_id').removeAttr('disabled');
         }

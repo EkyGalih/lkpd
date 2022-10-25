@@ -41,6 +41,7 @@
 {{ $IkuRealisasi->links() }}
 @section('js-additional')
     <script>
+
         function enableForm() {
             $('#indikator_kinerja_id').removeAttr('disabled');
         }

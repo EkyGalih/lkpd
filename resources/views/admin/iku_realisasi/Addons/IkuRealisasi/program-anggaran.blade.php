@@ -12,7 +12,7 @@
             <tr>
                 <th></th>
                 <th
-                    style="width: 200px; text-align: center; padding: 10px; font-size: 16px; font-family: 'Times New Roman', Times, serif;">
+                    style="width: 250px; text-align: center; padding: 10px; font-size: 16px; font-family: 'Times New Roman', Times, serif;">
                     Program</th>
                 <th
                     style="width: 200px; text-align: center; padding: 10px; font-size: 16px; font-family: 'Times New Roman', Times, serif;">
@@ -27,6 +27,7 @@
                 <th
                     style="width: 250px; text-align: center; padding: 10px; font-size: 16px; font-family: 'Times New Roman', Times, serif;">
                     Keterangan</th>
+                    <th></th>
             </tr>
         </thead>
         <tbody>
@@ -41,12 +42,16 @@
                         <td style="padding: 10px;">Rp. {{ number_format($pai->anggaran) }} <input type="hidden"
                                 name="anggaran" value="{{ $pai->anggaran }}"></td>
                         <td style="padding: 10px;"><input type="text" onkeypress="isInputNumber(event)"
-                                name="anggaran_terpakai" value="{{ $pai->anggaran_terpakai }}" class="form-control">
+                                name="anggaran_terpakai" id="anggaran_terpakai" value="{{ $pai->anggaran_terpakai }}"
+                                class="form-control">
                         </td>
-                        <td><button type="submit" class="btn btn-success btn-xs" data-tooltip="tooltip"
-                                data-placement="top" title="Simpan Perubahan"><i class="fas fa-save"></i></button></td>
+                        <td>
+                            <button type="submit" class="btn btn-link btn-xs" data-tooltip="tooltip"
+                                data-placement="top" title="Simpan Perubahan"><i class="fas fa-check"></i></button>
+                        </td>
                         <td style="padding: 10px; text-align: center;">{{ $pai->persentase_anggaran }} %</td>
                         <td style="padding: 10px;">{{ $pai->keterangan }}</td>
+                        <td><button type="button" class="btn btn-link btn-xs" onclick="deleteData('{{ route('program-anggaran-iku.destroy', $pai->program_anggaran_id) }}')" data-tooltip="tooltip" data-placement="top" title="Hapus Program"><i class="fas fa-times"></i></button></td>
                     </form>
                 </tr>
             @endforeach

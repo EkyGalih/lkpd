@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\IkuRealisasi;
 
+use App\Helper\UserAccess;
 use App\Http\Controllers\Controller;
 use App\Models\ProgramAnggaran;
 use Illuminate\Http\Request;
@@ -18,13 +19,13 @@ class ProgramAnggaranIkuController extends Controller
     {
         ProgramAnggaran::create([
             'program' => $request->program,
-            'anggaran' => $request->anggaran,
+            'anggaran' => UserAccess::CurrencyConvertComa($request->anggaran),
             'anggaran_terpakai' => 0,
             'persentase_anggaran' => 0,
             'keterangan' => $request->keterangan
         ]);
 
-        return redirect()->route('program-anggaran-iku')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('iku-realisasi.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
@@ -38,10 +39,10 @@ class ProgramAnggaranIkuController extends Controller
     {
         $ProgramAnggaran = ProgramAnggaran::findOrFail($id);
 
-        $getPersentase = ($request->anggaran_terpakai / $request->anggaran) * 100;
+        $getPersentase = (UserAccess::CurrencyConvertComa($request->anggaran_terpakai) / UserAccess::CurrencyConvertComa($request->anggaran)) * 100;
 
         $ProgramAnggaran->update([
-            'anggaran_terpakai' => $request->anggaran_terpakai,
+            'anggaran_terpakai' => UserAccess::CurrencyConvertComa($request->anggaran_terpakai),
             'persentase_anggaran' => $getPersentase
         ]);
 
@@ -57,6 +58,9 @@ class ProgramAnggaranIkuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ProgramAnggaran = ProgramAnggaran::findOrFail($id);
+        $ProgramAnggaran->delete();
+
+        return redirect()->route('iku-realisasi.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }
