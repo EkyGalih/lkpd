@@ -32,15 +32,17 @@
                             title="Edit Pengguna">
                             <i class="fas fa-user-cog"></i>
                         </button>
-                        @if ($user->jenis_pegawai != 'admin')
-                            <button type="button" class="btn btn-danger btn-xs"
-                                onclick="deleteData('{{ route('admin-pengguna.destroy', $user->user_id) }}')"
-                                data-tooltip="tooltip" data-placement="top" title="Hapus Pengguna">
-                                <i class="fas fa-user-times"></i>
-                            </button>
-                        @endif
+                        <button type="button" class="btn btn-danger btn-xs"
+                            onclick="deleteData('{{ route('admin-pengguna.destroy', $user->user_id) }}')"
+                            data-tooltip="tooltip" data-placement="top" title="Hapus Pengguna">
+                            <i class="fas fa-user-times"></i>
+                        </button>
+                        <button type="button" class="btn btn-info btn-xs" data-toggle="modal" data-target="#UbahPassword{{ $loop->iteration }}" data-tooltip="tooltip" data-placement="top" title="Reset Password">
+                            <i class="fas fa-lock"></i>
+                        </button>
                     </td>
                 </tr>
+                @include('admin.Pengguna.Addons.password')
                 @include('admin.Pengguna.Addons.edit')
             @endforeach
         </tbody>

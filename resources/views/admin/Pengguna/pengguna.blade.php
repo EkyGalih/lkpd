@@ -41,9 +41,11 @@
         }
 
         $('#password').val(makeid(20));
+        $('#password_reset').val(makeid(20));
 
         function randomPass() {
             $('#password').val(makeid(20));
+            $('#password_reset').val(makeid(20));
         }
     </script>
 @endsection

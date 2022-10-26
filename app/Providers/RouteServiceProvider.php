@@ -37,12 +37,12 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
         $this->mapWebRoutes();
 
+        // routes admin
         $this->IkuRealisasiAdmin();
         $this->SasaranStrategisAdmin();
         $this->IndikatorKinerjaAdmin();
         $this->FormulasiAdmin();
         $this->ProgramAnggaranIkuAdmin();
-
         $this->DivisiAdmin();
         $this->RealisasiAnggaranAdmin();
         $this->SaldoAnggaranAdmin();
@@ -57,12 +57,26 @@ class RouteServiceProvider extends ServiceProvider
         $this->KodeRekeningAdmin();
         $this->SubKodeRekeningAdmin();
 
+        // routes pegawai
+        $this->IkuRealisasiPegawai();
+        $this->SasaranStrategisPegawai();
+        $this->IndikatorKinerjaPegawai();
+        $this->FormulasiPegawai();
+        $this->ProgramAnggaranIkuPegawai();
+        $this->DivisiPegawai();
+        $this->RealisasiAnggaranPegawai();
+        $this->AnggaranPegawai();
+        $this->SchedulePegawaiRoutes();
+        $this->UsersPegawai();
+        $this->KodeRekeningPegawai();
+        $this->SubKodeRekeningPegawai();
+
         // Api routes Admin
         $this->KodeRekeningAdminApi();
         $this->ArusKasAdminApi();
         $this->RealisasiAnggaranAdminApi();
         $this->IkuRealisasiAdminApi();
-        $this->ProfileAdmin();
+        $this->ProfileAdminApi();
     }
 
     public function mapApiRoutes()
@@ -87,11 +101,25 @@ class RouteServiceProvider extends ServiceProvider
         ->group(base_path('routes/admin/iku-realisasi/IkuRealisasi.php'));
     }
 
+    public function IkuRealisasiPegawai()
+    {
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/pegawai/iku-realisasi/IkuRealisasi.php'));
+    }
+
     public function SasaranStrategisAdmin()
     {
         Route::middleware('web')
         ->namespace($this->namespace)
         ->group(base_path('routes/admin/iku-realisasi/sasaran-strategis.php'));
+    }
+
+    public function SasaranStrategisPegawai()
+    {
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/pegawai/iku-realisasi/sasaran-strategis.php'));
     }
 
     public function IndikatorKinerjaAdmin()
@@ -101,11 +129,25 @@ class RouteServiceProvider extends ServiceProvider
         ->group(base_path('routes/admin/iku-realisasi/indikator-kinerja.php'));
     }
 
+    public function IndikatorKinerjaPegawai()
+    {
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/pegawai/iku-realisasi/indikator-kinerja.php'));
+    }
+
     public function FormulasiAdmin()
     {
         Route::middleware('web')
         ->namespace($this->namespace)
         ->group(base_path('routes/admin/iku-realisasi/formulasi.php'));
+    }
+
+    public function FormulasiPegawai()
+    {
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/pegawai/iku-realisasi/formulasi.php'));
     }
 
     public function ProgramAnggaranIkuAdmin()
@@ -115,11 +157,25 @@ class RouteServiceProvider extends ServiceProvider
         ->group(base_path('routes/admin/iku-realisasi/program-anggaran.php'));
     }
 
+    public function ProgramAnggaranIkuPegawai()
+    {
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/pegawai/iku-realisasi/program-anggaran.php'));
+    }
+
     public function DivisiAdmin()
     {
         Route::middleware('web')
         ->namespace($this->namespace)
         ->group(base_path('routes/admin/Divisi.php'));
+    }
+
+    public function DivisiPegawai()
+    {
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/pegawai/Divisi.php'));
     }
 
     public function mapArusKasAdminRoutes()
@@ -136,11 +192,25 @@ class RouteServiceProvider extends ServiceProvider
         ->group(base_path('routes/admin/KodeRekening.php'));
     }
 
+    public function KodeRekeningPegawai()
+    {
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/pegawai/KodeRekening.php'));
+    }
+
     public function RealisasiAnggaranAdmin()
     {
         Route::middleware('web')
         ->namespace($this->namespace)
         ->group(base_path('routes/admin/RealisasiAnggaran.php'));
+    }
+
+    public function RealisasiAnggaranPegawai()
+    {
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/pegawai/RealisasiAnggaran.php'));
     }
 
     public function SaldoAnggaranAdmin()
@@ -178,6 +248,13 @@ class RouteServiceProvider extends ServiceProvider
         ->group(base_path('routes/admin/Anggaran.php'));
     }
 
+    public function AnggaranPegawai()
+    {
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/pegawai/Anggaran.php'));
+    }
+
     public function ScheduleAdminRoutes()
     {
         Route::middleware('web')
@@ -185,11 +262,39 @@ class RouteServiceProvider extends ServiceProvider
         ->group(base_path('routes/admin/Schedule.php'));
     }
 
+    public function SchedulePegawaiRoutes()
+    {
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/pegawai/Schedule.php'));
+    }
+
     public function UsersAdmin()
     {
         Route::middleware('web')
         ->namespace($this->namespace)
         ->group(base_path('routes/admin/User.php'));
+    }
+
+    public function UsersPegawai()
+    {
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/pegawai/User.php'));
+    }
+
+    public function SubKodeRekeningAdmin()
+    {
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/admin/SubKodeRekening.php'));
+    }
+
+    public function SubKodeRekeningPegawai()
+    {
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/pegawai/SubKodeRekening.php'));
     }
 
     // ROUTEST API
@@ -217,12 +322,6 @@ class RouteServiceProvider extends ServiceProvider
         ->group(base_path('routes/admin/api/RealisasiAnggaran.php'));
     }
 
-    public function SubKodeRekeningAdmin()
-    {
-        Route::middleware('web')
-        ->namespace($this->namespace)
-        ->group(base_path('routes/admin/SubKodeRekening.php'));
-    }
 
     public function IkuRealisasiAdminApi()
     {
@@ -232,7 +331,7 @@ class RouteServiceProvider extends ServiceProvider
         ->group(base_path('routes/admin/api/IkuRealisasi.php'));
     }
 
-    public function ProfileAdmin()
+    public function ProfileAdminApi()
     {
         Route::middleware('web')
         ->prefix('api')

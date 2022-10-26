@@ -104,8 +104,11 @@ class UsersController extends Controller
         $Pengguna->update([
             'password' => Hash::make($request->password)
         ]);
-
-        return redirect()->route('logout')->with(['success' => 'Password Berhasil Diubah']);
+        if ($Pengguna->jenis_pegawai == 'admin') {
+            return redirect()->route('logout')->with(['success' => 'Password Berhasil Diubah']);
+        } else {
+            return redirect()->route('admin-pengguna')->with(['success' => 'Password Berhasil Diubah']);
+        }
     }
 
     public function foto(Request $request, $id)
