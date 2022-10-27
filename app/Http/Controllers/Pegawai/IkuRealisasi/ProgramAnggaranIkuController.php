@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\IkuRealisasi;
+namespace App\Http\Controllers\Pegawai\IkuRealisasi;
 
 use App\Helper\UserAccess;
 use App\Http\Controllers\Controller;
@@ -25,7 +25,7 @@ class ProgramAnggaranIkuController extends Controller
             'keterangan' => $request->keterangan
         ]);
 
-        return redirect()->route('iku-realisasi.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('iku-realisasi-pegawai.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
@@ -47,7 +47,7 @@ class ProgramAnggaranIkuController extends Controller
         ]);
 
 
-        return redirect()->route('iku-realisasi.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('iku-realisasi-pegawai.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
@@ -61,6 +61,6 @@ class ProgramAnggaranIkuController extends Controller
         $ProgramAnggaran = ProgramAnggaran::findOrFail($id);
         $ProgramAnggaran->delete();
 
-        return redirect()->route('iku-realisasi.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect()->route('iku-realisasi-pegawai.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

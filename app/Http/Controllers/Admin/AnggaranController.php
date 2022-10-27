@@ -4,9 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helper\UserAccess;
 use App\Http\Controllers\Controller;
-use App\Imports\APBD;
-use App\Models\Anggaran;
-use App\Models\Apbd as ModelsApbd;
+use App\Models\Apbd;
 use App\Models\KodeRekening;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -23,13 +21,26 @@ class AnggaranController extends Controller
     public function index($tahun = null)
     {
 
+        $tahun = $tahun == null ? date('Y') : $tahun;
+
         $user = User::where('username', '=', Auth::user()->username)->select('id as user_id')->first();
-        $kodeRekening = KodeRekening::select('id as kode_rek_id', 'kode_rekening.*')->orderBy('kode_rekening', 'ASC')->get();
+        $kodeRekening = KodeRekening::select('id as kode_rek_id', 'kode_rekening.*')
+                        ->orderBy('kode_rekening', 'ASC')
+                        ->where('created_at', 'LIKE', $tahun.'%')
+                        ->get();
+
         if ($tahun == null)
         {
-            $Apbd = ModelsApbd::select('id as apbd_id', 'apbd.*')->orderBy('kode_rekening', 'ASC')->get();
+            $Apbd = Apbd::select('id as apbd_id', 'apbd.*')
+                    ->orderBy('kode_rekening', 'ASC')
+                    ->where('created_at', 'LIKE', $tahun.'%')
+                    ->get();
         } elseif ($tahun != null) {
-            $Apbd = ModelsApbd::select('id as apbd_id', 'apbd.*')->where('tahun_anggaran', '=', $tahun)->orderBy('kode_rekening', 'ASC')->get();
+            $Apbd = Apbd::select('id as apbd_id', 'apbd.*')
+                    ->where('tahun_anggaran', '=', $tahun)
+                    ->where('created_at', 'LIKE', $tahun.'%')
+                    ->orderBy('kode_rekening', 'ASC')
+                    ->get();
         }
 
         $data = [
@@ -95,7 +106,7 @@ class AnggaranController extends Controller
             }
         }
         $Apbd = $data['data'];
-        $get_tahun = ModelsApbd::select('tahun_anggaran')->groupBy('tahun_anggaran')->orderBy('tahun_anggaran', 'DESC')->get();
+        $get_tahun = Apbd::select('tahun_anggaran')->groupBy('tahun_anggaran')->orderBy('tahun_anggaran', 'DESC')->get();
         $tahun_anggaran = isset($data['tahun_anggaran']) ? $data['tahun_anggaran'] : date('Y');
 
         return view('admin.Apbd.apbd', compact('user', 'Apbd', 'kodeRekening', 'get_tahun', 'tahun_anggaran'));

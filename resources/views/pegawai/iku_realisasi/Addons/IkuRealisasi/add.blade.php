@@ -18,7 +18,9 @@
                     @csrf
                     <div class="form-group">
                         <label for="sasaran_strategis">Sasaran Strategis</label>
-                        @php $SasaranStrategis = \App\Models\SasaranStrategis::getSasaran() @endphp
+                        @php
+                            $SasaranStrategis = \App\Models\SasaranStrategis::getSasaran();
+                        @endphp
                         <select name="sasaran_strategis_id" class="form-control" onclick="enableForm()">
                             <option value="">------</option>
                             @foreach ($SasaranStrategis as $sasaran)

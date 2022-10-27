@@ -54,6 +54,7 @@
                 url: '{{ url('api/iku-realisasi/getFormulasi') }}/' + id,
                 dataType: 'json',
                 success: function(data) {
+                    console.log(data);
                     $('#formula_id').val(data.formula_id);
                     $('#formula').val(data.formulasi);
                     $('#tipe_penghitungan').val(data.tipe_penghitungan);

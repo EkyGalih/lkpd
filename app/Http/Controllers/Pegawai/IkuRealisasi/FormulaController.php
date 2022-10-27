@@ -37,7 +37,7 @@ class FormulaController extends Controller
             'alasan' => $request->alasan
         ]);
 
-        return redirect()->route('iku-formulasi')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('iku-formulasi-pegawai')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
@@ -59,7 +59,7 @@ class FormulaController extends Controller
             'alasan' => $request->alasan
         ]);
 
-        return redirect()->route('iku-formulasi')->with(['success' => 'Data Berhasil Diubah!']);
+        return redirect()->route('iku-formulasi-pegawai')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
     /**
@@ -72,6 +72,6 @@ class FormulaController extends Controller
     {
         $Formulasi = Formulasi::findOrFail($id);
         $Formulasi->delete();
-        return redirect()->route('iku-formulasi')->with(['success' => 'Data Berhasil Diubah!']);
+        return redirect()->route('iku-formulasi-pegawai')->with(['success' => 'Data Berhasil Diubah!']);
     }
 }

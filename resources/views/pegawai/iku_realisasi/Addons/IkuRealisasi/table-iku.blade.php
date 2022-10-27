@@ -33,7 +33,7 @@
                 <tr>
                     <td><strong>Alasan : </strong>{{ $data->formula->alasan }}</td>
                 </tr>
-                @include('admin.iku_realisasi.Addons.IkuRealisasi.edit')
+                @include('pegawai.iku_realisasi.Addons.IkuRealisasi.edit')
             @endforeach
         </tbody>
     </table>

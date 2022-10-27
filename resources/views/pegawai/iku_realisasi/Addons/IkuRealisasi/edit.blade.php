@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="modal-body">
-                <form action="{{ route('iku-realisasi.update', $data->iku_realisasi_id) }}" method="POST">
+                <form action="{{ route('iku-realisasi-pegawai.update', $data->iku_realisasi_id) }}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="form-group">

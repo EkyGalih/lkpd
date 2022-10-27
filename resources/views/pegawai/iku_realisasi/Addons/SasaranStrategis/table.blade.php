@@ -15,7 +15,7 @@
                     <button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#EditData{{ $loop->iteration }}">
                         <i class="fas fa-edit"></i>
                     </button>
-                    <button type="button" class="btn btn-link btn-xs" onclick="deleteData('{{ route('iku-sasaran.destroy', $sasaran->sasaran_id) }}')">
+                    <button type="button" class="btn btn-link btn-xs" onclick="deleteData('{{ route('iku-sasaran-pegawai.destroy', $sasaran->sasaran_id) }}')">
                         <i class="fas fa-trash"></i>
                     </button>
                 </td>

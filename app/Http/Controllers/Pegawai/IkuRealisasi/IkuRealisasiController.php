@@ -41,7 +41,7 @@ class IkuRealisasiController extends Controller
             'user_id' => $request->user_id
         ]);
 
-        return redirect()->route('iku-realisasi.index')->with(['success' => 'Data Berhasil Disimpan!']);
+        return redirect()->route('iku-realisasi-pegawai.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     /**
@@ -62,7 +62,7 @@ class IkuRealisasiController extends Controller
             'target_tercapai' => $request->target_tercapai
         ]);
 
-        return redirect()->route('iku-realisasi.index')->with(['success' => 'Data Berhasil Diubah!']);
+        return redirect()->route('iku-realisasi-pegawai.index')->with(['success' => 'Data Berhasil Diubah!']);
     }
 
     /**
@@ -76,6 +76,6 @@ class IkuRealisasiController extends Controller
         $IkuRealisasi = IkuRealisasi::findOrFail($id);
         $IkuRealisasi->delete();
 
-        return redirect()->route('iku-realisasi.index')->with(['success' => 'Data Berhasil Dihapus!']);
+        return redirect()->route('iku-realisasi-pegawai.index')->with(['success' => 'Data Berhasil Dihapus!']);
     }
 }

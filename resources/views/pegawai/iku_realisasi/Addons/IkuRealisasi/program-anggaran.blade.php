@@ -34,7 +34,7 @@
             @php $ProgramAnggaranIku = \App\Models\ProgramAnggaran::getProgramAnggaran() @endphp
             @foreach ($ProgramAnggaranIku as $pai)
                 <tr>
-                    <form action="{{ route('program-anggaran-iku.update', $pai->program_anggaran_id) }}" method="POST">
+                    <form action="{{ route('program-anggaran-iku-pegawai.update', $pai->program_anggaran_id) }}" method="POST">
                         @csrf
                         @method('PUT')
                         <td style="padding: 10px;">{{ $loop->iteration }}. </td>
@@ -51,7 +51,7 @@
                         </td>
                         <td style="padding: 10px; text-align: center;">{{ $pai->persentase_anggaran }} %</td>
                         <td style="padding: 10px;">{{ $pai->keterangan }}</td>
-                        <td><button type="button" class="btn btn-link btn-xs" onclick="deleteData('{{ route('program-anggaran-iku.destroy', $pai->program_anggaran_id) }}')" data-tooltip="tooltip" data-placement="top" title="Hapus Program"><i class="fas fa-times"></i></button></td>
+                        <td><button type="button" class="btn btn-link btn-xs" onclick="deleteData('{{ route('program-anggaran-iku-pegawai.destroy', $pai->program_anggaran_id) }}')" data-tooltip="tooltip" data-placement="top" title="Hapus Program"><i class="fas fa-times"></i></button></td>
                     </form>
                 </tr>
             @endforeach

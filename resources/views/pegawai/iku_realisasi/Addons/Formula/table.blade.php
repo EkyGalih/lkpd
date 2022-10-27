@@ -25,7 +25,7 @@
                                 <i class="fas fa-edit"></i>
                             </button>
                             <button type="button" class="btn btn-link btn-xs"
-                                onclick="deleteData('{{ route('iku-formulasi.destroy', $formula->formula_id) }}')">
+                                onclick="deleteData('{{ route('iku-formulasi-pegawai.destroy', $formula->formula_id) }}')">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </div>

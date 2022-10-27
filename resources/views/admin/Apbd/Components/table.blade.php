@@ -1,7 +1,7 @@
 <div class="content-panel">
     <div class="row">
         <div class="col-lg-8">
-            <h4 class="title"><i class="fas fa-list"></i> Data Anggaran {{ $tahun_anggaran }}</h4>
+            <h4 class="title"><i class="fas fa-list"></i> APBD {{ $tahun_anggaran }}</h4>
         </div>
         <div class="col-lg-3">
             <select id="tahun_anggaran" class="form-control">
@@ -34,9 +34,9 @@
             </tr>
             <tr>
                 <td>Sebelum Perubahan</td>
-                <td>Sebelum Perubahan</td>
-                <td>(Rp)</td>
-                <td>%</td>
+                <td>Setelah Perubahan</td>
+                <td style="text-align: center;">(Rp)</td>
+                <td style="text-align: center;">%</td>
             </tr>
         </thead>
         <tbody>

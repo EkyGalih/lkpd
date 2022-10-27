@@ -45,7 +45,7 @@
             <li class="">
                 <a class="@yield('menu-realisasi-anggaran')" href="{{ route('realisasi-anggaran-admin') }}">
                     <i class="fas fa-book-open"></i>
-                    <span>REALISASI ANGGARAN</span>
+                    <span>LAP. REALISASI ANGGARAN</span>
                 </a>
             </li>
             <li class="">

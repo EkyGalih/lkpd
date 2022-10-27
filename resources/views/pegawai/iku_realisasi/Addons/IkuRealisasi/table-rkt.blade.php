@@ -30,14 +30,14 @@
                                 <i class="fas fa-edit"></i>
                             </button>
                             <button type="button" class="btn btn-link btn-xs"
-                                onclick="deleteData('{{ route('iku-realisasi.destroy', $data->iku_realisasi_id) }}')"
+                                onclick="deleteData('{{ route('iku-realisasi-pegawai.destroy', $data->iku_realisasi_id) }}')"
                                 data-tooltip="tooltip" data-placement="top" title="Hapus Iku">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </div>
                     </td>
                 </tr>
-                @include('admin.iku_realisasi.Addons.IkuRealisasi.edit')
+                @include('pegawai.iku_realisasi.Addons.IkuRealisasi.edit')
             @endforeach
         </tbody>
     </table>

@@ -61,7 +61,7 @@
             <div class="row mt">
                 <div class="col-md-12">
                     <div class="showback">
-                        <h2><i class="fas fa-book"></i> CAPAIAN IKU & REALISASI</h2>
+                        <h4><i class="fas fa-book"></i> CAPAIAN IKU & REALISASI</h4>
                         <hr />
                         @foreach ($iku as $item)
                             <h4>{{ $loop->iteration }}. {{ $item->IK->indikator_kinerja }}</h4>
@@ -75,53 +75,6 @@
                         @endforeach
                     </div>
                 </div>
-                <!-- /col-md-4-->
-                {{-- <div class="col-md-4 col-sm-4 mb">
-                    <div class="white-panel pn">
-                        <div class="white-header">
-                            <h5>Pendapatan Asli Daerah (PAD)</h5>
-                        </div>
-                        <div class="chart mt">
-                            <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%"
-                                data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color=""
-                                data-highlight-line-color="#fff" data-spot-radius="4"
-                                data-data="[200,135,667,333,526,996,111,123,890,464,655]"></div>
-                        </div>
-                        <p class="mt"><b>Rp. 3,015,108,541,624</b><br /></p>
-                    </div>
-                    <!--  /darkblue panel -->
-                </div>
-                <div class="col-md-4 col-sm-4 mb">
-                    <div class="red-panel pn">
-                        <div class="red-header">
-                            <h5>Belanja</h5>
-                        </div>
-                        <div class="chart mt">
-                            <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%"
-                                data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color=""
-                                data-highlight-line-color="#fff" data-spot-radius="4"
-                                data-data="[200,135,667,333,526,996,111,123,890,464,655]"></div>
-                        </div>
-                        <p class="mt"><b>Rp. 815,108,541,624</b><br /></p>
-                    </div>
-                    <!--  /darkblue panel -->
-                </div>
-                <div class="col-md-4 col-sm-4 mb">
-                    <div class="green-panel pn">
-                        <div class="green-header">
-                            <h5>Pembiayaan</h5>
-                        </div>
-                        <div class="chart mt">
-                            <div class="sparkline" data-type="line" data-resize="true" data-height="75" data-width="90%"
-                                data-line-width="1" data-line-color="#fff" data-spot-color="#fff" data-fill-color=""
-                                data-highlight-line-color="#fff" data-spot-radius="4"
-                                data-data="[200,135,667,333,526,996,111,123,890,464,655]"></div>
-                        </div>
-                        <p class="mt"><b>Rp. 315,108,541,624</b><br /></p>
-                    </div>
-                    <!--  /darkblue panel -->
-                </div> --}}
-                <!-- /col-md-4 -->
             </div>
             <!-- /row -->
         </div>

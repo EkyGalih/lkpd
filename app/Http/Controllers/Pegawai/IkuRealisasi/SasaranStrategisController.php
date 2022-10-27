@@ -15,7 +15,7 @@ class SasaranStrategisController extends Controller
      */
     public function index()
     {
-        $SasaranStrategis = SasaranStrategis::select('id as sasaran_id', 'sasaran_strategis.sasaran_strategis')->paginate(10);
+        $SasaranStrategis = SasaranStrategis::select('id as sasaran_id', 'sasaran_strategis.sasaran_strategis')->where('created_at', 'LIKE', date('Y').'%')->paginate(10);
 
         return view('pegawai.iku_realisasi.Components.sasaran-strategis', compact('SasaranStrategis'));
     }

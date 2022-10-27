@@ -9,10 +9,10 @@
         <div class="col-lg-12">
             <div class="content-panel">
                 <div class="row">
-                    <div class="col-lg-11">
+                    <div class="col-lg-10">
                         <h4 class="title">Sasaran Strategis</h4>
                     </div>
-                    <div class="col-lg-1">
+                    <div class="col-lg-2">
                         <button type="button" class="btn btn-theme btn-sm" data-toggle="modal" data-target="#TambahData">
                             <i class="fas fa-plus"></i> Tambah Data
                         </button>

@@ -24,7 +24,8 @@ class SasaranStrategis extends Model
 
     public static function getSasaran()
     {
-        return SasaranStrategis::select('id as sasaran_id', 'sasaran_strategis.*')->get();
+        $tahun = date('Y');
+        return SasaranStrategis::select('id as sasaran_id', 'sasaran_strategis.*')->where('created_at', 'LIKE', $tahun.'%')->get();
     }
 
     public function iku()

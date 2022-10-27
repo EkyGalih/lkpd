@@ -15,7 +15,7 @@
                     <button type="button" class="btn btn-link btn-xs" data-toggle="modal" data-target="#EditData{{ $loop->iteration }}">
                         <i class="fas fa-edit"></i>
                     </button>
-                    <button type="button" class="btn btn-link btn-xs" onclick="deleteData('{{ route('iku-indikator.destroy', $ik->ik_id) }}')">
+                    <button type="button" class="btn btn-link btn-xs" onclick="deleteData('{{ route('iku-indikator-pegawai.destroy', $ik->ik_id) }}')">
                         <i class="fas fa-trash"></i>
                     </button>
                 </td>

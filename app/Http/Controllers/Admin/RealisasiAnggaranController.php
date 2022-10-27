@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Apbd;
 use App\Models\KodeRekening;
-use App\Models\LaporanRealisasiAnggaran;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,147 +16,97 @@ class RealisasiAnggaranController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id = null)
+    public function index($tahun = null)
     {
-        $user = User::where('username', '=', Auth::user()->username)->select('id as user_id')->first();
-        $kodeRekening = KodeRekening::select('id as rekening_id', 'kode_rekening.*')
-        // ->where('jenis_rekening', '=', 'realisasi')
-        ->orderBy('kode_rekening', 'ASC')
-        ->get();
+        $tahun = $tahun == null ? date('Y') : $tahun;
 
-        $realisasi = LaporanRealisasiAnggaran::select('id as realisasi_id', 'realisasi_anggaran.*')->get();
+        $user = User::where('username', '=', Auth::user()->username)->select('id as user_id')->first();
+        $kodeRekening = KodeRekening::select('id as kode_rek_id', 'kode_rekening.*')
+                        ->orderBy('kode_rekening', 'ASC')
+                        ->where('created_at', 'LIKE', $tahun.'%')
+                        ->get();
+
+        if ($tahun == null)
+        {
+            $Apbd = Apbd::select('id as apbd_id', 'apbd.*')
+                    ->orderBy('kode_rekening', 'ASC')
+                    ->where('created_at', 'LIKE', $tahun.'%')
+                    ->get();
+        } elseif ($tahun != null) {
+            $Apbd = Apbd::select('id as apbd_id', 'apbd.*')
+                    ->where('tahun_anggaran', '=', $tahun)
+                    ->where('created_at', 'LIKE', $tahun.'%')
+                    ->orderBy('kode_rekening', 'ASC')
+                    ->get();
+        }
 
         $data = [
-            'jenis_laporan' => array(),
+            'nama_rekening' => array(),
             'data' => array(),
         ];
-        $jenis_laporan = [];
-        foreach($realisasi as $k => $val) {
-            if (!isset($jenis_laporan[$val->jenis_laporan])) {
-                $jenis_laporan[$val->jenis_laporan] = [];
+        $nama_rekening = [];
+        foreach ($Apbd as $k => $val) {
+            if (!isset($nama_rekening[$val->nama_rekening])) {
+                $nama_rekening[$val->nama_rekening] = [];
             }
         }
-        $c_sort = count($jenis_laporan);
+        $kode_rekening = [];
+        foreach ($Apbd as $k => $val) {
+            if (!isset($kode_rekening[$val->kode_rekening])) {
+                $kode_rekening[$val->kode_rekening] = [];
+            }
+        }
+
+        $c_sort = count($nama_rekening);
         $i = 0;
-        if (is_array($jenis_laporan) && ($c_sort > 0)) {
-            foreach($jenis_laporan as $k => $v) {
-                array_push($data['jenis_laporan'], $k);
+        if (is_array($nama_rekening) && ($c_sort > 0)) {
+            foreach ($nama_rekening as $k => $v) {
+                array_push($data['nama_rekening'], $k);
+                $kode = $Apbd->where('nama_rekening', '=', $k)->first();
                 $data['data'][$k] = array(
-                    'jenis_laporan' => $k,
-                    'ref1' => '',
-                    'ref_arus_masuk' => '',
-                    'ref_arus_keluar' => '',
-                    'jenis_arus_kas' => [
-                        'arus_masuk' => array(),
-                        'arus_keluar' => array()
-                    ],
+                    'kode_rekening' => $kode->kode_rekening,
+                    'nama_rekening' => $k,
+                    'data' => array()
                 );
             }
-            foreach($realisasi as $key => $val) {
-                if (in_array($val->jenis_laporan, $data['jenis_laporan'])) {
-                    if (!isset($data['data'][$val->jenis_laporan]['jenis_arus_kas'])) {
-                        $data['data'][$val->jenis_laporan]['ref1'] = $val->ref1;
-                        $data['tahun1'] = $val->tahun_anggaran;
-                        $data['tahun2'] = $val->tahun_anggaran_sebelum;
-                        if ($val->jenis_arus_kas == 'Arus Masuk Kas')
-                        {
-                            $data['data'][$val->jenis_laporan]['ref_arus_masuk'] = $val->ref2;
-                            $data['data'][$val->jenis_laporan]['jenis_arus_kas']['arus_masuk'] = [
-                                'jenis_laporan' => $val->jenis_laporan,
-                                'arus_kas_id' => $val->arus_kas_id,
-                                'ref1' => $val->ref1,
-                                'jenis_arus_kas' => $val->jenis_arus_kas,
-                                'ref2' => $val->ref2,
-                                'uraian' => $val->uraian,
-                                'ref3' => $val->ref3,
-                                'tahun_anggaran' => $val->tahun_anggaran,
-                                'anggaran' => $val->anggaran,
-                                'tahun_anggaran_sebelum' => $val->tahun_anggaran_sebelum,
-                                'anggaran_tahun_sebelum' => $val->anggaran_tahun_sebelum,
-                                'sub_total_saldo1' => $val->sub_total_saldo1,
-                                'sub_total_saldo2' => $val->sub_total_saldo2,
-                                'total_saldo1' => $val->total_saldo1,
-                                'total_saldo2' => $val->total_saldo2
-                            ];
-                        } elseif ($val->jenis_arus_kas == 'Arus Keluar Kas') {
-                            $data['data'][$val->jenis_laporan]['ref_arus_keluar'] = $val->ref2;
-                            $data['data'][$val->jenis_laporan]['jenis_arus_kas']['arus_keluar'] = [
-                                'arus_kas_id' => $val->arus_kas_id,
-                                'jenis_laporan' => $val->jenis_laporan,
-                                'ref1' => $val->ref1,
-                                'jenis_arus_kas' => $val->jenis_arus_kas,
-                                'ref2' => $val->ref2,
-                                'uraian' => $val->uraian,
-                                'ref3' => $val->ref3,
-                                'tahun_anggaran' => $val->tahun_anggaran,
-                                'anggaran' => $val->anggaran,
-                                'tahun_anggaran_sebelum' => $val->tahun_anggaran_sebelum,
-                                'anggaran_tahun_sebelum' => $val->anggaran_tahun_sebelum,
-                                'sub_total_saldo1' => $val->sub_total_saldo1,
-                                'sub_total_saldo2' => $val->sub_total_saldo2,
-                                'total_saldo1' => $val->total_saldo1,
-                                'total_saldo2' => $val->total_saldo2
-                            ];
-                        }
+
+            foreach ($Apbd as $key => $val) {
+                if (in_array($val->nama_rekening, $data['nama_rekening'])) {
+                    if (!isset($data['data'][$val->nama_rekening]['data'])) {
+                        $data['tahun_anggaran'] = $val->tahun_anggaran;
+                        $data['data'][$val->nama_rekening]['data'] = [
+                            'apbd_id'               => $val->apbd_id,
+                            'kode_rekening'         => $val->kode_rekening,
+                            'nama_rekening'         => $val->nama_rekening,
+                            'uraian'                => $val->uraian,
+                            'sub_uraian'            => $val->sub_uraian,
+                            'jml_anggaran_sebelum'  => $val->jml_anggaran_sebelum,
+                            'jml_anggaran_setelah'  => $val->jml_anggaran_setelah,
+                            'selisih_anggaran'      => $val->selisih_anggaran,
+                            'persen'                => $val->persen
+                        ];
                     } else {
-                        $data['data'][$val->jenis_laporan]['ref1'] = $val->ref1;
-                        $data['tahun1'] = $val->tahun_anggaran;
-                        $data['tahun2'] = $val->tahun_anggaran_sebelum;
-                        if ($val->jenis_arus_kas == 'Arus Masuk Kas')
-                        {
-                            $data['data'][$val->jenis_laporan]['ref_arus_masuk'] = $val->ref2;
-                            array_push($data['data'][$val->jenis_laporan]['jenis_arus_kas']['arus_masuk'], [
-                                'arus_kas_id' => $val->arus_kas_id,
-                                'jenis_laporan' => $val->jenis_laporan,
-                                'ref1' => $val->ref1,
-                                'jenis_arus_kas' => $val->jenis_arus_kas,
-                                'ref2' => $val->ref2,
-                                'uraian' => $val->uraian,
-                                'ref3' => $val->ref3,
-                                'tahun_anggaran' => $val->tahun_anggaran,
-                                'anggaran' => $val->anggaran,
-                                'tahun_anggaran_sebelum' => $val->tahun_anggaran_sebelum,
-                                'anggaran_tahun_sebelum' => $val->anggaran_tahun_sebelum,
-                                'sub_total_saldo1' => $val->sub_total_saldo1,
-                                'sub_total_saldo2' => $val->sub_total_saldo2,
-                                'total_saldo1' => $val->total_saldo1,
-                                'total_saldo2' => $val->total_saldo2
-                            ]);
-                        } elseif ($val->jenis_arus_kas == 'Arus Keluar Kas') {
-                            $data['data'][$val->jenis_laporan]['ref_arus_keluar'] = $val->ref2;
-                            array_push($data['data'][$val->jenis_laporan]['jenis_arus_kas']['arus_keluar'], [
-                                'arus_kas_id' => $val->arus_kas_id,
-                                'jenis_laporan' => $val->jenis_laporan,
-                                'ref1' => $val->ref1,
-                                'jenis_arus_kas' => $val->jenis_arus_kas,
-                                'ref2' => $val->ref2,
-                                'uraian' => $val->uraian,
-                                'ref3' => $val->ref3,
-                                'tahun_anggaran' => $val->tahun_anggaran,
-                                'anggaran' => $val->anggaran,
-                                'tahun_anggaran_sebelum' => $val->tahun_anggaran_sebelum,
-                                'anggaran_tahun_sebelum' => $val->anggaran_tahun_sebelum,
-                                'sub_total_saldo1' => $val->sub_total_saldo1,
-                                'sub_total_saldo2' => $val->sub_total_saldo2,
-                                'total_saldo1' => $val->total_saldo1,
-                                'total_saldo2' => $val->total_saldo2
-                            ]);
-                        }
+                        $data['tahun_anggaran'] = $val->tahun_anggaran;
+                        array_push($data['data'][$val->nama_rekening]['data'], [
+                            'apbd_id'               => $val->apbd_id,
+                            'kode_rekening'         => $val->kode_rekening,
+                            'nama_rekening'         => $val->nama_rekening,
+                            'uraian'                => $val->uraian,
+                            'sub_uraian'            => $val->sub_uraian,
+                            'jml_anggaran_sebelum'  => $val->jml_anggaran_sebelum,
+                            'jml_anggaran_setelah'  => $val->jml_anggaran_setelah,
+                            'selisih_anggaran'      => $val->selisih_anggaran,
+                            'persen'                => $val->persen
+                        ]);
                     }
                 }
             }
         }
+        $Apbd = $data['data'];
+        $get_tahun = Apbd::select('tahun_anggaran')->groupBy('tahun_anggaran')->orderBy('tahun_anggaran', 'DESC')->get();
+        $tahun_anggaran = isset($data['tahun_anggaran']) ? $data['tahun_anggaran'] : date('Y');
 
-        $realisasi = $data['data'];
-        $tahun1 = isset($data['tahun1']) ? $data['tahun1'] : '-';
-        $tahun2 = isset($data['tahun2']) ? $data['tahun2'] : '-';
-        if ($id == null)
-        {
-            return view('admin.RealisasiAnggaran.realisasi-anggaran', compact('user','kodeRekening', 'realisasi','tahun1', 'tahun2'));
-        } else {
-            $edit = LaporanRealisasiAnggaran::select('id as realisasi_id', 'realisasi_anggaran.*')->where('id', '=', $id)->first();
-            return view('admin.RealisasiAnggaran.realisasi-anggaran', compact('user','kodeRekening', 'realisasi','tahun1', 'tahun2', 'edit'));
-        }
+        return view('admin.RealisasiAnggaran.realisasi-anggaran', compact('user', 'Apbd', 'kodeRekening', 'get_tahun', 'tahun_anggaran'));
     }
 
     /**
