@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Apbd;
 use App\Models\KodeRekening;
+use App\Models\LaporanRealisasiAnggaran;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -124,7 +125,12 @@ class RealisasiAnggaranController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($id);
+        $Anggaran = LaporanRealisasiAnggaran::findOrFail($id);
+        $Anggaran->update([
+            'anggaran_terealisasi' => $request->anggaran_terealisasi
+        ]);
+
+        return redirect()->route('realisasi-anggaran-admin')->with(['success' => 'Anggaran Berhasil Diupdate!']);
     }
 
     /**

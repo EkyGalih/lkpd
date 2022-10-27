@@ -14,7 +14,28 @@
     <hr />
     <div class="row mt">
         <div class="col-lg-12">
-            @include('admin.RealisasiAnggaran.Components.table')
+            <div class="content-panel">
+                <div class="row">
+                    <div class="col-lg-9">
+                        <h4 class="title"><i class="fas fa-list"></i> Realisasi Anggaran {{ $tahun_anggaran }}</h4>
+                    </div>
+                    <div class="col-lg-3">
+                        <select id="tahun_anggaran" class="form-control">
+                            <option>Pilih Tahun Anggaran</option>
+                            @foreach ($get_tahun as $ta)
+                                <option value="{{ $ta->tahun_anggaran }}">{{ $ta->tahun_anggaran }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <input type="hidden" value="{{ $ta->tahun_anggaran }}" id="get_ta">
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-lg-12">
+                        @include('admin.RealisasiAnggaran.Components.table')
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row mt">
@@ -30,6 +51,11 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ asset('lib/jquery-mask/jquery-mask.js') }}"></script>
     <script>
+        $('#anggaran_terealisasi').maskMoney({
+            precision: 0
+        });
+
+        $('#realisasi-table').dataTable();
 
         tahun_anggaran = $('#get_ta').val();
 
