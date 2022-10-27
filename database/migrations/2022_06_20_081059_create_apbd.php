@@ -19,11 +19,11 @@ return new class extends Migration
             $table->string('nama_rekening');
             $table->string('uraian')->nullable();
             $table->string('sub_uraian')->nullable();
-            $table->string('jml_anggaran_sebelum')->nullable();
-            $table->string('jml_anggaran_setelah')->nullable();
-            $table->string('selisih_anggaran')->nullable();
-            $table->string('persen')->nullable();
-            $table->string('user_id');
+            $table->bigInteger('jml_anggaran_sebelum')->nullable();
+            $table->bigInteger('jml_anggaran_setelah')->nullable();
+            $table->bigInteger('selisih_anggaran')->nullable();
+            $table->string('persen', 3)->nullable();
+            $table->string('user_id')->index();
             $table->string('tahun_anggaran', 4);
             $table->timestamps();
         });
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::drop('apbd');
+        Schema::dropIfExists('apbd');
     }
 };

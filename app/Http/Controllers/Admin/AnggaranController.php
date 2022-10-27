@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Helper\UserAccess;
 use App\Http\Controllers\Controller;
+use App\Imports\APBD as ImportsAPBD;
 use App\Models\Apbd;
 use App\Models\KodeRekening;
 use App\Models\User;
@@ -106,7 +107,8 @@ class AnggaranController extends Controller
             }
         }
         $Apbd = $data['data'];
-        $get_tahun = Apbd::select('tahun_anggaran')->groupBy('tahun_anggaran')->orderBy('tahun_anggaran', 'DESC')->get();
+        $cek_data = Apbd::select('tahun_anggaran')->groupBy('tahun_anggaran')->orderBy('tahun_anggaran', 'DESC')->get();
+        $get_tahun = $cek_data == null ? [] : $cek_data;
         $tahun_anggaran = isset($data['tahun_anggaran']) ? $data['tahun_anggaran'] : date('Y');
 
         return view('admin.Apbd.apbd', compact('user', 'Apbd', 'kodeRekening', 'get_tahun', 'tahun_anggaran'));
@@ -132,11 +134,11 @@ class AnggaranController extends Controller
     {
         if (!isset($request->uraian) && !isset($request->sub_uraian)) {
 
-            $cekData = ModelsApbd::where('kode_rekening', '=', $request->kode_rekening)->first();
+            $cekData = Apbd::where('kode_rekening', '=', $request->kode_rekening)->first();
             if (isset($cekData)) {
                 return redirect()->back()->with(['warning' => 'Kode Rekening is already in use']);
             } else {
-                ModelsApbd::create([
+                Apbd::create([
                     'kode_rekening' => $request->kode_rekening,
                     'nama_rekening' => $request->nama_rekening,
                     'user_id'       => $request->user_id,
@@ -146,12 +148,12 @@ class AnggaranController extends Controller
 
         } elseif (!isset($request->sub_uraian)) {
 
-            $cekData = ModelsApbd::where('kode_rekening', '=', $request->kode_rekening2)->first();
+            $cekData = Apbd::where('kode_rekening', '=', $request->kode_rekening2)->first();
 
             if (isset($cekData)) {
                 return redirect()->back()->with(['warning' => 'Kode Rekening is already in use']);
             } else {
-                ModelsApbd::create([
+                Apbd::create([
                     'kode_rekening' => $request->kode_rekening2,
                     'nama_rekening' => $request->nama_rekening,
                     'uraian'        => $request->uraian,
@@ -166,7 +168,7 @@ class AnggaranController extends Controller
 
         } elseif (isset($request->nama_rekening) && isset($request->uraian) && isset($request->sub_uraian)) {
 
-            $cekData = ModelsApbd::where('kode_rekening', '=', $request->kode_rekening3)->first();
+            $cekData = Apbd::where('kode_rekening', '=', $request->kode_rekening3)->first();
 
             if (isset($cekData)) {
                 return redirect()->back()->with(['warning' => 'Kode Rekening is already in use']);
@@ -176,7 +178,7 @@ class AnggaranController extends Controller
                 $selisih_anggaran = UserAccess::CurrencyConvertComa($request->selisih);
                 $persen = UserAccess::ConvertPersen($request->persen);
 
-                ModelsApbd::create([
+                Apbd::create([
                     'kode_rekening' => $request->kode_rekening3,
                     'nama_rekening' => $request->nama_rekening,
                     'uraian'        => $request->uraian,
@@ -193,28 +195,6 @@ class AnggaranController extends Controller
         }
 
         return redirect()->back()->with(['success' => 'Anggaran berhasil ditambah!']);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -240,7 +220,8 @@ class AnggaranController extends Controller
         $file = $apbd->file('data-apbd');
         $nama_file = rand() . '-' . $file->getCLientOriginalName();
         $file->move('import_data/', $nama_file);
-        Excel::import(new APBD, public_path('import_data/'.$nama_file));
+        Excel::import(new ImportsAPBD, public_path('import_data/'.$nama_file));
+
         return redirect()->route('apbd')->with(['success' => 'APBD berhasil dibuat!']);
      }
 

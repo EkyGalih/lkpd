@@ -28,15 +28,17 @@ class RealisasiAnggaranController extends Controller
 
         if ($tahun == null)
         {
-            $Apbd = Apbd::select('id as apbd_id', 'apbd.*')
-                    ->orderBy('kode_rekening', 'ASC')
-                    ->where('created_at', 'LIKE', $tahun.'%')
+            $Apbd = Apbd::select('apbd.id as apbd_id', 'apbd.*', 'realisasi_anggaran.id as realisasi_anggaran_id', 'realisasi_anggaran.anggaran_terealisasi')
+                    ->join('realisasi_anggaran', 'apbd.kode_rekening', '=', 'realisasi_anggaran.kode_rekening')
+                    ->orderBy('apbd.kode_rekening', 'ASC')
+                    ->where('apbd.created_at', 'LIKE', $tahun.'%')
                     ->get();
         } elseif ($tahun != null) {
-            $Apbd = Apbd::select('id as apbd_id', 'apbd.*')
-                    ->where('tahun_anggaran', '=', $tahun)
-                    ->where('created_at', 'LIKE', $tahun.'%')
-                    ->orderBy('kode_rekening', 'ASC')
+            $Apbd = Apbd::select('apbd.id as apbd_id', 'apbd.*', 'realisasi_anggaran.id as realisasi_anggaran_id', 'realisasi_anggaran.anggaran_terealisasi')
+                    ->join('realisasi_anggaran', 'apbd.kode_rekening', '=', 'realisasi_anggaran.kode_rekening')
+                    ->where('apbd.tahun_anggaran', '=', $tahun)
+                    ->where('apbd.created_at', 'LIKE', $tahun.'%')
+                    ->orderBy('apbd.kode_rekening', 'ASC')
                     ->get();
         }
 
@@ -83,7 +85,9 @@ class RealisasiAnggaranController extends Controller
                             'jml_anggaran_sebelum'  => $val->jml_anggaran_sebelum,
                             'jml_anggaran_setelah'  => $val->jml_anggaran_setelah,
                             'selisih_anggaran'      => $val->selisih_anggaran,
-                            'persen'                => $val->persen
+                            'persen'                => $val->persen,
+                            'realisasi_anggaran_id' => $val->realisasi_anggaran_id,
+                            'anggaran_terealisasi'  => $val->anggaran_terealisasi
                         ];
                     } else {
                         $data['tahun_anggaran'] = $val->tahun_anggaran;
@@ -96,7 +100,9 @@ class RealisasiAnggaranController extends Controller
                             'jml_anggaran_sebelum'  => $val->jml_anggaran_sebelum,
                             'jml_anggaran_setelah'  => $val->jml_anggaran_setelah,
                             'selisih_anggaran'      => $val->selisih_anggaran,
-                            'persen'                => $val->persen
+                            'persen'                => $val->persen,
+                            'realisasi_anggaran_id' => $val->realisasi_anggaran_id,
+                            'anggaran_terealisasi'  => $val->anggaran_terealisasi
                         ]);
                     }
                 }
@@ -110,49 +116,6 @@ class RealisasiAnggaranController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -161,7 +124,7 @@ class RealisasiAnggaranController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($id);
     }
 
     /**

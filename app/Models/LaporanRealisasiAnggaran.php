@@ -21,4 +21,9 @@ class LaporanRealisasiAnggaran extends Model
             $model->id = (string)Uuid::generate(4);
         });
     }
+
+    public function apbd()
+    {
+        return $this->belongsTo(Apbd::class, 'kode_rekening');
+    }
 }

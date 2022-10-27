@@ -15,7 +15,6 @@ return new class extends Migration
     {
         Schema::create('kode_rekening', function (Blueprint $table) {
             $table->string('id', 40)->primary();
-            // $table->enum('jenis_rekening', ['arus_kas', 'neraca', 'saldo', 'ekuitas', 'realisasi', 'operasional']);
             $table->string('nama_rekening', 250);
             $table->string('kode_rekening', 100)->unique();
             $table->string('ref', 40)->nullable();

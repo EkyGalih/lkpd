@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('ekuitas', function (Blueprint $table) {
+        Schema::table('apbd', function (Blueprint $table) {
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
@@ -29,8 +29,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('ekuitas', function (Blueprint $table) {
-            $table->drop('user_id');
+        Schema::table('apbd', function (Blueprint $table) {
+            $table->dropForeign('user_id');
         });
     }
 };

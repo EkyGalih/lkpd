@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('perubahan_saldo_anggaran_lebih', function (Blueprint $table) {
-            $table->foreign('user_id')
-                ->references('id')
-                ->on('users')
+        Schema::table('realisasi_anggaran', function (Blueprint $table) {
+            $table->foreign('kode_rekening')
+                ->references('kode_rekening')
+                ->on('apbd')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
         });
@@ -29,8 +29,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('perubahan_saldo_anggaran_lebih', function (Blueprint $table) {
-            $table->drop('user_id');
+        Schema::table('realisasi_anggaran', function (Blueprint $table) {
+            //
         });
     }
 };

@@ -21,4 +21,9 @@ class Apbd extends Model
             $model->id = (string)Uuid::generate(4);
         });
     }
+
+    public function Realisasi()
+    {
+        return $this->hasOne(LaporanRealisasiAnggaran::class, 'kode_rekening');
+    }
 }
