@@ -125,6 +125,8 @@ class RealisasiAnggaranController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $Apbd = Apbd::where('kode_rekening', '=', $request->kode_rekening)->select('jml_anggaran_setelah')->first();
+
         $Anggaran = LaporanRealisasiAnggaran::findOrFail($id);
         $Anggaran->update([
             'anggaran_terealisasi' => $request->anggaran_terealisasi

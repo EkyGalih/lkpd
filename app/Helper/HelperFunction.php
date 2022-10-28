@@ -41,4 +41,5 @@ class HelperFunction
     {
         return Date('g:i A', strtotime($param));
     }
+
 }

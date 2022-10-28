@@ -26,4 +26,9 @@ class LaporanRealisasiAnggaran extends Model
     {
         return $this->belongsTo(Apbd::class, 'kode_rekening');
     }
+
+    public static function sumSub($kode_rekening)
+    {
+        return LaporanRealisasiAnggaran::where('kode_rekening', 'Like', $kode_rekening.'%')->select('anggaran_terealisasi')->sum('anggaran_terealisasi');
+    }
 }

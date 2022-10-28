@@ -135,9 +135,9 @@
                                 $selisih_pendapatan1 = array_sum($jumlah_pendapatan1) - array_sum($jumlah_pendapatan2);
                                 $count_persen_pendapatan1 = (array_sum($jumlah_pendapatan1) - array_sum($jumlah_pendapatan2)) / array_sum($jumlah_pendapatan1);
                                 if ($count_persen_pendapatan1 < 0) {
-                                    $persen_pendapatan1 = abs(round($count_persen_pendapatan1 * 100));
+                                    $persen_pendapatan1 = abs(round($count_persen_pendapatan1 * 100,2));
                                 } elseif ($count_persen_pendapatan1 > 0) {
-                                    $persen_pendapatan1 = round($count_persen_pendapatan1 * 100);
+                                    $persen_pendapatan1 = round($count_persen_pendapatan1 * 100,2);
                                 }
                             @endphp
                             <td style="text-align: right; font-size: 14px;">
@@ -159,9 +159,9 @@
                                 $selisih_belanja = array_sum($jumlah_belanja1) - array_sum($jumlah_belanja2);
                                 $count_persen_belanja = (array_sum($jumlah_belanja1) - array_sum($jumlah_belanja2)) / array_sum($jumlah_belanja1);
                                 if ($count_persen_belanja < 0) {
-                                    $persen_belanja = abs(round($count_persen_belanja * 100));
+                                    $persen_belanja = abs(round($count_persen_belanja * 100,2));
                                 } elseif ($count_persen_belanja > 0) {
-                                    $persen_belanja = round($count_persen_belanja * 100);
+                                    $persen_belanja = round($count_persen_belanja * 100,2);
                                 }
                             @endphp
                             <td style="text-align: right; font-size: 14px;">
@@ -180,9 +180,9 @@
                                 $total_defisit = $defisit1 - $defisit2;
                                 $count_persen_defisit = ($defisit1 - $defisit2) / $defisit1;
                                 if ($count_persen_defisit < 0) {
-                                    $persen_defisit = abs(round($count_persen_defisit * 100));
+                                    $persen_defisit = abs(round($count_persen_defisit * 100,2));
                                 } elseif ($count_persen_defisit > 0) {
-                                    $persen_defisit = round($count_persen_defisit * 100);
+                                    $persen_defisit = round($count_persen_defisit * 100,2);
                                 }
                             @endphp
                             <td style="text-align: right;"><strong>{{ number_format($defisit1) }}</strong></td>
@@ -208,9 +208,9 @@
                                 $selisih_pembiayaan1 = array_sum($jumlah_pembiayaan1) - array_sum($jumlah_pembiayaan2);
                                 $count_persen_pembiayaan1 = (array_sum($jumlah_pembiayaan1) - array_sum($jumlah_pembiayaan2)) / array_sum($jumlah_pembiayaan1);
                                 if ($count_persen_pembiayaan1 < 0) {
-                                    $persen_pembiayaan1 = abs(round($count_persen_pembiayaan1 * 100));
+                                    $persen_pembiayaan1 = abs(round($count_persen_pembiayaan1 * 100,2));
                                 } elseif ($count_persen_pembiayaan1 > 0) {
-                                    $persen_pembiayaan1 = round($count_persen_pembiayaan1 * 100);
+                                    $persen_pembiayaan1 = round($count_persen_pembiayaan1 * 100,2);
                                 }
                             @endphp
                             <td style="text-align: right; font-size: 14px;">
@@ -229,9 +229,9 @@
                                 $selisih_pembiayaan2 = array_sum($jumlah_pembiayaan3) - array_sum($jumlah_pembiayaan4);
                                 $count_persen_pembiayaan2 = (array_sum($jumlah_pembiayaan3) - array_sum($jumlah_pembiayaan4)) / array_sum($jumlah_pembiayaan3);
                                 if ($count_persen_pembiayaan2 < 0) {
-                                    $persen_pembiayaan2 = abs(round($count_persen_pembiayaan2 * 100));
+                                    $persen_pembiayaan2 = abs(round($count_persen_pembiayaan2 * 100,2));
                                 } elseif ($count_persen_pembiayaan2 > 0) {
-                                    $persen_pembiayaan2 = round($count_persen_pembiayaan2 * 100);
+                                    $persen_pembiayaan2 = round($count_persen_pembiayaan2 * 100,2);
                                 }
                             @endphp
                             <td style="text-align: right; font-size: 14px;">
@@ -248,9 +248,9 @@
                                 $selisih_neto = $neto1 - $neto2;
                                 $count_persen_neto = ($neto1 - $neto2) / $neto1;
                                 if ($count_persen_neto < 0) {
-                                    $persen_neto = abs(round($count_persen_neto * 100));
+                                    $persen_neto = abs(round($count_persen_neto * 100,2));
                                 } elseif ($count_persen_neto > 0) {
-                                    $persen_neto = round($count_persen_neto * 100);
+                                    $persen_neto = round($count_persen_neto * 100,2);
                                 }
                             @endphp
                             <td style="text-align: right; font-size: 14px;">

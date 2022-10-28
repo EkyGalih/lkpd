@@ -5,8 +5,7 @@
 
 @section('css-additional')
     <link rel="stylesheet" href="{{ asset('lib/bootstrap-fileupload/bootstrap-fileupload.css') }}">
-    {{-- <script src="{{ asset('lib/chart-master/Chart.js') }}"></script> --}}
-    {{-- <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css"> --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 @endsection
 @section('content')
     <h3><a href="{{ route('realisasi-anggaran-admin') }}"><i class="fas fa-book-open"></i> LAPORAN REALISASI ANGGARAN APBD</a>
@@ -16,16 +15,23 @@
         <div class="col-lg-12">
             <div class="content-panel">
                 <div class="row">
-                    <div class="col-lg-9">
+                    <div class="col-lg-8">
                         <h4 class="title"><i class="fas fa-list"></i> Realisasi Anggaran {{ $tahun_anggaran }}</h4>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-2">
                         <select id="tahun_anggaran" class="form-control">
                             <option>Pilih Tahun Anggaran</option>
                             @foreach ($get_tahun as $ta)
                                 <option value="{{ $ta->tahun_anggaran }}">{{ $ta->tahun_anggaran }}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="col-lg-2">
+                        <button type="button" class="btn btn-success btn-sm" data-tooltip="tooltip" data-placement="top"
+                            title="Edit Anggaran" data-toggle="modal" data-target="#modalEdit">
+                            <i class="fas fa-edit"></i> Update Anggaran
+                        </button>
+                        @include('admin.RealisasiAnggaran.Components.edit')
                     </div>
                     <input type="hidden" value="{{ $ta->tahun_anggaran }}" id="get_ta">
                 </div>
@@ -50,10 +56,13 @@
     <script src="{{ asset('lib/bootstrap-fileupload/bootstrap-fileupload.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ asset('lib/jquery-mask/jquery-mask.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $('#anggaran_terealisasi').maskMoney({
             precision: 0
         });
+
+        $('.kode_rekening').select2();
 
         $('#realisasi-table').dataTable();
 

@@ -7,6 +7,7 @@ use Webpatser\Uuid\Uuid;
 
 class KodeRekening extends Model
 {
+    public $incrementing = false;
     protected $table = 'kode_rekening';
     protected $guarded = ['created_at', 'updated_at'];
 
@@ -19,8 +20,8 @@ class KodeRekening extends Model
         });
     }
 
-    public function subKode()
+    public static function getKodeRekening()
     {
-        return $this->hasMany(SubKodeRekening::class);
+        return KodeRekening::select('id', 'kode_rekening', 'nama_rekening')->orderBy('kode_rekening', 'ASC')->get();
     }
 }
