@@ -24,4 +24,23 @@ class KodeRekening extends Model
     {
         return KodeRekening::select('id', 'kode_rekening', 'nama_rekening')->orderBy('kode_rekening', 'ASC')->get();
     }
+
+    public static function getSubKode()
+    {
+        $KodeRekening = [
+            "kode_rekening" => array(),
+            "nama_rekening" => array()
+        ];
+        $Get = KodeRekening::select('id', 'kode_rekening', 'nama_rekening')->orderBy('kode_rekening', 'ASC')->get();
+
+        foreach ($Get as $item)
+        {
+            if (strlen($item->kode_rekening) > 3) {
+                array_push($KodeRekening["kode_rekening"], $item->kode_rekening);
+                array_push($KodeRekening["nama_rekening"], $item->nama_rekening);
+            }
+        }
+        return $KodeRekening;
+
+    }
 }

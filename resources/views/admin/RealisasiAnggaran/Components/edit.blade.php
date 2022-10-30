@@ -5,28 +5,26 @@
                 <h3 class="modal-title"><i class="fas fa-edit"></i> Realisasi Anggaran</h3>
             </div>
             <div class="modal-body">
-                <form method="POST" action="{{ route('realisasi-anggaran-admin') }}"
+                <form method="POST" action="{{ route('realisasi-anggaran-admin.update') }}"
                     style="margin-left: 10px; margin-right: 10px;">
                     @csrf
                     @method('PUT')
                     <div class="row">
-                        @php $KodeRekening = App\Models\KodeRekening::getKodeRekening() @endphp
+                        @php $KodeRekening = App\Models\KodeRekening::getSubKode() @endphp
                         <div class="form-group">
                             <label for="kode_rekening">Kode Rekening</label>
-                            <div class="col-md-12">
-                                <select name="kode_rekening" class="form-control kode_rekening">
-                                    <option value="">------</option>
-                                    @foreach ($KodeRekening as $kode)
-                                        <option value="{{ $kode->id }}">[{{ $kode->kode_rekening }}] -
-                                            {{ $kode->nama_rekening }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="anggaran_terealisasi">Anggaran Terealisasi</label>
-                                <input type="text" name="anggaran_terealisasi" id="anggaran_terealisasi"
-                                    class="form-control">
-                            </div>
+                            <select name="kode_rekening" class="form-control">
+                                <option value="">------</option>
+                                @foreach ($KodeRekening['kode_rekening'] as $key => $kode)
+                                    <option value="{{ $kode }}">[{{ $kode }}] -
+                                        {{ $KodeRekening['nama_rekening'][$key] }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="anggaran_terealisasi">Anggaran Terealisasi</label>
+                            <input type="text" name="anggaran_terealisasi" id="anggaran_terealisasi"
+                                class="form-control">
                         </div>
                     </div>
             </div>

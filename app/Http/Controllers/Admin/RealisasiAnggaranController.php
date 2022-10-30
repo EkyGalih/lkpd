@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper\UserAccess;
 use App\Http\Controllers\Controller;
 use App\Models\Apbd;
 use App\Models\KodeRekening;
@@ -123,16 +124,22 @@ class RealisasiAnggaranController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         $Apbd = Apbd::where('kode_rekening', '=', $request->kode_rekening)->select('jml_anggaran_setelah')->first();
+        $Anggaran = LaporanRealisasiAnggaran::where('kode_rekening', '=', $request->kode_rekening)->first();
+        $AnggaranBaru = UserAccess::CurrencyConvertComa($request->anggaran_terealisasi);
+        $SumAnggaran = $AnggaranBaru + $Anggaran->anggaran_terealisasi;
 
-        $Anggaran = LaporanRealisasiAnggaran::findOrFail($id);
-        $Anggaran->update([
-            'anggaran_terealisasi' => $request->anggaran_terealisasi
-        ]);
+        if ($Apbd->jml_anggaran_setelah >= $SumAnggaran) {
+            $Anggaran->update([
+                'anggaran_terealisasi' => $SumAnggaran
+            ]);
 
-        return redirect()->route('realisasi-anggaran-admin')->with(['success' => 'Anggaran Berhasil Diupdate!']);
+            return redirect()->route('realisasi-anggaran-admin')->with(['success' => 'Anggaran Berhasil Diupdate!']);
+        } elseif ($Apbd->jml_anggaran_setelah < $SumAnggaran) {
+            return redirect()->route('realisasi-anggaran-admin')->with(['warning' => 'Anggaran Terpakai Melebihi Pagu']);
+        }
     }
 
     /**
