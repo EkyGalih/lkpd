@@ -24,6 +24,11 @@
                 <canvas id="apbd-chart"></canvas>
             </div>
         </div>
+        <div class="col-lg-6">
+            <div class="content-panel">
+                <canvas id="apbd-comparison"></canvas>
+            </div>
+        </div>
     </div>
 @endsection
 @section('js-additional')

@@ -9,20 +9,20 @@
         labels: LabelsPad,
         datasets: [{
                 label: 'Sebelum Perubahan',
-                backgroundColor: 'hsl(350, 87%, 55%)',
-                borderColor: 'hsl(350, 87%, 55%)',
+                backgroundColor: '#FF1E00',
+                borderColor: '#FF1E00',
                 data: [jumlah_pendapatan1, jumlah_belanja1, jumlah_pembiayaan1],
             },
             {
                 label: 'Selisih Anggaran',
-                backgroundColor: '#1877F2',
-                borderColor: '#1877F2',
+                backgroundColor: '#3B9AE1',
+                borderColor: '#3B9AE1',
                 data: [selisih_pendapatan, selisih_belanja, selisih_pembiayaan],
             },
             {
                 label: 'Setelah Perubahan',
-                backgroundColor: '#2ABBA7',
-                borderColor: '#2ABBA7',
+                backgroundColor: '#3FA796',
+                borderColor: '#3FA796',
                 data: [jumlah_pendapatan2, jumlah_belanja2, jumlah_pembiayaan2],
             }
 
