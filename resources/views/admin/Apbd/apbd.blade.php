@@ -19,7 +19,7 @@
         @include('admin.Apbd.Components.add')
     </div>
     <div class="row mt">
-        <div class="col-lg-12">
+        <div class="col-lg-6">
             <div class="content-panel">
                 <canvas id="apbd-chart"></canvas>
             </div>
@@ -35,6 +35,11 @@
         $('apbd-table').dataTable();
 
         tahun_anggaran = $('#get_ta').val();
+
+        function getApbd(){
+            ta = $('#tahun_anggaran').val();
+            window.location.href = window.location.origin + '/admin/anggaran/' + ta
+        }
 
         jumlah_pendapatan1 = $('#jumlah_pendapatan1').val();
         jumlah_pendapatan2 = $('#jumlah_pendapatan2').val();

@@ -34,6 +34,7 @@ class APBD implements ToCollection, WithHeadingRow
             LaporanRealisasiAnggaran::create([
                 'kode_rekening'         => $row['kode_rekening'],
                 'anggaran_terealisasi'  => 0,
+                'tahun_anggaran'        => date('Y'),
                 'user_id'               => Auth::user()->id
             ]);
         }

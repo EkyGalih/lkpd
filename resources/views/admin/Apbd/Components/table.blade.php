@@ -4,10 +4,10 @@
             <h4 class="title"><i class="fas fa-list"></i> APBD {{ $tahun_anggaran }}</h4>
         </div>
         <div class="col-lg-3">
-            <select id="tahun_anggaran" class="form-control">
+            <select id="tahun_anggaran" class="form-control" onchange="getApbd()">
                 <option>Pilih Tahun Anggaran</option>
                 @foreach ($get_tahun as $ta)
-                    <option value="{{ $ta->tahun_anggaran }}">{{ $ta->tahun_anggaran }}</option>
+                    <option value="{{ $ta->tahun_anggaran }}" {{ $tahun_anggaran == $ta->tahun_anggaran ? 'selected' : '' }}>{{ $ta->tahun_anggaran }}</option>
                 @endforeach
             </select>
         </div>
@@ -21,7 +21,7 @@
                 <i class="fas fa-plus"></i>
             </div>
         </div>
-        {{-- <input type="hidden" value="{{ $ta->tahun_anggaran  }}" id="get_ta"> --}}
+        <input type="hidden" value="{{ $get_tahun == null ? date('Y') : $tahun_anggaran  }}" id="get_ta">
     </div>
     <hr />
     <div class="table-responsive">

@@ -34,12 +34,11 @@ class AnggaranController extends Controller
         {
             $Apbd = Apbd::select('id as apbd_id', 'apbd.*')
                     ->orderBy('kode_rekening', 'ASC')
-                    ->where('created_at', 'LIKE', $tahun.'%')
+                    ->where('tahun_anggaran', '=', date('Y'))
                     ->get();
         } elseif ($tahun != null) {
             $Apbd = Apbd::select('id as apbd_id', 'apbd.*')
                     ->where('tahun_anggaran', '=', $tahun)
-                    ->where('created_at', 'LIKE', $tahun.'%')
                     ->orderBy('kode_rekening', 'ASC')
                     ->get();
         }

@@ -33,14 +33,14 @@ class RealisasiAnggaranController extends Controller
             $Apbd = Apbd::select('apbd.id as apbd_id', 'apbd.*', 'realisasi_anggaran.id as realisasi_anggaran_id', 'realisasi_anggaran.anggaran_terealisasi')
                     ->join('realisasi_anggaran', 'apbd.kode_rekening', '=', 'realisasi_anggaran.kode_rekening')
                     ->orderBy('apbd.kode_rekening', 'ASC')
-                    ->where('apbd.created_at', 'LIKE', $tahun.'%')
+                    ->where('apbd.tahun_anggaran', '=', date('Y'))
                     ->get();
         } elseif ($tahun != null) {
             $Apbd = Apbd::select('apbd.id as apbd_id', 'apbd.*', 'realisasi_anggaran.id as realisasi_anggaran_id', 'realisasi_anggaran.anggaran_terealisasi')
                     ->join('realisasi_anggaran', 'apbd.kode_rekening', '=', 'realisasi_anggaran.kode_rekening')
                     ->where('apbd.tahun_anggaran', '=', $tahun)
-                    ->where('apbd.created_at', 'LIKE', $tahun.'%')
                     ->orderBy('apbd.kode_rekening', 'ASC')
+                    ->groupBy('kode_rekening')
                     ->get();
         }
 
