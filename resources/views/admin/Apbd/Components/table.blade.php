@@ -7,7 +7,9 @@
             <select id="tahun_anggaran" class="form-control" onchange="getApbd()">
                 <option>Pilih Tahun Anggaran</option>
                 @foreach ($get_tahun as $ta)
-                    <option value="{{ $ta->tahun_anggaran }}" {{ $tahun_anggaran == $ta->tahun_anggaran ? 'selected' : '' }}>{{ $ta->tahun_anggaran }}</option>
+                    <option value="{{ $ta->tahun_anggaran }}"
+                        {{ $tahun_anggaran == $ta->tahun_anggaran ? 'selected' : '' }}>{{ $ta->tahun_anggaran }}
+                    </option>
                 @endforeach
             </select>
         </div>
@@ -21,7 +23,7 @@
                 <i class="fas fa-plus"></i>
             </div>
         </div>
-        <input type="hidden" value="{{ $get_tahun == null ? date('Y') : $tahun_anggaran  }}" id="get_ta">
+        <input type="hidden" value="{{ $get_tahun == null ? date('Y') : $tahun_anggaran }}" id="get_ta">
     </div>
     <hr />
     <div class="table-responsive">
@@ -30,13 +32,15 @@
                 <tr>
                     <td style="text-align: center;" rowspan="2">Kode</td>
                     <td style="text-align: center;" rowspan="2">Uraian</td>
-                    <td style="text-align: center;" colspan="2">Jumlah (Rp)</td>
+                    <td style="text-align: center;" colspan="{{ count($get_tahun) + 1 }}">Jumlah (Rp)</td>
                     <td style="text-align: center;" colspan="2">Bertambah/(Berkurang)</td>
                     <td style="text-align: center;" rowspan="2"></td>
                 </tr>
                 <tr>
                     <td>Sebelum Perubahan</td>
-                    <td>Setelah Perubahan</td>
+                    @foreach ($get_tahun as $gtahun)
+                        <td>Setelah Perubahan ({{ $gtahun->tahun_anggaran }})</td>
+                    @endforeach
                     <td style="text-align: center;">(Rp)</td>
                     <td style="text-align: center;">%</td>
                 </tr>
@@ -56,11 +60,11 @@
                     $jumlah_pembiayaan3 = [];
                     $jumlah_pembiayaan4 = [];
                 @endphp
-
                 @foreach ($Apbd as $apbd)
                     <tr>
                         <td>{{ $apbd['kode_rekening'] }}</td>
                         <td><strong>{{ $apbd['nama_rekening'] }}</strong></td>
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -74,19 +78,30 @@
                                 @if (isset($item['nama_rekening']) && !isset($item['sub_uraian']))
                                     <td style="padding-left: 20px;"><strong>{{ $item['uraian'] }}</strong></td>
                                     <td style="text-align: right; font-size: 14px;">
-                                        <strong>{{ number_format($item['jml_anggaran_sebelum']) }}</strong></td>
+                                        <strong>{{ number_format($item['jml_anggaran_sebelum']) }}</strong>
+                                    </td>
+                                    @foreach ($get_tahun as $key => $tahun1)
+                                        @php $data1 = App\Models\Apbd::getApbdTahun($get_tahun[$key]['tahun_anggaran'], $item['kode_rekening']) @endphp
+                                        <td style="text-align: right; font-size: 14px;">
+                                            <strong>{{ number_format(floatval($data1)) }}</strong>
+                                        </td>
+                                    @endforeach
                                     <td style="text-align: right; font-size: 14px;">
-                                        <strong>{{ number_format($item['jml_anggaran_setelah']) }}</strong></td>
+                                        <strong>{{ number_format($item['selisih_anggaran']) }}</strong>
+                                    </td>
                                     <td style="text-align: right; font-size: 14px;">
-                                        <strong>{{ number_format($item['selisih_anggaran']) }}</strong></td>
-                                    <td style="text-align: right; font-size: 14px;">
-                                        <strong>{{ $item['persen'] }}%</strong></td>
+                                        <strong>{{ $item['persen'] }}%</strong>
+                                    </td>
                                 @elseif (isset($item['nama_rekening']) && isset($item['uraian']))
                                     <td style="padding-left: 40px;">{{ $item['sub_uraian'] }}</td>
                                     <td style="text-align: right; font-size: 12px;">
                                         {{ number_format($item['jml_anggaran_sebelum']) }}</td>
-                                    <td style="text-align: right; font-size: 12px;">
-                                        {{ number_format($item['jml_anggaran_setelah']) }}</td>
+                                        @foreach ($get_tahun as $key => $tahun2)
+                                        @php $data2 = App\Models\Apbd::getApbdTahun($get_tahun[$key]['tahun_anggaran'], $item['kode_rekening']) @endphp
+                                        <td style="text-align: right; font-size: 14px;">
+                                            {{ number_format(floatval($data2)) }}
+                                        </td>
+                                    @endforeach
                                     <td style="text-align: right; font-size: 12px;">
                                         {{ number_format($item['selisih_anggaran']) }}</td>
                                     <td style="text-align: right; font-size: 12px;">{{ $item['persen'] }}%</td>
@@ -124,48 +139,56 @@
                             <td></td>
                             <td style="text-align: right;"><strong>Jumlah Pendapatan</strong></td>
                             <td style="text-align: right; font-size: 14px;">
-                                <strong>{{ number_format(array_sum($jumlah_pendapatan1)) }}</strong></td>
+                                <strong>{{ number_format(array_sum($jumlah_pendapatan1)) }}</strong>
+                            </td>
                             {{-- simpan data jumlah pendapatan1 untuk di kirim ke grafik --}}
                             <input type="hidden" value="{{ array_sum($jumlah_pendapatan1) }}" id="jumlah_pendapatan1">
                             <td style="text-align: right; font-size: 14px;">
-                                <strong>{{ number_format(array_sum($jumlah_pendapatan2)) }}</strong></td>
+                                <strong>{{ number_format(array_sum($jumlah_pendapatan2)) }}</strong>
+                            </td>
+                            <td></td>
                             {{-- simpan data jumlah pendapatan2 untuk di kirim ke grafik --}}
                             <input type="hidden" value="{{ array_sum($jumlah_pendapatan2) }}" id="jumlah_pendapatan2">
                             @php
                                 $selisih_pendapatan1 = array_sum($jumlah_pendapatan1) - array_sum($jumlah_pendapatan2);
                                 $count_persen_pendapatan1 = (array_sum($jumlah_pendapatan1) - array_sum($jumlah_pendapatan2)) / array_sum($jumlah_pendapatan1);
                                 if ($count_persen_pendapatan1 < 0) {
-                                    $persen_pendapatan1 = abs(round($count_persen_pendapatan1 * 100,2));
+                                    $persen_pendapatan1 = abs(round($count_persen_pendapatan1 * 100, 2));
                                 } elseif ($count_persen_pendapatan1 > 0) {
-                                    $persen_pendapatan1 = round($count_persen_pendapatan1 * 100,2);
+                                    $persen_pendapatan1 = round($count_persen_pendapatan1 * 100, 2);
                                 }
                             @endphp
                             <td style="text-align: right; font-size: 14px;">
-                                <strong>{{ number_format(abs($selisih_pendapatan1)) }}</strong></td>
+                                <strong>{{ number_format(abs($selisih_pendapatan1)) }}</strong>
+                            </td>
                             <td style="text-align: right;"><strong>{{ $persen_pendapatan1 }}%</strong></td>
                             <td></td>
                         @elseif ($apbd['nama_rekening'] == 'BELANJA')
                             <td></td>
                             <td style="text-align: right"><strong>Jumlah belanja</strong></td>
                             <td style="text-align: right; font-size: 14px;">
-                                <strong>{{ number_format(array_sum($jumlah_belanja1)) }}</strong></td>
+                                <strong>{{ number_format(array_sum($jumlah_belanja1)) }}</strong>
+                            </td>
                             {{-- simpan data jumlah belanja1 untuk di kirim ke grafik --}}
                             <input type="hidden" value="{{ array_sum($jumlah_belanja1) }}" id="jumlah_belanja1">
                             <td style="text-align: right; font-size: 14px;">
-                                <strong>{{ number_format(array_sum($jumlah_belanja2)) }}</strong></td>
+                                <strong>{{ number_format(array_sum($jumlah_belanja2)) }}</strong>
+                            </td>
+                            <td></td>
                             {{-- simpan data jumlah belanja2 untuk di kirim ke grafik --}}
                             <input type="hidden" value="{{ array_sum($jumlah_belanja2) }}" id="jumlah_belanja2">
                             @php
                                 $selisih_belanja = array_sum($jumlah_belanja1) - array_sum($jumlah_belanja2);
                                 $count_persen_belanja = (array_sum($jumlah_belanja1) - array_sum($jumlah_belanja2)) / array_sum($jumlah_belanja1);
                                 if ($count_persen_belanja < 0) {
-                                    $persen_belanja = abs(round($count_persen_belanja * 100,2));
+                                    $persen_belanja = abs(round($count_persen_belanja * 100, 2));
                                 } elseif ($count_persen_belanja > 0) {
-                                    $persen_belanja = round($count_persen_belanja * 100,2);
+                                    $persen_belanja = round($count_persen_belanja * 100, 2);
                                 }
                             @endphp
                             <td style="text-align: right; font-size: 14px;">
-                                <strong>{{ number_format(abs($selisih_belanja)) }}</strong></td>
+                                <strong>{{ number_format(abs($selisih_belanja)) }}</strong>
+                            </td>
                             <td style="text-align: right"><strong>{{ $persen_belanja }}%</strong></td>
                             <td></td>
                         @endif
@@ -180,13 +203,14 @@
                                 $total_defisit = $defisit1 - $defisit2;
                                 $count_persen_defisit = ($defisit1 - $defisit2) / $defisit1;
                                 if ($count_persen_defisit < 0) {
-                                    $persen_defisit = abs(round($count_persen_defisit * 100,2));
+                                    $persen_defisit = abs(round($count_persen_defisit * 100, 2));
                                 } elseif ($count_persen_defisit > 0) {
-                                    $persen_defisit = round($count_persen_defisit * 100,2);
+                                    $persen_defisit = round($count_persen_defisit * 100, 2);
                                 }
                             @endphp
                             <td style="text-align: right;"><strong>{{ number_format($defisit1) }}</strong></td>
                             <td style="text-align: right;"><strong>{{ number_format($defisit2) }}</strong></td>
+                            <td></td>
                             <td style="text-align: right;"><strong>{{ number_format($total_defisit) }}</strong></td>
                             <td style="text-align: right;"><strong>{{ $persen_defisit }}%</strong></td>
                             <td></td>
@@ -197,24 +221,28 @@
                             <td></td>
                             <td style="text-align: right;"><strong>Jumlah Penerimaan Pembiayaan</strong></td>
                             <td style="text-align: right; font-size: 14px;">
-                                <strong>{{ number_format(array_sum($jumlah_pembiayaan1)) }}</strong></td>
+                                <strong>{{ number_format(array_sum($jumlah_pembiayaan1)) }}</strong>
+                            </td>
                             {{-- simpan data jumlah pembiayaan1 untuk di kirim ke grafik --}}
                             <input type="hidden" value="{{ array_sum($jumlah_pembiayaan1) }}" id="jumlah_pembiayaan1">
                             <td style="text-align: right; font-size: 14px;">
-                                <strong>{{ number_format(array_sum($jumlah_pembiayaan2)) }}</strong></td>
+                                <strong>{{ number_format(array_sum($jumlah_pembiayaan2)) }}</strong>
+                            </td>
+                            <td></td>
                             {{-- simpan data jumlah pembiayaan2 untuk di kirim ke grafik --}}
                             <input type="hidden" value="{{ array_sum($jumlah_pembiayaan2) }}" id="jumlah_pembiayaan2">
                             @php
                                 $selisih_pembiayaan1 = array_sum($jumlah_pembiayaan1) - array_sum($jumlah_pembiayaan2);
                                 $count_persen_pembiayaan1 = (array_sum($jumlah_pembiayaan1) - array_sum($jumlah_pembiayaan2)) / array_sum($jumlah_pembiayaan1);
                                 if ($count_persen_pembiayaan1 < 0) {
-                                    $persen_pembiayaan1 = abs(round($count_persen_pembiayaan1 * 100,2));
+                                    $persen_pembiayaan1 = abs(round($count_persen_pembiayaan1 * 100, 2));
                                 } elseif ($count_persen_pembiayaan1 > 0) {
-                                    $persen_pembiayaan1 = round($count_persen_pembiayaan1 * 100,2);
+                                    $persen_pembiayaan1 = round($count_persen_pembiayaan1 * 100, 2);
                                 }
                             @endphp
                             <td style="text-align: right; font-size: 14px;">
-                                <strong>{{ number_format($selisih_pembiayaan1) }}</strong></td>
+                                <strong>{{ number_format($selisih_pembiayaan1) }}</strong>
+                            </td>
                             <td style="text-align: right"><strong>{{ $persen_pembiayaan1 }}%</strong></td>
                             <td></td>
                         </tr>
@@ -222,20 +250,24 @@
                             <td></td>
                             <td style="text-align: right;"><strong>Jumlah Pengeluaran Pembiayaan</strong></td>
                             <td style="text-align: right; font-size: 14px;">
-                                <strong>{{ number_format(array_sum($jumlah_pembiayaan3)) }}</strong></td>
+                                <strong>{{ number_format(array_sum($jumlah_pembiayaan3)) }}</strong>
+                            </td>
                             <td style="text-align: right; font-size: 14px;">
-                                <strong>{{ number_format(array_sum($jumlah_pembiayaan4)) }}</strong></td>
+                                <strong>{{ number_format(array_sum($jumlah_pembiayaan4)) }}</strong>
+                            </td>
+                            <td></td>
                             @php
                                 $selisih_pembiayaan2 = array_sum($jumlah_pembiayaan3) - array_sum($jumlah_pembiayaan4);
                                 $count_persen_pembiayaan2 = (array_sum($jumlah_pembiayaan3) - array_sum($jumlah_pembiayaan4)) / array_sum($jumlah_pembiayaan3);
                                 if ($count_persen_pembiayaan2 < 0) {
-                                    $persen_pembiayaan2 = abs(round($count_persen_pembiayaan2 * 100,2));
+                                    $persen_pembiayaan2 = abs(round($count_persen_pembiayaan2 * 100, 2));
                                 } elseif ($count_persen_pembiayaan2 > 0) {
-                                    $persen_pembiayaan2 = round($count_persen_pembiayaan2 * 100,2);
+                                    $persen_pembiayaan2 = round($count_persen_pembiayaan2 * 100, 2);
                                 }
                             @endphp
                             <td style="text-align: right; font-size: 14px;">
-                                <strong>{{ number_format($selisih_pembiayaan2) }}</strong></td>
+                                <strong>{{ number_format($selisih_pembiayaan2) }}</strong>
+                            </td>
                             <td style="text-align: right;"><strong>{{ $persen_pembiayaan2 }}%</strong></td>
                             <td></td>
                         </tr>
@@ -248,17 +280,21 @@
                                 $selisih_neto = $neto1 - $neto2;
                                 $count_persen_neto = ($neto1 - $neto2) / $neto1;
                                 if ($count_persen_neto < 0) {
-                                    $persen_neto = abs(round($count_persen_neto * 100,2));
+                                    $persen_neto = abs(round($count_persen_neto * 100, 2));
                                 } elseif ($count_persen_neto > 0) {
-                                    $persen_neto = round($count_persen_neto * 100,2);
+                                    $persen_neto = round($count_persen_neto * 100, 2);
                                 }
                             @endphp
                             <td style="text-align: right; font-size: 14px;">
-                                <strong>{{ number_format($neto1) }}</strong></td>
+                                <strong>{{ number_format($neto1) }}</strong>
+                            </td>
                             <td style="text-align: right; font-size: 14px;">
-                                <strong>{{ number_format($neto2) }}</strong></td>
+                                <strong>{{ number_format($neto2) }}</strong>
+                            </td>
+                            <td></td>
                             <td style="text-align: right; font-size: 14px;">
-                                <strong>{{ number_format($selisih_neto) }}</strong></td>
+                                <strong>{{ number_format($selisih_neto) }}</strong>
+                            </td>
                             <td style="text-align: right; font-size: 14px;"><strong>{{ $persen_neto }}%</strong></td>
                             <td></td>
                         </tr>

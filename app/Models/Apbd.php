@@ -26,4 +26,13 @@ class Apbd extends Model
     {
         return $this->hasOne(LaporanRealisasiAnggaran::class, 'kode_rekening');
     }
+
+    public static function getApbdTahun($TahunAnggaran, $KodeRekening)
+    {
+        $apbd = Apbd::select('jml_anggaran_setelah')
+                ->where('tahun_anggaran', '=', $TahunAnggaran)
+                ->where('kode_rekening', '=', $KodeRekening)
+                ->first();
+        return $apbd->jml_anggaran_setelah ?? '';
+    }
 }

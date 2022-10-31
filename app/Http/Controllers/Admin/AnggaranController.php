@@ -21,7 +21,6 @@ class AnggaranController extends Controller
      */
     public function index($tahun = null)
     {
-
         $tahun = $tahun == null ? date('Y') : $tahun;
 
         $user = User::where('username', '=', Auth::user()->username)->select('id as user_id')->first();
@@ -30,19 +29,10 @@ class AnggaranController extends Controller
                         ->where('created_at', 'LIKE', $tahun.'%')
                         ->get();
 
-        if ($tahun == null)
-        {
-            $Apbd = Apbd::select('id as apbd_id', 'apbd.*')
-                    ->orderBy('kode_rekening', 'ASC')
-                    ->where('tahun_anggaran', '=', date('Y'))
-                    ->get();
-        } elseif ($tahun != null) {
-            $Apbd = Apbd::select('id as apbd_id', 'apbd.*')
-                    ->where('tahun_anggaran', '=', $tahun)
-                    ->orderBy('kode_rekening', 'ASC')
-                    ->get();
-        }
-
+        $Apbd = Apbd::select('id as apbd_id', 'apbd.*')
+                ->orderBy('kode_rekening', 'ASC')
+                ->where('tahun_anggaran', '=', $tahun)
+                ->get();
         $data = [
             'nama_rekening' => array(),
             'data' => array(),
@@ -72,7 +62,6 @@ class AnggaranController extends Controller
                     'data' => array()
                 );
             }
-
             foreach ($Apbd as $key => $val) {
                 if (in_array($val->nama_rekening, $data['nama_rekening'])) {
                     if (!isset($data['data'][$val->nama_rekening]['data'])) {
@@ -106,7 +95,7 @@ class AnggaranController extends Controller
             }
         }
         $Apbd = $data['data'];
-        $cek_data = Apbd::select('tahun_anggaran')->groupBy('tahun_anggaran')->orderBy('tahun_anggaran', 'DESC')->get();
+        $cek_data = Apbd::select('tahun_anggaran')->groupBy('tahun_anggaran')->orderBy('tahun_anggaran', 'DESC')->limit(5)->get();
         $get_tahun = $cek_data == null ? [] : $cek_data;
         $tahun_anggaran = isset($data['tahun_anggaran']) ? $data['tahun_anggaran'] : date('Y');
 
