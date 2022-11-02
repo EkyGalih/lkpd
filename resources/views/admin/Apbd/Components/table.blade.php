@@ -48,31 +48,46 @@
             <tbody>
                 {{-- HITUNG JUMLAH ANGGARAN --}}
                 @php
-                    $jumlah_pendapatan1 = [];
-                    $jumlah_pendapatan2 = [];
-                    $jumlah_pendapatan = [
-                        'years' . date('Y') - 1 => [],
-                        'years' . date('Y') - 2 => [],
-                        'years' . date('Y') - 3 => [],
-                        'years' . date('Y') - 4 => [],
-                    ];
-
-                    $jumlah_belanja1 = [];
-                    $jumlah_belanja2 = [];
-                    $data_belanja = [];
-
-                    $jumlah_pembiayaan1 = [];
-                    $jumlah_pembiayaan2 = [];
-                    $data_pembiayaan1 = [];
-
-                    $jumlah_pembiayaan3 = [];
-                    $jumlah_pembiayaan4 = [];
-                    $data_pembiayaan2 = [];
-
                     $years1 = date('Y') - 1;
                     $years2 = date('Y') - 2;
                     $years3 = date('Y') - 3;
                     $years4 = date('Y') - 4;
+
+                    $jumlah_pendapatan1 = [];
+                    $jumlah_pendapatan2 = [];
+                    $jumlah_pendapatan3 = [
+                       $years1 => [],
+                       $years2 => [],
+                       $years3 => [],
+                       $years4 => [],
+                    ];
+
+                    $jumlah_belanja1 = [];
+                    $jumlah_belanja2 = [];
+                    $jumlah_belanja3 = [
+                        $years1 => [],
+                        $years2 => [],
+                        $years3 => [],
+                        $years4 => [],
+                    ];
+
+                    $jumlah_pembiayaan1 = [];
+                    $jumlah_pembiayaan2 = [];
+                    $data_pembiayaan1 = [
+                        $years1 => [],
+                        $years2 => [],
+                        $years3 => [],
+                        $years4 => [],
+                    ];
+
+                    $jumlah_pembiayaan3 = [];
+                    $jumlah_pembiayaan4 = [];
+                    $data_pembiayaan2 = [
+                        $years1 => [],
+                        $years2 => [],
+                        $years3 => [],
+                        $years4 => [],
+                    ];
                 @endphp
                 @foreach ($Apbd as $apbd)
                     <tr>
@@ -137,21 +152,58 @@
                             if (strlen($item['kode_rekening']) == 3 && $item['nama_rekening'] == strtoupper('pendapatan daerah')) {
                                 array_push($jumlah_pendapatan1, $item['jml_anggaran_sebelum']);
                                 array_push($jumlah_pendapatan2, $item['jml_anggaran_setelah']);
-                                dd($item['tahun_anggaran']);
+
+                                $getSum1 = App\Models\Apbd::getSumSub($years1, $item['kode_rekening']);
+                                array_push($jumlah_pendapatan3[$years1], $getSum1);
+                                $getSum2 = App\Models\Apbd::getSumSub($years2, $item['kode_rekening']);
+                                array_push($jumlah_pendapatan3[$years2], $getSum2);
+                                $getSum3 = App\Models\Apbd::getSumSub($years3, $item['kode_rekening']);
+                                array_push($jumlah_pendapatan3[$years3], $getSum3);
+                                $getSum4 = App\Models\Apbd::getSumSub($years4, $item['kode_rekening']);
+                                array_push($jumlah_pendapatan3[$years4], $getSum4);
+
                             } elseif (strlen($item['kode_rekening']) == 3 && $item['nama_rekening'] == strtoupper('belanja')) {
                                 array_push($jumlah_belanja1, $item['jml_anggaran_sebelum']);
                                 array_push($jumlah_belanja2, $item['jml_anggaran_setelah']);
+
+                                $getSum1 = App\Models\Apbd::getSumSub($years1, $item['kode_rekening']);
+                                array_push($jumlah_belanja3[$years1], $getSum1);
+                                $getSum2 = App\Models\Apbd::getSumSub($years2, $item['kode_rekening']);
+                                array_push($jumlah_belanja3[$years2], $getSum2);
+                                $getSum3 = App\Models\Apbd::getSumSub($years3, $item['kode_rekening']);
+                                array_push($jumlah_belanja3[$years3], $getSum3);
+                                $getSum4 = App\Models\Apbd::getSumSub($years4, $item['kode_rekening']);
+                                array_push($jumlah_belanja3[$years4], $getSum4);
+
                             } elseif (strlen($item['kode_rekening']) == 6 && $item['uraian'] == strtoupper('penerimaan pembiayaan')) {
                                 array_push($jumlah_pembiayaan1, $item['jml_anggaran_sebelum']);
                                 array_push($jumlah_pembiayaan2, $item['jml_anggaran_setelah']);
+
+                                $getSum1 = App\Models\Apbd::getSumSub($years1, $item['kode_rekening']);
+                                array_push($data_pembiayaan1[$years1], $getSum1);
+                                $getSum2 = App\Models\Apbd::getSumSub($years2, $item['kode_rekening']);
+                                array_push($data_pembiayaan1[$years2], $getSum2);
+                                $getSum3 = App\Models\Apbd::getSumSub($years3, $item['kode_rekening']);
+                                array_push($data_pembiayaan1[$years3], $getSum3);
+                                $getSum4 = App\Models\Apbd::getSumSub($years4, $item['kode_rekening']);
+                                array_push($data_pembiayaan1[$years4], $getSum4);
+
                             } elseif (strlen($item['kode_rekening']) == 6 && $item['uraian'] == strtoupper('pengeluaran pembiayaan')) {
                                 array_push($jumlah_pembiayaan3, $item['jml_anggaran_sebelum']);
                                 array_push($jumlah_pembiayaan4, $item['jml_anggaran_setelah']);
-                            }
 
+                                $getSum1 = App\Models\Apbd::getSumSub($years1, $item['kode_rekening']);
+                                array_push($data_pembiayaan2[$years1], $getSum1);
+                                $getSum2 = App\Models\Apbd::getSumSub($years2, $item['kode_rekening']);
+                                array_push($data_pembiayaan2[$years2], $getSum2);
+                                $getSum3 = App\Models\Apbd::getSumSub($years3, $item['kode_rekening']);
+                                array_push($data_pembiayaan2[$years3], $getSum3);
+                                $getSum4 = App\Models\Apbd::getSumSub($years4, $item['kode_rekening']);
+                                array_push($data_pembiayaan2[$years4], $getSum4);
+
+                            }
                         @endphp
                     @endforeach
-                    {{ dd($jumlah_pendapatan) }}
                     <tr>
                         @if ($apbd['nama_rekening'] == 'PENDAPATAN DAERAH')
                             <td></td>
@@ -165,6 +217,16 @@
                                 <strong>{{ number_format(array_sum($jumlah_pendapatan2)) }}</strong>
                             </td>
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};">
+                                <strong>{{ number_format(array_sum($jumlah_pendapatan3[$years1])) }}</strong>
+                            </td>
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};">
+                                <strong>{{ number_format(array_sum($jumlah_pendapatan3[$years2])) }}</strong>
+                            </td>
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};">
+                                <strong>{{ number_format(array_sum($jumlah_pendapatan3[$years3])) }}</strong>
+                            </td>
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};">
+                                <strong>{{ number_format(array_sum($jumlah_pendapatan3[$years4])) }}</strong>
                             </td>
                             {{-- simpan data jumlah pendapatan2 untuk di kirim ke grafik --}}
                             <input type="hidden" value="{{ array_sum($jumlah_pendapatan2) }}" id="jumlah_pendapatan2">
@@ -194,12 +256,16 @@
                                 <strong>{{ number_format(array_sum($jumlah_belanja2)) }}</strong>
                             </td>
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};">
+                                <strong>{{ number_format(array_sum($jumlah_belanja3[$years1])) }}</strong>
                             </td>
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};">
+                                <strong>{{ number_format(array_sum($jumlah_belanja3[$years2])) }}</strong>
                             </td>
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};">
+                                <strong>{{ number_format(array_sum($jumlah_belanja3[$years3])) }}</strong>
                             </td>
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};">
+                                <strong>{{ number_format(array_sum($jumlah_belanja3[$years4])) }}</strong>
                             </td>
                             {{-- simpan data jumlah belanja2 untuk di kirim ke grafik --}}
                             <input type="hidden" value="{{ array_sum($jumlah_belanja2) }}" id="jumlah_belanja2">
@@ -265,12 +331,16 @@
                                 <strong>{{ number_format(array_sum($jumlah_pembiayaan2)) }}</strong>
                             </td>
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};">
+                                <strong>{{ number_format(array_sum($data_pembiayaan1[$years1])) }}</strong>
                             </td>
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};">
+                                <strong>{{ number_format(array_sum($data_pembiayaan1[$years2])) }}</strong>
                             </td>
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};">
+                                <strong>{{ number_format(array_sum($data_pembiayaan1[$years3])) }}</strong>
                             </td>
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};">
+                                <strong>{{ number_format(array_sum($data_pembiayaan1[$years4])) }}</strong>
                             </td>
                             {{-- simpan data jumlah pembiayaan2 untuk di kirim ke grafik --}}
                             <input type="hidden" value="{{ array_sum($jumlah_pembiayaan2) }}"
@@ -300,12 +370,16 @@
                                 <strong>{{ number_format(array_sum($jumlah_pembiayaan4)) }}</strong>
                             </td>
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};">
+                                {{ number_format(array_sum($data_pembiayaan2[$years1])) }}
                             </td>
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};">
+                                {{ number_format(array_sum($data_pembiayaan2[$years2])) }}
                             </td>
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};">
+                                {{ number_format(array_sum($data_pembiayaan2[$years3])) }}
                             </td>
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};">
+                                {{ number_format(array_sum($data_pembiayaan2[$years4])) }}
                             </td>
                             @php
                                 $selisih_pembiayaan2 = array_sum($jumlah_pembiayaan3) - array_sum($jumlah_pembiayaan4);

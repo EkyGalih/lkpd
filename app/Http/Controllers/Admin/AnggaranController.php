@@ -75,6 +75,7 @@ class AnggaranController extends Controller
                             'jml_anggaran_sebelum'  => $val->jml_anggaran_sebelum,
                             'jml_anggaran_setelah'  => $val->jml_anggaran_setelah,
                             'selisih_anggaran'      => $val->selisih_anggaran,
+                            'tahun_anggaran'        => $val->tahun_anggaran,
                             'persen'                => $val->persen
                         ];
                     } else {
@@ -88,6 +89,7 @@ class AnggaranController extends Controller
                             'jml_anggaran_sebelum'  => $val->jml_anggaran_sebelum,
                             'jml_anggaran_setelah'  => $val->jml_anggaran_setelah,
                             'selisih_anggaran'      => $val->selisih_anggaran,
+                            'tahun_anggaran'        => $val->tahun_anggaran,
                             'persen'                => $val->persen
                         ]);
                     }

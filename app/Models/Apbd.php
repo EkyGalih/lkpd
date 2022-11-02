@@ -54,20 +54,22 @@ class Apbd extends Model
         return array_sum($sum);
     }
 
-    public static function getApbd5Years($KodeRekening)
+    public static function getSumSub($TahunAnggaran, $KodeRekening)
     {
         $Apbd = Apbd::select('jml_anggaran_setelah','kode_rekening', 'nama_rekening', 'tahun_anggaran')
+                ->where('tahun_anggaran', '=', $TahunAnggaran)
                 ->where('kode_rekening', 'LIKE', $KodeRekening.'%')
                 ->orderBy('tahun_anggaran', 'ASC')
                 ->get();
-        $data = [];
+
+        $sum = [];
 
         foreach ($Apbd as $item) {
             if (strlen($item->kode_rekening) > 3) {
-                array_push($data, $item);
+                array_push($sum, $item->jml_anggaran_setelah);
             }
         }
 
-        return $data;
+        return array_sum($sum);
     }
 }
