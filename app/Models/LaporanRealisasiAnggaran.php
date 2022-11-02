@@ -29,6 +29,8 @@ class LaporanRealisasiAnggaran extends Model
 
     public static function sumSub($kode_rekening)
     {
-        return LaporanRealisasiAnggaran::where('kode_rekening', 'Like', $kode_rekening.'%')->select('anggaran_terealisasi')->sum('anggaran_terealisasi');
+        return LaporanRealisasiAnggaran::where('kode_rekening', 'Like', $kode_rekening.'%')
+                                        ->select('anggaran_terealisasi')
+                                        ->sum('anggaran_terealisasi');
     }
 }

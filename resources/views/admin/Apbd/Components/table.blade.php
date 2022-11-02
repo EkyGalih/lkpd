@@ -50,20 +50,34 @@
                 @php
                     $jumlah_pendapatan1 = [];
                     $jumlah_pendapatan2 = [];
+                    $jumlah_pendapatan = [
+                        'years' . date('Y') - 1 => [],
+                        'years' . date('Y') - 2 => [],
+                        'years' . date('Y') - 3 => [],
+                        'years' . date('Y') - 4 => [],
+                    ];
 
                     $jumlah_belanja1 = [];
                     $jumlah_belanja2 = [];
+                    $data_belanja = [];
 
                     $jumlah_pembiayaan1 = [];
                     $jumlah_pembiayaan2 = [];
+                    $data_pembiayaan1 = [];
 
                     $jumlah_pembiayaan3 = [];
                     $jumlah_pembiayaan4 = [];
+                    $data_pembiayaan2 = [];
+
+                    $years1 = date('Y') - 1;
+                    $years2 = date('Y') - 2;
+                    $years3 = date('Y') - 3;
+                    $years4 = date('Y') - 4;
                 @endphp
                 @foreach ($Apbd as $apbd)
                     <tr>
                         <td>{{ $apbd['kode_rekening'] }}</td>
-                        <td colspan="{{ count($get_tahun)+5 }}"><strong>{{ $apbd['nama_rekening'] }}</strong></td>
+                        <td colspan="{{ count($get_tahun) + 5 }}"><strong>{{ $apbd['nama_rekening'] }}</strong></td>
                     </tr>
                     @foreach ($apbd['data'] as $item)
                         @if ($apbd['kode_rekening'] != $item['kode_rekening'])
@@ -77,7 +91,7 @@
                                     @foreach ($get_tahun as $key => $tahun1)
                                         @php
                                             $bgcolor = ['#FF7D7D', '#FDFF00', '#21E1E1', '#38E54D', '#FF884B'];
-                                            $data1 = App\Models\Apbd::getApbdTahun($get_tahun[$key]['tahun_anggaran'], $item['kode_rekening']);
+                                            $data1 = App\Models\Apbd::sumSub($get_tahun[$key]['tahun_anggaran'], $item['kode_rekening']);
                                         @endphp
                                         <td
                                             style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[$key] }}">
@@ -98,8 +112,9 @@
                                         @php
                                             $data2 = App\Models\Apbd::getApbdTahun($get_tahun[$key]['tahun_anggaran'], $item['kode_rekening']);
                                         @endphp
-                                        <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[$key] }};">
-                                            {{ number_format(floatval($data2)) }}
+                                        <td
+                                            style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[$key] }};">
+                                            {{ number_format(floatval($data2->jml_anggaran_setelah)) }}
                                         </td>
                                     @endforeach
                                     <td style="text-align: right; font-size: 12px; background-color: #E8F9FD;">
@@ -122,6 +137,7 @@
                             if (strlen($item['kode_rekening']) == 3 && $item['nama_rekening'] == strtoupper('pendapatan daerah')) {
                                 array_push($jumlah_pendapatan1, $item['jml_anggaran_sebelum']);
                                 array_push($jumlah_pendapatan2, $item['jml_anggaran_setelah']);
+                                dd($item['tahun_anggaran']);
                             } elseif (strlen($item['kode_rekening']) == 3 && $item['nama_rekening'] == strtoupper('belanja')) {
                                 array_push($jumlah_belanja1, $item['jml_anggaran_sebelum']);
                                 array_push($jumlah_belanja2, $item['jml_anggaran_setelah']);
@@ -132,8 +148,10 @@
                                 array_push($jumlah_pembiayaan3, $item['jml_anggaran_sebelum']);
                                 array_push($jumlah_pembiayaan4, $item['jml_anggaran_setelah']);
                             }
+
                         @endphp
                     @endforeach
+                    {{ dd($jumlah_pendapatan) }}
                     <tr>
                         @if ($apbd['nama_rekening'] == 'PENDAPATAN DAERAH')
                             <td></td>
@@ -146,10 +164,8 @@
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[0] }};">
                                 <strong>{{ number_format(array_sum($jumlah_pendapatan2)) }}</strong>
                             </td>
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};"></td>
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};"></td>
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};"></td>
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};"></td>
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};">
+                            </td>
                             {{-- simpan data jumlah pendapatan2 untuk di kirim ke grafik --}}
                             <input type="hidden" value="{{ array_sum($jumlah_pendapatan2) }}" id="jumlah_pendapatan2">
                             @php
@@ -177,10 +193,14 @@
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[0] }};">
                                 <strong>{{ number_format(array_sum($jumlah_belanja2)) }}</strong>
                             </td>
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};"></td>
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};"></td>
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};"></td>
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};"></td>
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};">
+                            </td>
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};">
+                            </td>
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};">
+                            </td>
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};">
+                            </td>
                             {{-- simpan data jumlah belanja2 untuk di kirim ke grafik --}}
                             <input type="hidden" value="{{ array_sum($jumlah_belanja2) }}" id="jumlah_belanja2">
                             @php
@@ -214,10 +234,19 @@
                                     $persen_defisit = round($count_persen_defisit * 100, 2);
                                 }
                             @endphp
-                            <td style="text-align: right;"><strong>{{ number_format($defisit1) }}</strong></td>
-                            <td style="text-align: right;"><strong>{{ number_format($defisit2) }}</strong></td>
-                            <td></td>
-                            <td style="text-align: right;"><strong>{{ number_format($total_defisit) }}</strong></td>
+                            <td style="text-align: right; background-color: #B7C4CF;">
+                                <strong>{{ number_format($defisit1) }}</strong>
+                            </td>
+                            <td style="text-align: right; background-color: {{ $bgcolor[0] }};">
+                                <strong>{{ number_format($defisit2) }}</strong>
+                            </td>
+                            <td style="text-align: right; background-color: {{ $bgcolor[1] }};"></td>
+                            <td style="text-align: right; background-color: {{ $bgcolor[2] }};"></td>
+                            <td style="text-align: right; background-color: {{ $bgcolor[3] }};"></td>
+                            <td style="text-align: right; background-color: {{ $bgcolor[4] }};"></td>
+                            <td style="text-align: right; background-color: #E8F9FD;">
+                                <strong>{{ number_format($total_defisit) }}</strong>
+                            </td>
                             <td style="text-align: right;"><strong>{{ $persen_defisit }}%</strong></td>
                             <td></td>
                         @endif
@@ -226,20 +255,26 @@
                         <tr>
                             <td></td>
                             <td style="text-align: right;"><strong>Jumlah Penerimaan Pembiayaan</strong></td>
-                            <td style="text-align: right; font-size: 14px;">
+                            <td style="text-align: right; font-size: 14px; background-color: #B7C4CF;">
                                 <strong>{{ number_format(array_sum($jumlah_pembiayaan1)) }}</strong>
                             </td>
                             {{-- simpan data jumlah pembiayaan1 untuk di kirim ke grafik --}}
-                            <input type="hidden" value="{{ array_sum($jumlah_pembiayaan1) }}" id="jumlah_pembiayaan1">
-                            <td style="text-align: right; font-size: 14px;">
+                            <input type="hidden" value="{{ array_sum($jumlah_pembiayaan1) }}"
+                                id="jumlah_pembiayaan1">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[0] }};">
                                 <strong>{{ number_format(array_sum($jumlah_pembiayaan2)) }}</strong>
                             </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};">
+                            </td>
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};">
+                            </td>
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};">
+                            </td>
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};">
+                            </td>
                             {{-- simpan data jumlah pembiayaan2 untuk di kirim ke grafik --}}
-                            <input type="hidden" value="{{ array_sum($jumlah_pembiayaan2) }}" id="jumlah_pembiayaan2">
+                            <input type="hidden" value="{{ array_sum($jumlah_pembiayaan2) }}"
+                                id="jumlah_pembiayaan2">
                             @php
                                 $selisih_pembiayaan1 = array_sum($jumlah_pembiayaan1) - array_sum($jumlah_pembiayaan2);
                                 $count_persen_pembiayaan1 = (array_sum($jumlah_pembiayaan1) - array_sum($jumlah_pembiayaan2)) / array_sum($jumlah_pembiayaan1);
@@ -249,7 +284,7 @@
                                     $persen_pembiayaan1 = round($count_persen_pembiayaan1 * 100, 2);
                                 }
                             @endphp
-                            <td style="text-align: right; font-size: 14px;">
+                            <td style="text-align: right; font-size: 14px; background-color: #E8F9FD;">
                                 <strong>{{ number_format($selisih_pembiayaan1) }}</strong>
                             </td>
                             <td style="text-align: right"><strong>{{ $persen_pembiayaan1 }}%</strong></td>
@@ -258,16 +293,20 @@
                         <tr>
                             <td></td>
                             <td style="text-align: right;"><strong>Jumlah Pengeluaran Pembiayaan</strong></td>
-                            <td style="text-align: right; font-size: 14px;">
+                            <td style="text-align: right; font-size: 14px; background-color: #B7C4CF;">
                                 <strong>{{ number_format(array_sum($jumlah_pembiayaan3)) }}</strong>
                             </td>
-                            <td style="text-align: right; font-size: 14px;">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[0] }};">
                                 <strong>{{ number_format(array_sum($jumlah_pembiayaan4)) }}</strong>
                             </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};">
+                            </td>
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};">
+                            </td>
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};">
+                            </td>
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};">
+                            </td>
                             @php
                                 $selisih_pembiayaan2 = array_sum($jumlah_pembiayaan3) - array_sum($jumlah_pembiayaan4);
                                 $count_persen_pembiayaan2 = (array_sum($jumlah_pembiayaan3) - array_sum($jumlah_pembiayaan4)) / array_sum($jumlah_pembiayaan3);
@@ -277,7 +316,7 @@
                                     $persen_pembiayaan2 = round($count_persen_pembiayaan2 * 100, 2);
                                 }
                             @endphp
-                            <td style="text-align: right; font-size: 14px;">
+                            <td style="text-align: right; font-size: 14px; background-color: #E8F9FD;">
                                 <strong>{{ number_format($selisih_pembiayaan2) }}</strong>
                             </td>
                             <td style="text-align: right;"><strong>{{ $persen_pembiayaan2 }}%</strong></td>
@@ -297,17 +336,21 @@
                                     $persen_neto = round($count_persen_neto * 100, 2);
                                 }
                             @endphp
-                            <td style="text-align: right; font-size: 14px;">
+                            <td style="text-align: right; font-size: 14px; background-color: #B7C4CF;">
                                 <strong>{{ number_format($neto1) }}</strong>
                             </td>
-                            <td style="text-align: right; font-size: 14px;">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[0] }};">
                                 <strong>{{ number_format($neto2) }}</strong>
                             </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td style="text-align: right; font-size: 14px;">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};">
+                            </td>
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};">
+                            </td>
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};">
+                            </td>
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};">
+                            </td>
+                            <td style="text-align: right; font-size: 14px; background-color: #E8F9FD;">
                                 <strong>{{ number_format($selisih_neto) }}</strong>
                             </td>
                             <td style="text-align: right; font-size: 14px;"><strong>{{ $persen_neto }}%</strong></td>

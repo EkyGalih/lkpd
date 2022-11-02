@@ -29,10 +29,45 @@ class Apbd extends Model
 
     public static function getApbdTahun($TahunAnggaran, $KodeRekening)
     {
-        $apbd = Apbd::select('jml_anggaran_setelah')
+        $apbd = Apbd::select('jml_anggaran_setelah','kode_rekening', 'nama_rekening', 'tahun_anggaran')
                 ->where('tahun_anggaran', '=', $TahunAnggaran)
                 ->where('kode_rekening', '=', $KodeRekening)
                 ->first();
-        return $apbd->jml_anggaran_setelah ?? '';
+        return $apbd;
+    }
+
+    public static function sumSub($TahunAnggaran, $KodeRekening)
+    {
+
+        $Apbd = Apbd::where('tahun_anggaran', '=', $TahunAnggaran)
+                    ->where('kode_rekening', 'LIKE', $KodeRekening.'%')
+                    ->select('jml_anggaran_setelah','kode_rekening')
+                    ->get();
+        $sum = [];
+
+        foreach ($Apbd as $item) {
+            if (strlen($item->kode_rekening) > 3) {
+                array_push($sum, $item->jml_anggaran_setelah);
+            }
+        }
+
+        return array_sum($sum);
+    }
+
+    public static function getApbd5Years($KodeRekening)
+    {
+        $Apbd = Apbd::select('jml_anggaran_setelah','kode_rekening', 'nama_rekening', 'tahun_anggaran')
+                ->where('kode_rekening', 'LIKE', $KodeRekening.'%')
+                ->orderBy('tahun_anggaran', 'ASC')
+                ->get();
+        $data = [];
+
+        foreach ($Apbd as $item) {
+            if (strlen($item->kode_rekening) > 3) {
+                array_push($data, $item);
+            }
+        }
+
+        return $data;
     }
 }
