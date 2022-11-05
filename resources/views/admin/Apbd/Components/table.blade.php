@@ -18,8 +18,7 @@
                 title="Download Data" data-toggle="modal" data-target="#modalImport">
                 <i class="fas fa-file-excel"></i>
             </button>
-            <div type="button" class="btn btn-theme" data-tooltip="tooltip" data-placement="bottom" title="Tambah Data"
-                data-toggle="modal" data-target="#modalAdd">
+            <div type="button" class="btn btn-theme" data-tooltip="tooltip" data-placement="bottom" title="Tambah Data" data-toggle="modal" data-target="#modalAdd">
                 <i class="fas fa-plus"></i>
             </div>
         </div>
@@ -89,6 +88,10 @@
                         $years4 => [],
                     ];
                 @endphp
+                <input type="hidden" id="years1" value="{{ $years1 }}">
+                <input type="hidden" id="years2" value="{{ $years2 }}">
+                <input type="hidden" id="years3" value="{{ $years3 }}">
+                <input type="hidden" id="years4" value="{{ $years4 }}">
                 @foreach ($Apbd as $apbd)
                     <tr>
                         <td>{{ $apbd['kode_rekening'] }}</td>
@@ -138,15 +141,13 @@
                                 @endif
                                 <td>
                                     @if (strlen($item['kode_rekening']) == 6)
-                                        <button type="button" class="btn btn-warning btn-xs" data-tooltip="tooltip"
-                                            data-placement="top" title="Edit Anggaran" data-toggle="modal"
-                                            data-target="#modalEdit{{ $item['apbd_id'] }}">
-                                            <i class="fas fa-edit"></i>
+                                        <button type="button" class="btn btn-danger btn-sm" data-tooltip="tooltip" data-placement="left" title="Hapus Sub Kegiatan" onclick="deleteData('{{ route('apbd.destroy', $item['apbd_id']) }}')">
+                                            <i class="fas fa-trash"></i>
                                         </button>
                                     @endif
                                 </td>
                             </tr>
-                            @include('admin.Apbd.Components.edit')
+                            {{-- @include('admin.Apbd.Components.edit') --}}
                         @endif
                         @php
                             if (strlen($item['kode_rekening']) == 3 && $item['nama_rekening'] == strtoupper('pendapatan daerah')) {
@@ -216,15 +217,19 @@
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[0] }};">
                                 <strong>{{ number_format(array_sum($jumlah_pendapatan2)) }}</strong>
                             </td>
+                            <input type="hidden" value="{{ array_sum($jumlah_pendapatan3[$years1]) }}" id="jumlah_pendapatan_{{ $years1 }}">
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};">
                                 <strong>{{ number_format(array_sum($jumlah_pendapatan3[$years1])) }}</strong>
                             </td>
+                            <input type="hidden" value="{{ array_sum($jumlah_pendapatan3[$years2]) }}" id="jumlah_pendapatan_{{ $years2 }}">
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};">
                                 <strong>{{ number_format(array_sum($jumlah_pendapatan3[$years2])) }}</strong>
                             </td>
+                            <input type="hidden" value="{{ array_sum($jumlah_pendapatan3[$years3]) }}" id="jumlah_pendapatan_{{ $years3 }}">
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};">
                                 <strong>{{ number_format(array_sum($jumlah_pendapatan3[$years3])) }}</strong>
                             </td>
+                            <input type="hidden" value="{{ array_sum($jumlah_pendapatan3[$years4]) }}" id="jumlah_pendapatan_{{ $years4 }}">
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};">
                                 <strong>{{ number_format(array_sum($jumlah_pendapatan3[$years4])) }}</strong>
                             </td>
@@ -325,20 +330,23 @@
                                 <strong>{{ number_format(array_sum($jumlah_pembiayaan1)) }}</strong>
                             </td>
                             {{-- simpan data jumlah pembiayaan1 untuk di kirim ke grafik --}}
-                            <input type="hidden" value="{{ array_sum($jumlah_pembiayaan1) }}"
-                                id="jumlah_pembiayaan1">
+                            <input type="hidden" value="{{ array_sum($jumlah_pembiayaan1) }}" id="jumlah_pembiayaan1">
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[0] }};">
                                 <strong>{{ number_format(array_sum($jumlah_pembiayaan2)) }}</strong>
                             </td>
+                            <input type="hidden" value="{{ array_sum($data_pembiayaan1[$years1]) }}" id="jumlah_pembiayaan_{{ $years1 }}">
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};">
                                 <strong>{{ number_format(array_sum($data_pembiayaan1[$years1])) }}</strong>
                             </td>
+                            <input type="hidden" value="{{ array_sum($data_pembiayaan1[$years2]) }}" id="jumlah_pembiayaan_{{ $years2 }}">
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};">
                                 <strong>{{ number_format(array_sum($data_pembiayaan1[$years2])) }}</strong>
                             </td>
+                            <input type="hidden" value="{{ array_sum($data_pembiayaan1[$years3]) }}" id="jumlah_pembiayaan_{{ $years3 }}">
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};">
                                 <strong>{{ number_format(array_sum($data_pembiayaan1[$years3])) }}</strong>
                             </td>
+                            <input type="hidden" value="{{ array_sum($data_pembiayaan1[$years4]) }}" id="jumlah_pembiayaan_{{ $years4 }}">
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};">
                                 <strong>{{ number_format(array_sum($data_pembiayaan1[$years4])) }}</strong>
                             </td>
@@ -369,15 +377,19 @@
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[0] }};">
                                 <strong>{{ number_format(array_sum($jumlah_pembiayaan4)) }}</strong>
                             </td>
+                            <input type="hidden" value="{{ array_sum($data_pembiayaan1[$years1]) }}" id="jumlah_pembiayaan2_{{ $years1 }}">
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};">
                                 {{ number_format(array_sum($data_pembiayaan2[$years1])) }}
                             </td>
+                            <input type="hidden" value="{{ array_sum($data_pembiayaan1[$years2]) }}" id="jumlah_pembiayaan2_{{ $years2 }}">
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};">
                                 {{ number_format(array_sum($data_pembiayaan2[$years2])) }}
                             </td>
+                            <input type="hidden" value="{{ array_sum($data_pembiayaan1[$years3]) }}" id="jumlah_pembiayaan2_{{ $years3 }}">
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};">
                                 {{ number_format(array_sum($data_pembiayaan2[$years3])) }}
                             </td>
+                            <input type="hidden" value="{{ array_sum($data_pembiayaan1[$years4]) }}" id="jumlah_pembiayaan2_{{ $years4 }}">
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};">
                                 {{ number_format(array_sum($data_pembiayaan2[$years4])) }}
                             </td>

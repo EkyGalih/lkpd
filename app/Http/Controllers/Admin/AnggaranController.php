@@ -213,6 +213,9 @@ class AnggaranController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $SubKegiatan = Apbd::findOrFail($id);
+        $SubKegiatan->delete();
+
+        return redirect()->route('apbd')->with(['success' => 'Sub Kegiatan Berhasil Dihapus!']);
     }
 }

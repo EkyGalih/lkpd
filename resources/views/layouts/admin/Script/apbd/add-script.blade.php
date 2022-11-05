@@ -28,7 +28,7 @@
         $('#persen_add').val(parseFloat(persen) * 100);
     });
 
-    function KodeRekening() {
+    function KodeRekeningAdd() {
         var kode_rekening = $('#kode_rekening_add').val();
         $.ajax({
             type: 'GET',
@@ -55,7 +55,7 @@
         });
     }
 
-    function getSubKode() {
+    function getSubKodeAdd() {
         var uraian = $('#kode_rekening2_add').val();
         $.ajax({
             type: 'GET',
@@ -82,7 +82,7 @@
         });
     }
 
-    function getSubUraian() {
+    function getSubUraianAdd() {
         var sub_uraian = $('#kode_rekening3_add').val();
         $.ajax({
             type: 'GET',

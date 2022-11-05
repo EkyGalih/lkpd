@@ -28,8 +28,8 @@
         $('#persen_edit').val(parseFloat(persen) * 100);
     });
 
-    function editKodeRekening() {
-        var kode_rekening_edit = $('#kode_rekening_edit').val();
+    function KodeRekeningEdit() {
+        kode_rekening_edit = $('#kode_rekening_edit').val();
         console.log(kode_rekening_edit);
         $.ajax({
             type: 'GET',
@@ -56,7 +56,7 @@
         });
     }
 
-    function getSubKode() {
+    function getSubKodeEdit() {
         var uraian = $('#kode_rekening2_edit').val();
         $.ajax({
             type: 'GET',
@@ -83,7 +83,7 @@
         });
     }
 
-    function getSubUraian() {
+    function getSubUraianEdit() {
         var sub_uraian = $('#kode_rekening3_edit').val();
         $.ajax({
             type: 'GET',

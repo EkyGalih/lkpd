@@ -15,7 +15,7 @@
                             <div class="form-group">
                                 <label for="kode_rekening">Nama Rekening</label>
                                 <select name="kode_rekening" id="kode_rekening_edit" class="form-control"
-                                    onchange="editKodeRekening()">
+                                    onchange="KodeRekeningEdit()">
                                     <option value="">Pilih</option>
                                     @foreach ($kodeRekening as $kode)
                                         @if (strlen($kode->kode_rekening) == 1)
@@ -33,7 +33,7 @@
                             <div class="form-group">
                                 <label for="uraian">uraian</label>
                                 <select name="kode_rekening2" id="kode_rekening2_edit" class="form-control"
-                                    onchange="getSubKode()"></select>
+                                    onchange="getSubKodeEdit()"></select>
                                 <input type="hidden" name="uraian" id="uraian_edit" class="form-control">
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                             <div class="form-group">
                                 <label for="sub_uraian">Sub Uraian</label>
                                 <select name="kode_rekening3" id="kode_rekening3_edit" class="form-control"
-                                    onchange="getSubUraian()"></select>
+                                    onchange="getSubUraianEdit()"></select>
                                 <input type="hidden" name="sub_uraian" id="sub_uraian_edit" class="form-control">
                             </div>
                         </div>

@@ -26,9 +26,11 @@
 @if ($message = Session::get('warning'))
 <script>
     Swal.fire({
+        position: 'top-end',
         icon: 'warning',
-        title: 'Oops...',
+        title: 'Oopss...',
         text: '{{ $message }}',
+        showConfirmButton: false,
         timer: 3000
     })
 </script>
