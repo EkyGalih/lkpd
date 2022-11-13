@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Helper\UserAccess;
+use App\Helpers\Helpers;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +19,7 @@ class isPegawai
     {
        if (Auth::check())
        {
-           if(UserAccess::getRole() == 'pegawai')
+           if(Helpers::Role() == 'pegawai')
            {
                return $next($request);
            }

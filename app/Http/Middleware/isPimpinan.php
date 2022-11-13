@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Helper\UserAccess;
+use App\Helpers\Helpers;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +19,7 @@ class isPimpinan
     {
         if (Auth::check())
         {
-            if (UserAccess::getRole() == 'pimpinan')
+            if (Helpers::Role() == 'pimpinan')
             {
                 return $next($request);
             }

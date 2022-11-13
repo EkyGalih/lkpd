@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('iku_realisasi', function (Blueprint $table) {
             $table->string('id', 40)->primary();
+            $table->string('kode_iku', 100);
             $table->string('sasaran_strategis_id', 40)->index();
             $table->string('indikator_kinerja_id', 40)->index();
             $table->string('formula_id', 40)->index();

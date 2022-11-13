@@ -55,6 +55,7 @@
                             <div class="form-group">
                                 <label for="target">Target</label>
                                 <input type="text" name="target" class="form-control" placeholder="Tulis angka persentase (tanpa persen)">
+                                <input type="hidden" class="form-control" name="kode_iku" value="IkuBpkad-{{ Helpers::GenerateString(3) }}-{{ date('Y') }}-{{ Helpers::GenerateString(3) }}">
                             </div>
                         </div>
                     </div>

@@ -58,6 +58,7 @@ class IkuRealisasiController extends Controller
     {
         $IkuRealisasi = IkuRealisasi::findOrFail($id);
         $IkuRealisasi->update([
+            'kode_iku' => $request->kode_iku,
             'sasaran_strategis_id' => $request->sasaran_strategis_id,
             'indikator_kinerja_id' => $request->indikator_kinerja_id,
             'formula_id' => $request->formula_id,

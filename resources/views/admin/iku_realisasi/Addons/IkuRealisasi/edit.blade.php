@@ -65,6 +65,7 @@
                             <div class="form-group">
                                 <label for="target">Target Tercapai</label>
                                 <input type="text" name="target_tercapai" class="form-control" value="{{ $data->target_tercapai }}">
+                                <input type="hidden" class="form-control" name="kode_iku" value="IkuBpkad-{{ Helpers::GenerateString(3) }}-{{ date('Y') }}-{{ Helpers::GenerateString(3) }}">
                             </div>
                         </div>
                     </div>

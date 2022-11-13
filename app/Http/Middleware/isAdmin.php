@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Helper\UserAccess;
+use App\Helpers\Helpers;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +19,7 @@ class isAdmin
     {
         if (Auth::check())
         {
-            if (UserAccess::getRole() == 'admin')
+            if (Helpers::Role() == 'admin')
             {
                 return $next($request);
             }
