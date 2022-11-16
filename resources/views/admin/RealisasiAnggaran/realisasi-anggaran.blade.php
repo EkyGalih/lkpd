@@ -67,12 +67,6 @@
 
         tahun_anggaran = $('#get_ta').val();
 
-        function getApbd(){
-            ta = $('#tahun_anggaran').val();
-            window.location.href = window.location.origin + '/index.php/admin/Realisasi-Anggaran/' + ta
-        }
-
-        jumlah_pendapatan1 = $('#jumlah_pendapatan1').val();
         jumlah_pendapatan2 = $('#jumlah_pendapatan2').val();
         selisih_pendapatan = Math.abs(jumlah_pendapatan1 - jumlah_pendapatan2);
 

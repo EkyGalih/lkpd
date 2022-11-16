@@ -50,7 +50,7 @@
     <script>
 
         $('apbd-table').dataTable();
-
+k
         tahun_anggaran = $('#get_ta').val();
 
         function getApbd(){
