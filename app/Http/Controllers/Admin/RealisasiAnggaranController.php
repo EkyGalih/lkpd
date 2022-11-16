@@ -44,8 +44,6 @@ class RealisasiAnggaranController extends Controller
                     ->get();
         }
 
-        dd($Apbd);
-
         $data = [
             'nama_rekening' => array(),
             'data' => array(),
