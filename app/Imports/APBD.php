@@ -29,13 +29,13 @@ class APBD implements ToCollection, WithHeadingRow
                 'selisih_anggaran'      => Helpers::CurrencyConvert($row['bertambahberkurang']),
                 'persen'                => $row['persen'],
                 'user_id'               => Auth::user()->id,
-                'tahun_anggaran'        => '2022'
+                'tahun_anggaran'        => date('Y')
             ]);
 
             LaporanRealisasiAnggaran::create([
                 'kode_rekening'         => $row['kode_rekening'],
                 'anggaran_terealisasi'  => 0,
-                'tahun_anggaran'        => '2022',
+                'tahun_anggaran'        => date('Y'),
                 'user_id'               => Auth::user()->id
             ]);
         }

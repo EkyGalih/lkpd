@@ -15,7 +15,7 @@
             <div class="content-panel">
                 <div class="row">
                     <div class="col-lg-8" style="text-align: center;">
-                        <h4 class="title" style="color: #000000; font-weight: bold;">LAPORAN REALISASI ANGGARAN PENDAPATAN DAN BELANJA DAERAH (KONSOLIDASI)<br/> TAHUN ANGGARAN {{ date('Y') }}<br/>01 Januari 2022 Sampai {{ date('d F Y') }}</h4>
+                        <h4 class="title" style="color: #000000; font-weight: bold;">LAPORAN REALISASI ANGGARAN PENDAPATAN DAN BELANJA DAERAH (KONSOLIDASI)<br/> TAHUN ANGGARAN {{ date('Y') }}<br/>01 Januari {{ date('Y') }} Sampai {{ date('d F Y') }}</h4>
                     </div>
                     <div class="col-lg-2">
                         <select id="tahun_anggaran" class="form-control" onchange="getApbd()">
@@ -32,7 +32,7 @@
                         </button>
                         @include('admin.RealisasiAnggaran.Components.edit')
                     </div>
-                    <input type="hidden" value="{{ $ta->tahun_anggaran }}" id="get_ta">
+                    <input type="hidden" value="{{ $get_tahun == null ? date('Y') : $tahun_anggaran }}" id="get_ta">
                 </div>
                 <hr />
                 <div class="row">

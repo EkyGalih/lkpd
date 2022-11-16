@@ -1,10 +1,11 @@
 <div class="content-panel">
     <div class="row">
         <div class="col-lg-8">
+            @php $tahun = count($get_tahun)-1 @endphp
             @if (count($get_tahun) == 1)
             <h4 class="title"><i class="fas fa-list"></i> DATA APBD {{ $tahun_anggaran }} </h4>
             @else
-            <h4 class="title"><i class="fas fa-list"></i> DATA APBD {{ $tahun_anggaran }} s/d {{ $tahun_anggaran-count($get_tahun) }}</h4>
+            <h4 class="title"><i class="fas fa-list"></i> DATA APBD {{ $tahun_anggaran }} s/d {{ $tahun_anggaran-$tahun }}</h4>
             @endif
         </div>
         <input type="hidden" value="{{ $get_tahun == null ? date('Y') : $tahun_anggaran }}" id="get_ta">
@@ -204,19 +205,19 @@
                                 <strong>{{ number_format(array_sum($jumlah_pendapatan2)) }}</strong>
                             </td>
                             <input type="hidden" value="{{ array_sum($jumlah_pendapatan3[$years1]) }}" id="jumlah_pendapatan_{{ $years1 }}">
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};">
-                                <strong>{{ number_format(array_sum($jumlah_pendapatan3[$years1])) }}</strong>s
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};" {{ array_sum($jumlah_pendapatan3[$years1]) == 0 ? 'hidden' : '' }}>
+                                <strong>{{ number_format(array_sum($jumlah_pendapatan3[$years1])) }}</strong>
                             </td>
                             <input type="hidden" value="{{ array_sum($jumlah_pendapatan3[$years2]) }}" id="jumlah_pendapatan_{{ $years2 }}">
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};" {{ array_sum($jumlah_pendapatan3[$years2]) == 0 ? 'hidden' : '' }}>
                                 <strong>{{ number_format(array_sum($jumlah_pendapatan3[$years2])) }}</strong>
                             </td>
                             <input type="hidden" value="{{ array_sum($jumlah_pendapatan3[$years3]) }}" id="jumlah_pendapatan_{{ $years3 }}">
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};" {{ array_sum($jumlah_pendapatan3[$years3]) == 0 ? 'hidden' : '' }}>
                                 <strong>{{ number_format(array_sum($jumlah_pendapatan3[$years3])) }}</strong>
                             </td>
                             <input type="hidden" value="{{ array_sum($jumlah_pendapatan3[$years4]) }}" id="jumlah_pendapatan_{{ $years4 }}">
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};" {{ array_sum($jumlah_pendapatan3[$years4]) == 0 ? 'hidden' : '' }}>
                                 <strong>{{ number_format(array_sum($jumlah_pendapatan3[$years4])) }}</strong>
                             </td>
                             {{-- simpan data jumlah pendapatan2 untuk di kirim ke grafik --}}
@@ -246,16 +247,16 @@
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[0] }};">
                                 <strong>{{ number_format(array_sum($jumlah_belanja2)) }}</strong>
                             </td>
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};" {{ array_sum($jumlah_belanja3[$years1]) == 0 ? 'hidden' : '' }}>
                                 <strong>{{ number_format(array_sum($jumlah_belanja3[$years1])) }}</strong>
                             </td>
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};" {{ array_sum($jumlah_belanja3[$years2]) == 0 ? 'hidden' : '' }}>
                                 <strong>{{ number_format(array_sum($jumlah_belanja3[$years2])) }}</strong>
                             </td>
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};" {{ array_sum($jumlah_belanja3[$years3]) == 0 ? 'hidden' : '' }}>
                                 <strong>{{ number_format(array_sum($jumlah_belanja3[$years3])) }}</strong>
                             </td>
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};" {{ array_sum($jumlah_belanja3[$years4]) == 0 ? 'hidden' : '' }}>
                                 <strong>{{ number_format(array_sum($jumlah_belanja3[$years4])) }}</strong>
                             </td>
                             {{-- simpan data jumlah belanja2 untuk di kirim ke grafik --}}
@@ -297,10 +298,10 @@
                             <td style="text-align: right; background-color: {{ $bgcolor[0] }};">
                                 <strong>{{ number_format($defisit2) }}</strong>
                             </td>
-                            <td style="text-align: right; background-color: {{ $bgcolor[1] }};"></td>
-                            <td style="text-align: right; background-color: {{ $bgcolor[2] }};"></td>
-                            <td style="text-align: right; background-color: {{ $bgcolor[3] }};"></td>
-                            <td style="text-align: right; background-color: {{ $bgcolor[4] }};"></td>
+                            <td style="text-align: right; background-color: {{ $bgcolor[1] }};" {{ array_sum($jumlah_belanja3[$years1]) == 0 ? 'hidden' : '' }}></td>
+                            <td style="text-align: right; background-color: {{ $bgcolor[2] }};" {{ array_sum($jumlah_belanja3[$years2]) == 0 ? 'hidden' : '' }}></td>
+                            <td style="text-align: right; background-color: {{ $bgcolor[3] }};" {{ array_sum($jumlah_belanja3[$years3]) == 0 ? 'hidden' : '' }}></td>
+                            <td style="text-align: right; background-color: {{ $bgcolor[4] }};" {{ array_sum($jumlah_belanja3[$years4]) == 0 ? 'hidden' : '' }}></td>
                             <td style="text-align: right; background-color: #E8F9FD;">
                                 <strong>{{ number_format($total_defisit) }}</strong>
                             </td>
@@ -321,19 +322,19 @@
                                 <strong>{{ number_format(array_sum($jumlah_pembiayaan2)) }}</strong>
                             </td>
                             <input type="hidden" value="{{ array_sum($data_pembiayaan1[$years1]) }}" id="jumlah_pembiayaan_{{ $years1 }}">
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};" {{ array_sum($data_pembiayaan1[$years1]) == 0 ? 'hidden' : '' }}>
                                 <strong>{{ number_format(array_sum($data_pembiayaan1[$years1])) }}</strong>
                             </td>
                             <input type="hidden" value="{{ array_sum($data_pembiayaan1[$years2]) }}" id="jumlah_pembiayaan_{{ $years2 }}">
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};" {{ array_sum($data_pembiayaan1[$years2]) == 0 ? 'hidden' : '' }}>
                                 <strong>{{ number_format(array_sum($data_pembiayaan1[$years2])) }}</strong>
                             </td>
                             <input type="hidden" value="{{ array_sum($data_pembiayaan1[$years3]) }}" id="jumlah_pembiayaan_{{ $years3 }}">
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};" {{ array_sum($data_pembiayaan1[$years3]) == 0 ? 'hidden' : '' }}>
                                 <strong>{{ number_format(array_sum($data_pembiayaan1[$years3])) }}</strong>
                             </td>
                             <input type="hidden" value="{{ array_sum($data_pembiayaan1[$years4]) }}" id="jumlah_pembiayaan_{{ $years4 }}">
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};" {{ array_sum($data_pembiayaan1[$years4]) == 0 ? 'hidden' : '' }}>
                                 <strong>{{ number_format(array_sum($data_pembiayaan1[$years4])) }}</strong>
                             </td>
                             {{-- simpan data jumlah pembiayaan2 untuk di kirim ke grafik --}}
@@ -364,19 +365,19 @@
                                 <strong>{{ number_format(array_sum($jumlah_pembiayaan4)) }}</strong>
                             </td>
                             <input type="hidden" value="{{ array_sum($data_pembiayaan1[$years1]) }}" id="jumlah_pembiayaan2_{{ $years1 }}">
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};" {{ array_sum($data_pembiayaan2[$years1]) == 0 ? 'hidden' : '' }}>
                                 {{ number_format(array_sum($data_pembiayaan2[$years1])) }}
                             </td>
                             <input type="hidden" value="{{ array_sum($data_pembiayaan1[$years2]) }}" id="jumlah_pembiayaan2_{{ $years2 }}">
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};" {{ array_sum($data_pembiayaan2[$years2]) == 0 ? 'hidden' : '' }}>
                                 {{ number_format(array_sum($data_pembiayaan2[$years2])) }}
                             </td>
                             <input type="hidden" value="{{ array_sum($data_pembiayaan1[$years3]) }}" id="jumlah_pembiayaan2_{{ $years3 }}">
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};" {{ array_sum($data_pembiayaan2[$years3]) == 0 ? 'hidden' : '' }}>
                                 {{ number_format(array_sum($data_pembiayaan2[$years3])) }}
                             </td>
                             <input type="hidden" value="{{ array_sum($data_pembiayaan1[$years4]) }}" id="jumlah_pembiayaan2_{{ $years4 }}">
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};" {{ array_sum($data_pembiayaan2[$years4]) == 0 ? 'hidden' : '' }}>
                                 {{ number_format(array_sum($data_pembiayaan2[$years4])) }}
                             </td>
                             @php
@@ -414,13 +415,13 @@
                             <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[0] }};">
                                 <strong>{{ number_format($neto2) }}</strong>
                             </td>
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[1] }};" {{ array_sum($data_pembiayaan2[$years1]) == 0 ? 'hidden' : '' }}>
                             </td>
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[2] }};" {{ array_sum($data_pembiayaan2[$years2]) == 0 ? 'hidden' : '' }}>
                             </td>
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[3] }};" {{ array_sum($data_pembiayaan2[$years3]) == 0 ? 'hidden' : '' }}>
                             </td>
-                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};">
+                            <td style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[4] }};" {{ array_sum($data_pembiayaan2[$years4]) == 0 ? 'hidden' : '' }}>
                             </td>
                             <td style="text-align: right; font-size: 14px; background-color: #E8F9FD;">
                                 <strong>{{ number_format($selisih_neto) }}</strong>
