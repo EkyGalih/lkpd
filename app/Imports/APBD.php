@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Helpers\Helpers;
 use App\Models\Apbd as ModelsApbd;
 use App\Models\LaporanRealisasiAnggaran;
 use Illuminate\Support\Collection;
@@ -23,18 +24,18 @@ class APBD implements ToCollection, WithHeadingRow
                 'nama_rekening'         => $row['nama_rekening'],
                 'uraian'                => $row['uraian'],
                 'sub_uraian'            => $row['sub_uraian'],
-                'jml_anggaran_sebelum'  => \App\Helper\UserAccess::CurrencyConvert($row['sebelum_perubahan']),
-                'jml_anggaran_setelah'  => \App\Helper\UserAccess::CurrencyConvert($row['setelah_perubahan']),
-                'selisih_anggaran'      => \App\Helper\UserAccess::CurrencyConvert($row['bertambahberkurang']),
+                'jml_anggaran_sebelum'  => Helpers::CurrencyConvert($row['sebelum_perubahan']),
+                'jml_anggaran_setelah'  => Helpers::CurrencyConvert($row['setelah_perubahan']),
+                'selisih_anggaran'      => Helpers::CurrencyConvert($row['bertambahberkurang']),
                 'persen'                => $row['persen'],
                 'user_id'               => Auth::user()->id,
-                'tahun_anggaran'        => date('Y')
+                'tahun_anggaran'        => '2022'
             ]);
 
             LaporanRealisasiAnggaran::create([
                 'kode_rekening'         => $row['kode_rekening'],
                 'anggaran_terealisasi'  => 0,
-                'tahun_anggaran'        => date('Y'),
+                'tahun_anggaran'        => '2022',
                 'user_id'               => Auth::user()->id
             ]);
         }

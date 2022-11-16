@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Helper\UserAccess;
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Imports\APBD as ImportsAPBD;
 use App\Models\Apbd;
@@ -29,14 +30,28 @@ class AnggaranController extends Controller
                         ->where('created_at', 'LIKE', $tahun.'%')
                         ->get();
 
-        $Apbd = Apbd::select('id as apbd_id', 'apbd.*')
+        $CekApbd = Apbd::select('id as apbd_id', 'apbd.*')
                 ->orderBy('kode_rekening', 'ASC')
                 ->where('tahun_anggaran', '=', $tahun)
                 ->get();
+
+        if ($CekApbd->isEmpty()) {
+            $Apbd = Apbd::select('id as apbd_id', 'apbd.*')
+                ->orderBy('kode_rekening', 'ASC')
+                ->where('tahun_anggaran', '=', $tahun-1)
+                ->get();
+        } else {
+            $Apbd = Apbd::select('id as apbd_id', 'apbd.*')
+                ->orderBy('kode_rekening', 'ASC')
+                ->where('tahun_anggaran', '=', $tahun)
+                ->get();
+        }
+
         $data = [
             'nama_rekening' => array(),
             'data' => array(),
         ];
+
         $nama_rekening = [];
         foreach ($Apbd as $k => $val) {
             if (!isset($nama_rekening[$val->nama_rekening])) {
@@ -153,10 +168,10 @@ class AnggaranController extends Controller
             if (isset($cekData)) {
                 return redirect()->back()->with(['warning' => 'Kode Rekening is already in use']);
             } else {
-                $jml_anggaran_sebelum = UserAccess::CurrencyConvertComa($request->jml_anggaran_sebelum);
-                $jml_anggaran_setelah = UserAccess::CurrencyConvertComa($request->jml_anggaran_setelah);
-                $selisih_anggaran = UserAccess::CurrencyConvertComa($request->selisih);
-                $persen = UserAccess::ConvertPersen($request->persen);
+                $jml_anggaran_sebelum = Helpers::CurrencyConvertComa($request->jml_anggaran_sebelum);
+                $jml_anggaran_setelah = Helpers::CurrencyConvertComa($request->jml_anggaran_setelah);
+                $selisih_anggaran = Helpers::CurrencyConvertComa($request->selisih);
+                $persen = Helpers::ConvertPersen($request->persen);
 
                 Apbd::create([
                     'kode_rekening' => $request->kode_rekening3,

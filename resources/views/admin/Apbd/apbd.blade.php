@@ -13,7 +13,24 @@
     <hr />
     <div class="row mt">
         <div class="col-lg-12">
-            @include('admin.Apbd.Components.table')
+            <div>
+
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                  <li role="presentation" class="active"><a href="#one-years" aria-controls="one-years" role="tab" data-toggle="tab">DATA PERTAHUN ({{ $tahun_anggaran }})</a></li>
+                  <li role="presentation"><a href="#five-years" aria-controls="five-years" role="tab" data-toggle="tab">DATA 5 TAHUN TERAKHIR</a></li>
+                </ul>
+
+                <!-- Tab panes -->
+                <div class="tab-content">
+                  <div role="tabpanel" class="tab-pane active" id="one-years">
+                      @include('admin.Apbd.Components.table')
+                  </div>
+                  <div role="tabpanel" class="tab-pane" id="five-years">
+                    @include('admin.Apbd.Components.table-5-years')
+                  </div>
+                </div>
+              </div>
         </div>
         @include('admin.Apbd.Components.import')
         @include('admin.Apbd.Components.add')

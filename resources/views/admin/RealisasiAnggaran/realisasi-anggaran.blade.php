@@ -14,8 +14,8 @@
         <div class="col-lg-12">
             <div class="content-panel">
                 <div class="row">
-                    <div class="col-lg-8">
-                        <h4 class="title"><i class="fas fa-list"></i> Realisasi Anggaran {{ $tahun_anggaran }}</h4>
+                    <div class="col-lg-8" style="text-align: center;">
+                        <h4 class="title" style="color: #000000; font-weight: bold;">LAPORAN REALISASI ANGGARAN PENDAPATAN DAN BELANJA DAERAH (KONSOLIDASI)<br/> TAHUN ANGGARAN {{ date('Y') }}<br/>01 Januari 2022 Sampai {{ date('d F Y') }}</h4>
                     </div>
                     <div class="col-lg-2">
                         <select id="tahun_anggaran" class="form-control" onchange="getApbd()">

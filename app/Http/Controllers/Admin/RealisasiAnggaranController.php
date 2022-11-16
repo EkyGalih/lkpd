@@ -44,6 +44,8 @@ class RealisasiAnggaranController extends Controller
                     ->get();
         }
 
+        dd($Apbd);
+
         $data = [
             'nama_rekening' => array(),
             'data' => array(),
@@ -70,6 +72,7 @@ class RealisasiAnggaranController extends Controller
                 $data['data'][$k] = array(
                     'kode_rekening' => $kode->kode_rekening,
                     'nama_rekening' => $k,
+                    'uraian' => $kode->uraian,
                     'data' => array()
                 );
             }
