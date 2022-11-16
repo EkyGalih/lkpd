@@ -36,7 +36,7 @@
                     <td style="text-align: center;" rowspan="2"></td>
                 </tr>
                 <tr>
-                    <td>Sebelum Perubahan</td>
+                    <td>Sebelum Perubahan ({{ date('Y') }})</td>
                     @foreach ($get_tahun as $gtahun)
                         <td>Setelah Perubahan ({{ $gtahun->tahun_anggaran }})</td>
                     @endforeach
