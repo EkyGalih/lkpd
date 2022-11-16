@@ -95,7 +95,7 @@
                                     </td>
                                     @foreach ($get_tahun as $key => $tahun1)
                                         @php
-                                            $bgcolor = ['#B7C4CF', '#B7C4CF', '#B7C4CF', '#B7C4CF', '#B7C4CF'];
+                                            $bgcolor = ['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff'];
                                             $data1 = App\Models\Apbd::sumSub($get_tahun[$key]['tahun_anggaran'], $item['kode_rekening']);
                                         @endphp
                                         <td
