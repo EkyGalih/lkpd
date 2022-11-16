@@ -69,7 +69,7 @@
 
         function getApbd(){
             ta = $('#tahun_anggaran').val();
-            window.location.href = window.location.origin + 'index.php/admin/Realisasi-Anggaran/' + ta
+            window.location.href = window.location.origin + '/index.php/admin/Realisasi-Anggaran/' + ta
         }
 
         jumlah_pendapatan1 = $('#jumlah_pendapatan1').val();

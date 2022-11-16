@@ -55,7 +55,7 @@
 
         function getApbd(){
             ta = $('#tahun_anggaran').val();
-            window.location.href = window.location.origin + 'index.php/admin/anggaran/' + ta
+            window.location.href = window.location.origin + '/index.php/admin/anggaran/' + ta
         }
 
         // get years
