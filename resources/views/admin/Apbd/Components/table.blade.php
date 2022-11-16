@@ -29,17 +29,17 @@
         <table class="table table-hover table-striped table-bordered" id="apbd-table">
             <thead>
                 <tr>
-                    <td style="text-align: center;" rowspan="2">Kode</td>
-                    <td style="text-align: center;" rowspan="2">Uraian</td>
-                    <td style="text-align: center;" colspan="2">Jumlah (Rp)</td>
-                    <td style="text-align: center;" colspan="2">Bertambah/(Berkurang)</td>
-                    <td style="text-align: center;" rowspan="2"></td>
+                    <td style="text-align: center; vertical-align: middle;" rowspan="2">Kode</td>
+                    <td style="text-align: center; vertical-align: middle;" rowspan="2">Uraian</td>
+                    <td style="text-align: center; vertical-align: middle;" colspan="2">Jumlah (Rp)</td>
+                    <td style="text-align: center; vertical-align: middle;" colspan="2">Bertambah/(Berkurang)</td>
+                    <td style="text-align: center; vertical-align: middle;" rowspan="2"></td>
                 </tr>
                 <tr>
-                    <td style="text-align: center;">MURNI ({{ date('Y') }})</td>
-                    <td style="text-align: center;">PERUBAHAN ({{ date('Y') }})</td>
-                    <td style="text-align: center;" style="text-align: center;">(Rp)</td>
-                    <td style="text-align: center;" style="text-align: center;">%</td>
+                    <td style="text-align: center; vertical-align: middle;">MURNI ({{ date('Y') }})</td>
+                    <td style="text-align: center; vertical-align: middle;">PERUBAHAN ({{ date('Y') }})</td>
+                    <td style="text-align: center; vertical-align: middle;">(Rp)</td>
+                    <td style="text-align: center; vertical-align: middle;">%</td>
                 </tr>
             </thead>
             <tbody>

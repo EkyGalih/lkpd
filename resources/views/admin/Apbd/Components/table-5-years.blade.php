@@ -22,9 +22,9 @@
                     <td style="text-align: center; vertical-align: middle;" rowspan="2"></td>
                 </tr>
                 <tr>
-                    <td>Sebelum Perubahan ({{ date('Y') }})</td>
+                    <td style="text-align: center; vertical-align: middle;">Sebelum Perubahan ({{ date('Y') }})</td>
                     @foreach ($get_tahun as $gtahun)
-                        <td>APBD ({{ $gtahun->tahun_anggaran }})</td>
+                        <td style="text-align: center; vertical-align: middle;">APBD ({{ $gtahun->tahun_anggaran }})</td>
                         {{-- 2022 ganti nama apbdp --}}
                     @endforeach
                     <td style="text-align: center;">(Rp)</td>
