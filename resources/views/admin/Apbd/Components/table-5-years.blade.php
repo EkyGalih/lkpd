@@ -15,11 +15,11 @@
         <table class="table table-hover table-striped table-bordered" id="apbd-table">
             <thead>
                 <tr>
-                    <td style="text-align: center;" rowspan="2">Kode</td>
-                    <td style="text-align: center;" rowspan="2">Uraian</td>
-                    <td style="text-align: center;" colspan="{{ count($get_tahun) + 1 }}">Jumlah (Rp)</td>
-                    <td style="text-align: center;" colspan="2">Bertambah/(Berkurang)</td>
-                    <td style="text-align: center;" rowspan="2"></td>
+                    <td style="text-align: center; vertical-align: middle;" rowspan="2">Kode</td>
+                    <td style="text-align: center; vertical-align: middle;" rowspan="2">Uraian</td>
+                    <td style="text-align: center; vertical-align: middle;" colspan="{{ count($get_tahun) + 1 }}">Jumlah (Rp)</td>
+                    <td style="text-align: center; vertical-align: middle;" colspan="2">Bertambah/(Berkurang)</td>
+                    <td style="text-align: center; vertical-align: middle;" rowspan="2"></td>
                 </tr>
                 <tr>
                     <td>Sebelum Perubahan ({{ date('Y') }})</td>
@@ -195,7 +195,7 @@
                     <tr>
                         @if ($apbd['nama_rekening'] == 'PENDAPATAN DAERAH')
                             <td></td>
-                            <td style="text-align: right;"><strong>Jumlah Pendapatan</strong></td>
+                            <td><strong>JUMLAH PENDAPATAN</strong></td>
                             <td style="text-align: right; font-size: 14px; background-color: #FDFF00;">
                                 <strong>{{ number_format(array_sum($jumlah_pendapatan1)) }}</strong>
                             </td>
@@ -238,7 +238,7 @@
                             <td></td>
                         @elseif ($apbd['nama_rekening'] == 'BELANJA')
                             <td></td>
-                            <td style="text-align: right"><strong>Jumlah belanja</strong></td>
+                            <td><strong>JUMLAH BELANJA</strong></td>
                             <td style="text-align: right; font-size: 14px; background-color: #FDFF00;">
                                 <strong>{{ number_format(array_sum($jumlah_belanja1)) }}</strong>
                             </td>
@@ -278,9 +278,16 @@
                         @endif
                     </tr>
                     <tr>
+                        <td height=35px></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
                         @if ($apbd['nama_rekening'] == 'BELANJA')
                             <td></td>
-                            <td style="text-align: right;"><strong>Total Surplus/(Defisit)</strong></td>
+                            <td><strong>TOTAL SURPLUS/(DEFISIT)</strong></td>
                             @php
                                 $defisit1 = array_sum($jumlah_pendapatan1) - array_sum($jumlah_belanja1);
                                 $defisit2 = array_sum($jumlah_pendapatan2) - array_sum($jumlah_belanja2);
@@ -309,10 +316,17 @@
                             <td></td>
                         @endif
                     </tr>
+                    <tr>
+                        <td height=35px></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
                     @if ($apbd['nama_rekening'] == strtoupper('pembiayaan'))
                         <tr>
                             <td></td>
-                            <td style="text-align: right;"><strong>Jumlah Penerimaan Pembiayaan</strong></td>
+                            <td><strong>JUMLAH PENERIMAAN PEMBIAYAAN</strong></td>
                             <td style="text-align: right; font-size: 14px; background-color: #FDFF00;">
                                 <strong>{{ number_format(array_sum($jumlah_pembiayaan1)) }}</strong>
                             </td>
@@ -357,7 +371,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td style="text-align: right;"><strong>Jumlah Pengeluaran Pembiayaan</strong></td>
+                            <td><strong>JUMLAH PENGELUARAN PEMBIAYAAN</strong></td>
                             <td style="text-align: right; font-size: 14px; background-color: #FDFF00;">
                                 <strong>{{ number_format(array_sum($jumlah_pembiayaan3)) }}</strong>
                             </td>
@@ -397,7 +411,7 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td style="text-align: right"><strong>Pembiayaan Neto</strong></td>
+                            <td><strong>PEMBIAYAAN NETO</strong></td>
                             @php
                                 $neto1 = array_sum($jumlah_pembiayaan1) - array_sum($jumlah_pembiayaan3);
                                 $neto2 = array_sum($jumlah_pembiayaan2) - array_sum($jumlah_pembiayaan4);
