@@ -396,10 +396,14 @@
                             </td>
                             @php
                                 $selisih_pembiayaan2 = array_sum($jumlah_pembiayaan3) - array_sum($jumlah_pembiayaan4);
-                                $count_persen_pembiayaan2 = (array_sum($jumlah_pembiayaan3) - array_sum($jumlah_pembiayaan4)) / array_sum($jumlah_pembiayaan3);
+                                if (array_sum($jumlah_pembiayaan3) > 0 && array_sum($jumlah_pembiayaan4) > 0) {
+                                    $count_persen_pembiayaan2 = (array_sum($jumlah_pembiayaan3) - array_sum($jumlah_pembiayaan4)) / array_sum($jumlah_pembiayaan3);
+                                } else {
+                                    $count_persen_pembiayaan2 = 0;
+                                }
                                 if ($count_persen_pembiayaan2 < 0) {
                                     $persen_pembiayaan2 = abs(round($count_persen_pembiayaan2 * 100, 2));
-                                } elseif ($count_persen_pembiayaan2 > 0) {
+                                } else {
                                     $persen_pembiayaan2 = round($count_persen_pembiayaan2 * 100, 2);
                                 }
                             @endphp

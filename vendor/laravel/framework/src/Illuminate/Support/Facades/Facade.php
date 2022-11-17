@@ -2,7 +2,6 @@
 
 namespace Illuminate\Support\Facades;
 
-use App\Helpers\Helpers;
 use Closure;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Arr;
@@ -295,7 +294,6 @@ abstract class Facade
             'Validator' => Validator::class,
             'View' => View::class,
             'Vite' => Vite::class,
-            'Helpers' => Helpers::class,
         ]);
     }
 
