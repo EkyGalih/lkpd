@@ -62,7 +62,7 @@
                                     <strong>{{ number_format($sumSub) }}</strong>
                                 </td>
                                 <td style="text-align: right; font-size: 14px;">
-                                    @php $persenSub = ($sumSub / $item['jml_anggaran_setelah']) * 100 @endphp
+                                    @php $persenSub = $sumSub == 0 ? 0 : ($sumSub / $item['jml_anggaran_setelah']) * 100 @endphp
                                     <strong>{{ round($persenSub, 2) }}%</strong>
                                 </td>
                             @elseif (isset($item['nama_rekening']) && isset($item['uraian']))
