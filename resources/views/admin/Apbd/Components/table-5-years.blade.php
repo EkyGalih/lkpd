@@ -96,7 +96,7 @@
                                     @foreach ($get_tahun as $key => $tahun1)
                                         @php
                                             $bgcolor = ['#ffffff', '#ffffff', '#ffffff', '#ffffff', '#ffffff'];
-                                            $data1 = App\Models\Apbd::sumSub($get_tahun[$key]['tahun_anggaran'], $item['kode_rekening']);
+                                            $data1 = Helpers::SumSubAPBD($get_tahun[$key]['tahun_anggaran'], $item['kode_rekening']);
                                         @endphp
                                         <td
                                             style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[$key] }}">
@@ -115,7 +115,7 @@
                                         {{ number_format($item['jml_anggaran_sebelum']) }}</td>
                                     @foreach ($get_tahun as $key => $tahun2)
                                         @php
-                                            $data2 = App\Models\Apbd::getApbdTahun($tahun2['tahun_anggaran'], $item['kode_rekening']);
+                                            $data2 = Helpers::GetApbdTahun($tahun2['tahun_anggaran'], $item['kode_rekening']);
                                         @endphp
                                         <td
                                         style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[$key] }};">
@@ -141,52 +141,52 @@
                                 array_push($jumlah_pendapatan1, $item['jml_anggaran_sebelum']);
                                 array_push($jumlah_pendapatan2, $item['jml_anggaran_setelah']);
 
-                                $getSum1 = App\Models\Apbd::getSumSub($years1, $item['kode_rekening']);
+                                $getSum1 = Helpers::GetSumSubAPBD($years1, $item['kode_rekening']);
                                 array_push($jumlah_pendapatan3[$years1], $getSum1);
-                                $getSum2 = App\Models\Apbd::getSumSub($years2, $item['kode_rekening']);
+                                $getSum2 = Helpers::GetSumSubAPBD($years2, $item['kode_rekening']);
                                 array_push($jumlah_pendapatan3[$years2], $getSum2);
-                                $getSum3 = App\Models\Apbd::getSumSub($years3, $item['kode_rekening']);
+                                $getSum3 = Helpers::GetSumSubAPBD($years3, $item['kode_rekening']);
                                 array_push($jumlah_pendapatan3[$years3], $getSum3);
-                                $getSum4 = App\Models\Apbd::getSumSub($years4, $item['kode_rekening']);
+                                $getSum4 = Helpers::GetSumSubAPBD($years4, $item['kode_rekening']);
                                 array_push($jumlah_pendapatan3[$years4], $getSum4);
 
                             } elseif (strlen($item['kode_rekening']) == 3 && $item['nama_rekening'] == strtoupper('belanja')) {
                                 array_push($jumlah_belanja1, $item['jml_anggaran_sebelum']);
                                 array_push($jumlah_belanja2, $item['jml_anggaran_setelah']);
 
-                                $getSum1 = App\Models\Apbd::getSumSub($years1, $item['kode_rekening']);
+                                $getSum1 = Helpers::GetSumSubAPBD($years1, $item['kode_rekening']);
                                 array_push($jumlah_belanja3[$years1], $getSum1);
-                                $getSum2 = App\Models\Apbd::getSumSub($years2, $item['kode_rekening']);
+                                $getSum2 = Helpers::GetSumSubAPBD($years2, $item['kode_rekening']);
                                 array_push($jumlah_belanja3[$years2], $getSum2);
-                                $getSum3 = App\Models\Apbd::getSumSub($years3, $item['kode_rekening']);
+                                $getSum3 = Helpers::GetSumSubAPBD($years3, $item['kode_rekening']);
                                 array_push($jumlah_belanja3[$years3], $getSum3);
-                                $getSum4 = App\Models\Apbd::getSumSub($years4, $item['kode_rekening']);
+                                $getSum4 = Helpers::GetSumSubAPBD($years4, $item['kode_rekening']);
                                 array_push($jumlah_belanja3[$years4], $getSum4);
 
                             } elseif (strlen($item['kode_rekening']) == 6 && $item['uraian'] == strtoupper('penerimaan pembiayaan')) {
                                 array_push($jumlah_pembiayaan1, $item['jml_anggaran_sebelum']);
                                 array_push($jumlah_pembiayaan2, $item['jml_anggaran_setelah']);
 
-                                $getSum1 = App\Models\Apbd::getSumSub($years1, $item['kode_rekening']);
+                                $getSum1 = Helpers::GetSumSubAPBD($years1, $item['kode_rekening']);
                                 array_push($data_pembiayaan1[$years1], $getSum1);
-                                $getSum2 = App\Models\Apbd::getSumSub($years2, $item['kode_rekening']);
+                                $getSum2 = Helpers::GetSumSubAPBD($years2, $item['kode_rekening']);
                                 array_push($data_pembiayaan1[$years2], $getSum2);
-                                $getSum3 = App\Models\Apbd::getSumSub($years3, $item['kode_rekening']);
+                                $getSum3 = Helpers::GetSumSubAPBD($years3, $item['kode_rekening']);
                                 array_push($data_pembiayaan1[$years3], $getSum3);
-                                $getSum4 = App\Models\Apbd::getSumSub($years4, $item['kode_rekening']);
+                                $getSum4 = Helpers::GetSumSubAPBD($years4, $item['kode_rekening']);
                                 array_push($data_pembiayaan1[$years4], $getSum4);
 
                             } elseif (strlen($item['kode_rekening']) == 6 && $item['uraian'] == strtoupper('pengeluaran pembiayaan')) {
                                 array_push($jumlah_pembiayaan3, $item['jml_anggaran_sebelum']);
                                 array_push($jumlah_pembiayaan4, $item['jml_anggaran_setelah']);
 
-                                $getSum1 = App\Models\Apbd::getSumSub($years1, $item['kode_rekening']);
+                                $getSum1 = Helpers::GetSumSubAPBD($years1, $item['kode_rekening']);
                                 array_push($data_pembiayaan2[$years1], $getSum1);
-                                $getSum2 = App\Models\Apbd::getSumSub($years2, $item['kode_rekening']);
+                                $getSum2 = Helpers::GetSumSubAPBD($years2, $item['kode_rekening']);
                                 array_push($data_pembiayaan2[$years2], $getSum2);
-                                $getSum3 = App\Models\Apbd::getSumSub($years3, $item['kode_rekening']);
+                                $getSum3 = Helpers::GetSumSubAPBD($years3, $item['kode_rekening']);
                                 array_push($data_pembiayaan2[$years3], $getSum3);
-                                $getSum4 = App\Models\Apbd::getSumSub($years4, $item['kode_rekening']);
+                                $getSum4 = Helpers::GetSumSubAPBD($years4, $item['kode_rekening']);
                                 array_push($data_pembiayaan2[$years4], $getSum4);
 
                             }

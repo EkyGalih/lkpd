@@ -31,7 +31,7 @@
             </tr>
         </thead>
         <tbody>
-            @php $ProgramAnggaranIku = \App\Models\ProgramAnggaran::getProgramAnggaran() @endphp
+            @php $ProgramAnggaranIku = Helpers::GetProgramAnggaran() @endphp
             @foreach ($ProgramAnggaranIku as $pai)
                 <tr>
                     <form action="{{ route('program-anggaran-iku.update', $pai->program_anggaran_id) }}" method="POST">

@@ -10,7 +10,7 @@
                     @csrf
                     @method('PUT')
                     <div class="row">
-                        @php $KodeRekening = App\Models\KodeRekening::getSubKode() @endphp
+                        @php $KodeRekening = Helpers::GetSubKode() @endphp
                         <div class="form-group">
                             <label for="kode_rekening">Kode Rekening</label>
                             <select name="kode_rekening" class="form-control">

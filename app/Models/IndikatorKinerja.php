@@ -22,12 +22,6 @@ class IndikatorKinerja extends Model
         });
     }
 
-    public static function getIK()
-    {
-        $tahun = date('Y');
-        return IndikatorKinerja::select('id as ik_id', 'indikator_kinerja.indikator_kinerja')->where('created_at', 'LIKE', $tahun.'%')->get();
-    }
-
     public function Formula()
     {
         return $this->hasMany(Formulasi::class);

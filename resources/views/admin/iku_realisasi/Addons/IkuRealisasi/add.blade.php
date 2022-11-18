@@ -18,7 +18,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="sasaran_strategis">Sasaran Strategis</label>
-                        @php $SasaranStrategis = \App\Models\SasaranStrategis::getSasaran() @endphp
+                        @php $SasaranStrategis = Helpers::GetSasaran() @endphp
                         <select name="sasaran_strategis_id" class="form-control" onclick="enableForm()">
                             <option value="">------</option>
                             @foreach ($SasaranStrategis as $sasaran)
@@ -28,7 +28,7 @@
                     </div>
                     <div class="form-group">
                         <label for="indikator_kinerja">Indikator Kinerja</label>
-                        @php $IndikatorKinerja = \App\Models\IndikatorKinerja::getIK() @endphp
+                        @php $IndikatorKinerja = Helpers::GetIK() @endphp
                         <select name="indikator_kinerja_id" id="indikator_kinerja_id" onchange="getData()" class="form-control" disabled>
                             <option value="">------</option>
                             @foreach ($IndikatorKinerja as $ik)

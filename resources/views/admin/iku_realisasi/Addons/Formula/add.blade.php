@@ -20,7 +20,7 @@
                         <label for="ik_id">Indikator Kinerja</label>
                         <select name="indikator_kinerja_id" class="form-control">
                             <option>-----</option>
-                            @php $indikatorKinerja = \App\Models\IndikatorKinerja::getIK() @endphp
+                            @php $indikatorKinerja = Helpers::GetIK() @endphp
                             @foreach ($indikatorKinerja as $ik)
                                 <option value="{{ $ik->ik_id }}">{{ $ik->indikator_kinerja }}</option>
                             @endforeach
@@ -38,7 +38,7 @@
                         <label for="sumber_data">Sumber Data</label>
                         <select name="divisi_id" class="form-control">
                             <option value="">-------</option>
-                            @php $Divisi = \App\Models\Divisi::getDivisi() @endphp
+                            @php $Divisi = Helpers::GetDivisi() @endphp
                             @foreach ($Divisi as $div)
                             <option value="{{ $div->divisi_id }}">{{ $div->nama_divisi }}</option>
                             @endforeach

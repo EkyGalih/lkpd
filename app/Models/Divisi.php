@@ -22,11 +22,6 @@ class Divisi extends Model
         });
     }
 
-    public static function getDivisi()
-    {
-        return Divisi::select('id as divisi_id', 'divisi.*')->get();
-    }
-
     public function formula()
     {
         return $this->hasMany(Formulasi::class);

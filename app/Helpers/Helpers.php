@@ -2,7 +2,13 @@
 
 namespace App\Helpers;
 
+use App\Models\Apbd;
+use App\Models\Divisi;
+use App\Models\IndikatorKinerja;
+use App\Models\KodeRekening;
 use App\Models\LaporanRealisasiAnggaran;
+use App\Models\ProgramAnggaran;
+use App\Models\SasaranStrategis;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Facade;
@@ -85,12 +91,127 @@ class Helpers extends Facade
         return $persen;
     }
 
-    // Realisasi Anggaran
+    // ================================
+    //          KODE REKENING
+    // ===============================
+
+    public static function GetKodeRekening()
+    {
+        return KodeRekening::select('id', 'kode_rekening', 'nama_rekening')->orderBy('kode_rekening', 'ASC')->get();
+    }
+
+    public static function GetSubKode()
+    {
+        $KodeRekening = [
+            "kode_rekening" => array(),
+            "nama_rekening" => array()
+        ];
+        $Get = KodeRekening::select('id', 'kode_rekening', 'nama_rekening')->orderBy('kode_rekening', 'ASC')->get();
+
+        foreach ($Get as $item)
+        {
+            if (strlen($item->kode_rekening) > 3) {
+                array_push($KodeRekening["kode_rekening"], $item->kode_rekening);
+                array_push($KodeRekening["nama_rekening"], $item->nama_rekening);
+            }
+        }
+        return $KodeRekening;
+
+    }
+
+    // ================================
+    //              APBD
+    // ===============================
+
+    public static function GetApbdTahun($TahunAnggaran, $KodeRekening)
+    {
+        $apbd = Apbd::select('jml_anggaran_setelah','kode_rekening', 'nama_rekening', 'tahun_anggaran')
+                ->where('kode_rekening', '=', $KodeRekening)
+                ->where('tahun_anggaran', '=', $TahunAnggaran)
+                ->first();
+        return $apbd;
+    }
+
+    public static function SumSubAPBD($TahunAnggaran, $KodeRekening)
+    {
+
+        $Apbd = Apbd::where('tahun_anggaran', '=', $TahunAnggaran)
+                    ->where('kode_rekening', 'LIKE', $KodeRekening.'%')
+                    ->select('jml_anggaran_setelah','kode_rekening')
+                    ->get();
+        $sum = [];
+
+        foreach ($Apbd as $item) {
+            if (strlen($item->kode_rekening) > 3) {
+                array_push($sum, $item->jml_anggaran_setelah);
+            }
+        }
+
+        return array_sum($sum);
+    }
+
+    public static function GetSumSubAPBD($TahunAnggaran, $KodeRekening)
+    {
+        $Apbd = Apbd::select('jml_anggaran_setelah','kode_rekening', 'nama_rekening', 'tahun_anggaran')
+                ->where('tahun_anggaran', '=', $TahunAnggaran)
+                ->where('kode_rekening', 'LIKE', $KodeRekening.'%')
+                ->orderBy('tahun_anggaran', 'ASC')
+                ->get();
+
+        $sum = [];
+
+        foreach ($Apbd as $item) {
+            if (strlen($item->kode_rekening) > 3) {
+                array_push($sum, $item->jml_anggaran_setelah);
+            }
+        }
+
+        return array_sum($sum);
+    }
+
+    // ================================
+    //         REALISASI ANGGARAN
+    // ===============================
+
     public static function SumSubLRA($kode_rekening)
     {
         return LaporanRealisasiAnggaran::where('kode_rekening', 'Like', $kode_rekening.'%')
                                         ->select('anggaran_terealisasi')
                                         ->sum('anggaran_terealisasi');
+    }
+
+    // ================================
+    //          IKU REALISASI
+    // ===============================
+
+    public static function GetSasaran()
+    {
+        $tahun = date('Y');
+        return SasaranStrategis::select('id as sasaran_id', 'sasaran_strategis.*')->where('created_at', 'LIKE', $tahun.'%')->get();
+    }
+
+    public static function GetIK()
+    {
+        $tahun = date('Y');
+        return IndikatorKinerja::select('id as ik_id', 'indikator_kinerja.indikator_kinerja')->where('created_at', 'LIKE', $tahun.'%')->get();
+    }
+
+    public static function GetProgramAnggaran()
+    {
+        $years = date('Y');
+        return ProgramAnggaran::select('id as program_anggaran_id', 'program_anggaran_iku.*')
+        ->where('created_at', 'LIKE', $years.'%')
+        ->orderBy('created_at', 'ASC')
+        ->get();
+    }
+
+    // ================================
+    //              TOOLS
+    // ===============================
+
+    public static function GetDivisi()
+    {
+        return Divisi::select('id as divisi_id', 'divisi.*')->get();
     }
 
 }
