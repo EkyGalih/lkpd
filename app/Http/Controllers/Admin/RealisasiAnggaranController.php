@@ -141,7 +141,10 @@ class RealisasiAnggaranController extends Controller
 
             return redirect()->route('realisasi-anggaran-admin')->with(['success' => 'Anggaran Berhasil Diupdate!']);
         } elseif ($Apbd->jml_anggaran_setelah < $SumAnggaran) {
-            return redirect()->route('realisasi-anggaran-admin')->with(['warning' => 'Anggaran Terpakai Melebihi Pagu']);
+            $Anggaran->update([
+                'anggaran_terealisasi' => $SumAnggaran
+            ]);
+            return redirect()->route('realisasi-anggaran-admin')->with(['warning' => 'Anggaran Berhasil Diupdate, Tapi melebihi Pagu']);
         }
     }
 

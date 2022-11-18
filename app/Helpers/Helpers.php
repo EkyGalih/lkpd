@@ -2,6 +2,7 @@
 
 namespace App\Helpers;
 
+use App\Models\LaporanRealisasiAnggaran;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Facade;
@@ -82,6 +83,14 @@ class Helpers extends Facade
             $persen = round($persen);
         }
         return $persen;
+    }
+
+    // Realisasi Anggaran
+    public static function SumSubLRA($kode_rekening)
+    {
+        return LaporanRealisasiAnggaran::where('kode_rekening', 'Like', $kode_rekening.'%')
+                                        ->select('anggaran_terealisasi')
+                                        ->sum('anggaran_terealisasi');
     }
 
 }
