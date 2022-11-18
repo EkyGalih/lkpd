@@ -25,6 +25,7 @@
                             <label for="anggaran_terealisasi">Anggaran Terealisasi</label>
                             <input type="text" name="anggaran_terealisasi" id="anggaran_terealisasi"
                                 class="form-control" required>
+                                <input type="hidden" name="tahun_anggaran" value="{{ date('Y') }}">
                         </div>
                     </div>
             </div>

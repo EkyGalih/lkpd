@@ -25,24 +25,25 @@ class RealisasiAnggaranController extends Controller
 
         $user = User::where('username', '=', Auth::user()->username)->select('id as user_id')->first();
         $kodeRekening = KodeRekening::select('id as kode_rek_id', 'kode_rekening.*')
-                        ->orderBy('kode_rekening', 'ASC')
-                        ->where('created_at', 'LIKE', $tahun.'%')
-                        ->get();
+            ->orderBy('kode_rekening', 'ASC')
+            ->where('created_at', 'LIKE', $tahun . '%')
+            ->get();
 
-        if ($tahun == null)
-        {
+        if ($tahun == null) {
             $Apbd = Apbd::select('apbd.id as apbd_id', 'apbd.*', 'realisasi_anggaran.id as realisasi_anggaran_id', 'realisasi_anggaran.anggaran_terealisasi')
-                    ->join('realisasi_anggaran', 'apbd.kode_rekening', '=', 'realisasi_anggaran.kode_rekening')
-                    ->orderBy('apbd.kode_rekening', 'ASC')
-                    ->where('apbd.tahun_anggaran', '=', date('Y'))
-                    ->get();
+                ->join('realisasi_anggaran', 'apbd.kode_rekening', '=', 'realisasi_anggaran.kode_rekening')
+                ->orderBy('apbd.kode_rekening', 'ASC')
+                ->where('apbd.tahun_anggaran', '=',$tahun)
+                ->where('realisasi_anggaran.tahun_anggaran', '=',$tahun)
+                ->get();
         } elseif ($tahun != null) {
             $Apbd = Apbd::select('apbd.id as apbd_id', 'apbd.*', 'realisasi_anggaran.id as realisasi_anggaran_id', 'realisasi_anggaran.anggaran_terealisasi')
-                    ->join('realisasi_anggaran', 'apbd.kode_rekening', '=', 'realisasi_anggaran.kode_rekening')
-                    ->where('apbd.tahun_anggaran', '=', $tahun)
-                    ->orderBy('apbd.kode_rekening', 'ASC')
-                    ->groupBy('kode_rekening')
-                    ->get();
+                ->join('realisasi_anggaran', 'apbd.kode_rekening', '=', 'realisasi_anggaran.kode_rekening')
+                ->where('apbd.tahun_anggaran', '=', $tahun)
+                ->where('realisasi_anggaran.tahun_anggaran', '=', $tahun)
+                ->orderBy('apbd.kode_rekening', 'ASC')
+                ->groupBy('kode_rekening')
+                ->get();
         }
 
         $data = [
@@ -128,8 +129,8 @@ class RealisasiAnggaranController extends Controller
      */
     public function update(Request $request)
     {
-        $Apbd = Apbd::where('kode_rekening', '=', $request->kode_rekening)->select('jml_anggaran_setelah')->first();
-        $Anggaran = LaporanRealisasiAnggaran::where('kode_rekening', '=', $request->kode_rekening)->first();
+        $Apbd = Apbd::where('kode_rekening', '=', $request->kode_rekening)->where('tahun_anggaran', '=', $request->tahun_anggaran)->select('jml_anggaran_setelah', 'tahun_anggaran')->first();
+        $Anggaran = LaporanRealisasiAnggaran::where('kode_rekening', '=', $request->kode_rekening)->where('tahun_anggaran', '=', $request->tahun_anggaran)->first();
         $AnggaranBaru = Helpers::CurrencyConvertComa($request->anggaran_terealisasi);
         $SumAnggaran = $AnggaranBaru + $Anggaran->anggaran_terealisasi;
 

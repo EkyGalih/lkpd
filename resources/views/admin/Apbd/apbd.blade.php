@@ -14,7 +14,6 @@
     <div class="row mt">
         <div class="col-lg-12">
             <div>
-
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                   <li role="presentation" class="active"><a href="#one-years" aria-controls="one-years" role="tab" data-toggle="tab">DATA PERTAHUN ({{ $tahun_anggaran }})</a></li>
@@ -97,6 +96,5 @@
         data_pembiayaan2_years4 = $('#jumlah_pembiayaan2_'+years4).val();
     </script>
     @include('layouts.admin.Script.apbd.add-script')
-    @include('layouts.admin.Script.apbd.edit-script')
     @include('layouts.admin.Script.apbd-chart')
 @endsection

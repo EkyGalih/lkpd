@@ -192,6 +192,12 @@ class AnggaranController extends Controller
         return redirect()->back()->with(['success' => 'Anggaran berhasil ditambah!']);
     }
 
+    public function edit($id)
+    {
+        $apbd = Apbd::findOrFail($id);
+        return view('admin.Apbd.Components.edit', compact('apbd'));
+    }
+
     /**
      * Update the specified resource in storage.
      *
@@ -201,7 +207,14 @@ class AnggaranController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $apbd = Apbd::findOrFail($id);
+        $apbd->update([
+            'jml_anggaran_setelah' => Helpers::CurrencyConvertComa($request->jml_anggaran_setelah),
+            'selisih' => Helpers::CurrencyConvertComa($request->selisih),
+            'persen' => Helpers::ConvertPersen($request->persen)
+        ]);
+
+        return redirect()->route('apbd')->with(['success' => 'Anggaran Berhasil Diubah!']);
     }
 
      /**

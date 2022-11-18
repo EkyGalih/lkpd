@@ -1,7 +1,7 @@
 @if ($message = Session::get('success'))
 <script>
     Swal.fire({
-        position: 'top-end',
+        position: 'top',
         icon: 'success',
         title: '{{ $message }}',
         showConfirmButton: false,

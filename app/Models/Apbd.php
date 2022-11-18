@@ -10,6 +10,7 @@ class Apbd extends Model
 {
     use HasFactory;
 
+    public $incrementing = false;
     protected $table = 'apbd';
     protected $guarded = ['created_at', 'updated_at'];
 

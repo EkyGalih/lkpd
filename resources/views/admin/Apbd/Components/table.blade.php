@@ -18,7 +18,8 @@
                 title="Upload Data" data-toggle="modal" data-target="#modalImport">
                 <i class="fas fa-file-excel"></i>
             </button>
-            <div type="button" class="btn btn-theme" data-tooltip="tooltip" data-placement="bottom" title="Tambah Data" data-toggle="modal" data-target="#modalAdd">
+            <div type="button" class="btn btn-theme" data-tooltip="tooltip" data-placement="bottom" title="Tambah Data"
+                data-toggle="modal" data-target="#modalAdd">
                 <i class="fas fa-plus"></i>
             </div>
         </div>
@@ -92,16 +93,19 @@
                                 @endif
                                 <td style="text-align: center;">
                                     @if (strlen($item['kode_rekening']) == 6)
-                                        <button type="button" class="btn btn-danger btn-sm" data-tooltip="tooltip" data-placement="left" title="Hapus Sub Kegiatan" onclick="deleteData('{{ route('apbd.destroy', $item['apbd_id']) }}')">
+                                        <button type="button" class="btn btn-danger btn-sm" data-tooltip="tooltip"
+                                            data-placement="left" title="Hapus Sub Kegiatan"
+                                            onclick="deleteData('{{ route('apbd.destroy', $item['apbd_id']) }}')">
                                             <i class="fas fa-trash"></i>
                                         </button>
-                                        <button type="button" class="btn btn-warning btn-sm" data-tooltip="tooltip" data-placement="left" title="Ubah Anggaran" data-toggle="modal" data-target="#modalEdit{{ $item['apbd_id'] }}">
+                                        <a class="btn btn-warning btn-sm" data-tooltip="tooltip" data-placement="left"
+                                            title="Ubah Anggaran" href="{{ route('apbd.edit', $item['apbd_id']) }}">
                                             <i class="fas fa-pencil-alt"></i>
-                                        </button>
+                                        </a>
                                     @endif
                                 </td>
                             </tr>
-                            @include('admin.Apbd.Components.edit')
+                            {{-- @include('admin.Apbd.Components.edit') --}}
                         @endif
                         @php
                             if (strlen($item['kode_rekening']) == 3 && $item['nama_rekening'] == strtoupper('pendapatan daerah')) {
@@ -219,7 +223,8 @@
                                 <strong>{{ number_format(array_sum($jumlah_pembiayaan1)) }}</strong>
                             </td>
                             {{-- simpan data jumlah pembiayaan1 untuk di kirim ke grafik --}}
-                            <input type="hidden" value="{{ array_sum($jumlah_pembiayaan1) }}" id="jumlah_pembiayaan1">
+                            <input type="hidden" value="{{ array_sum($jumlah_pembiayaan1) }}"
+                                id="jumlah_pembiayaan1">
                             <td style="text-align: right; font-size: 14px;">
                                 <strong>{{ number_format(array_sum($jumlah_pembiayaan2)) }}</strong>
                             </td>
@@ -252,7 +257,7 @@
                             </td>
                             @php
                                 $selisih_pembiayaan2 = array_sum($jumlah_pembiayaan3) - array_sum($jumlah_pembiayaan4);
-                                if (array_sum($jumlah_pembiayaan3) > 0 && array_sum($jumlah_pembiayaan4) > 0 ) {
+                                if (array_sum($jumlah_pembiayaan3) > 0 && array_sum($jumlah_pembiayaan4) > 0) {
                                     $count_persen_pembiayaan2 = (array_sum($jumlah_pembiayaan3) - array_sum($jumlah_pembiayaan4)) / array_sum($jumlah_pembiayaan3);
                                 } else {
                                     $count_persen_pembiayaan2 = 0;

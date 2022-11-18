@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\IkuRealisasi;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RequestSasaranStrategis;
 use App\Models\SasaranStrategis;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,9 @@ class SasaranStrategisController extends Controller
      */
     public function store(Request $request)
     {
+        dd($request);
         SasaranStrategis::create(['sasaran_strategis' => $request->sasaran_strategis]);
+
 
         return redirect()->route('iku-sasaran')->with(['success' => 'Data Berhasil Disimpan!']);
     }

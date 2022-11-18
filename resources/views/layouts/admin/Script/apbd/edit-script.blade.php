@@ -1,4 +1,10 @@
 <script>
+    $('#jml_anggaran_sebelum_edit').maskMoney({
+        precision: 0
+    });
+    $('#jml_anggaran_setelah_edit').maskMoney({
+        precision: 0
+    });
 
     $('#jml_anggaran_setelah_edit').on('change', function() {
         split1 = $('#jml_anggaran_sebelum_edit').val().split(',');
