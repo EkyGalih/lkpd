@@ -11,47 +11,9 @@
                     @csrf
                     @method('PUT')
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="kode_rekening">Nama Rekening</label>
-                                <select name="kode_rekening" id="kode_rekening_edit" class="form-control"
-                                    onchange="KodeRekeningEdit()">
-                                    <option value="">Pilih</option>
-                                    @foreach ($kodeRekening as $kode)
-                                        @if (strlen($kode->kode_rekening) == 1)
-                                            <option value="{{ $kode->kode_rekening }}">[{{ $kode->kode_rekening }}]
-                                                {{ $kode->nama_rekening }}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                                <input type="hidden" name="nama_rekening" id="nama_rekening_edit" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="uraian">uraian</label>
-                                <select name="kode_rekening2" id="kode_rekening2_edit" class="form-control"
-                                    onchange="getSubKodeEdit()"></select>
-                                <input type="hidden" name="uraian" id="uraian_edit" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="sub_uraian">Sub Uraian</label>
-                                <select name="kode_rekening3" id="kode_rekening3_edit" class="form-control"
-                                    onchange="getSubUraianEdit()"></select>
-                                <input type="hidden" name="sub_uraian" id="sub_uraian_edit" class="form-control">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="anggaran_sebelum_perubahan">Anggaran Sebelum Perubahan</label>
+                                <label for="anggaran_sebelum_perubahan">MURNI</label>
                                 <input type="text" name="jml_anggaran_sebelum" id="jml_anggaran_sebelum_edit"
                                     class="form-control" value="{{ $item['jml_anggaran_sebelum'] }}"
                                     onkeypress="isInputNumber(event)">
@@ -59,7 +21,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="anggaran_setelah_perubahan">Anggaran Setelah Perubahan</label>
+                                <label for="anggaran_setelah_perubahan">PERUBAHAN</label>
                                 <input type="text" name="jml_anggaran_setelah" id="jml_anggaran_setelah_edit"
                                     class="form-control" value="{{ $item['jml_anggaran_setelah'] }}"
                                     onkeypress="isInputNumber(event)">

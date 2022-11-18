@@ -6,6 +6,13 @@
         precision: 0
     });
 
+    $('#jml_anggaran_sebelum_edit').maskMoney({
+        precision: 0
+    });
+    $('#jml_anggaran_setelah_edit').maskMoney({
+        precision: 0
+    });
+
     $('#jml_anggaran_setelah_add').on('change', function() {
         split1 = $('#jml_anggaran_sebelum_add').val().split(',');
         split2 = $('#jml_anggaran_setelah_add').val().split(',');

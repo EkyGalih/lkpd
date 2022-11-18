@@ -16,7 +16,7 @@
                 <p>
                     {{ $jadwal->redaksi_acara }}
                     <ul>
-                        <li>Jadwal : <u>{{ App\Helper\HelperFunction::getDate($jadwal->tgl_acara) }} - {{ App\Helper\HelperFunction::getTime($jadwal->jam_acara) }}</u></li>
+                        <li>Jadwal : <u>{{ Helpers::GetDate($jadwal->tgl_acara) }} - {{ Helpers::GetTime($jadwal->jam_acara) }}</u></li>
                         <li>Lokasi : <u>{{ $jadwal->lokasi_acara }}</u></li>
                     </ul>
                 </p>

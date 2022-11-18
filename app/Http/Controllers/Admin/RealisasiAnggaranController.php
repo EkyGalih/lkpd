@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Helper\UserAccess;
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Apbd;
 use App\Models\KodeRekening;
@@ -129,7 +130,7 @@ class RealisasiAnggaranController extends Controller
     {
         $Apbd = Apbd::where('kode_rekening', '=', $request->kode_rekening)->select('jml_anggaran_setelah')->first();
         $Anggaran = LaporanRealisasiAnggaran::where('kode_rekening', '=', $request->kode_rekening)->first();
-        $AnggaranBaru = UserAccess::CurrencyConvertComa($request->anggaran_terealisasi);
+        $AnggaranBaru = Helpers::CurrencyConvertComa($request->anggaran_terealisasi);
         $SumAnggaran = $AnggaranBaru + $Anggaran->anggaran_terealisasi;
 
         if ($Apbd->jml_anggaran_setelah >= $SumAnggaran) {

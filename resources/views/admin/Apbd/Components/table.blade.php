@@ -90,15 +90,18 @@
                                         {{ number_format($item['selisih_anggaran']) }}</td>
                                     <td style="text-align: right; font-size: 12px;">{{ $item['persen'] }}%</td>
                                 @endif
-                                <td>
+                                <td style="text-align: center;">
                                     @if (strlen($item['kode_rekening']) == 6)
                                         <button type="button" class="btn btn-danger btn-sm" data-tooltip="tooltip" data-placement="left" title="Hapus Sub Kegiatan" onclick="deleteData('{{ route('apbd.destroy', $item['apbd_id']) }}')">
                                             <i class="fas fa-trash"></i>
                                         </button>
+                                        <button type="button" class="btn btn-warning btn-sm" data-tooltip="tooltip" data-placement="left" title="Ubah Anggaran" data-toggle="modal" data-target="#modalEdit{{ $item['apbd_id'] }}">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </button>
                                     @endif
                                 </td>
                             </tr>
-                            {{-- @include('admin.Apbd.Components.edit') --}}
+                            @include('admin.Apbd.Components.edit')
                         @endif
                         @php
                             if (strlen($item['kode_rekening']) == 3 && $item['nama_rekening'] == strtoupper('pendapatan daerah')) {

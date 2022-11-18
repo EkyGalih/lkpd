@@ -6,7 +6,7 @@
             </div>
             <div class="modal-body">
                 <form method="POST" action="{{ route('realisasi-anggaran-admin.update') }}"
-                    style="margin-left: 10px; margin-right: 10px;">
+                    style="margin-left: 10px; margin-right: 10px;" onsubmit="return validateForm()">
                     @csrf
                     @method('PUT')
                     <div class="row">
@@ -24,7 +24,7 @@
                         <div class="form-group">
                             <label for="anggaran_terealisasi">Anggaran Terealisasi</label>
                             <input type="text" name="anggaran_terealisasi" id="anggaran_terealisasi"
-                                class="form-control">
+                                class="form-control" required>
                         </div>
                     </div>
             </div>

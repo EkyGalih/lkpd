@@ -35,6 +35,7 @@ class ComposerStaticInitcb65a83afb2a34088541605a450481e9
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         'ec07570ca5a812141189b1fa81503674' => __DIR__ . '/..' . '/phpunit/phpunit/src/Framework/Assert/Functions.php',
         '320163ac6b93aebe3dc25b60a0533d56' => __DIR__ . '/..' . '/spatie/laravel-ignition/src/helpers.php',
+        '381c1f7485be5ec909ca0fe1ede4b928' => __DIR__ . '/../..' . '/app/Helpers/Helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -587,7 +588,6 @@ class ComposerStaticInitcb65a83afb2a34088541605a450481e9
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Exports\\ArusKasExport' => __DIR__ . '/../..' . '/app/Exports/ArusKasExport.php',
         'App\\Helpers\\Helpers' => __DIR__ . '/../..' . '/app/Helpers/Helpers.php',
-        'App\\Helpers\\UserAccess' => __DIR__ . '/../..' . '/app/Helpers/UserAccess.php',
         'App\\Http\\Controllers\\Admin\\AnggaranController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AnggaranController.php',
         'App\\Http\\Controllers\\Admin\\Api\\ArusKasController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/Api/ArusKasController.php',
         'App\\Http\\Controllers\\Admin\\Api\\IkuRealisasiController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/Api/IkuRealisasiController.php',

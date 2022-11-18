@@ -10,7 +10,6 @@ return array(
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Exports\\ArusKasExport' => $baseDir . '/app/Exports/ArusKasExport.php',
     'App\\Helpers\\Helpers' => $baseDir . '/app/Helpers/Helpers.php',
-    'App\\Helpers\\UserAccess' => $baseDir . '/app/Helpers/UserAccess.php',
     'App\\Http\\Controllers\\Admin\\AnggaranController' => $baseDir . '/app/Http/Controllers/Admin/AnggaranController.php',
     'App\\Http\\Controllers\\Admin\\Api\\ArusKasController' => $baseDir . '/app/Http/Controllers/Admin/Api/ArusKasController.php',
     'App\\Http\\Controllers\\Admin\\Api\\IkuRealisasiController' => $baseDir . '/app/Http/Controllers/Admin/Api/IkuRealisasiController.php',
