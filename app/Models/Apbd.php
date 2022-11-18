@@ -30,8 +30,8 @@ class Apbd extends Model
     public static function getApbdTahun($TahunAnggaran, $KodeRekening)
     {
         $apbd = Apbd::select('jml_anggaran_setelah','kode_rekening', 'nama_rekening', 'tahun_anggaran')
-                ->where('tahun_anggaran', '=', $TahunAnggaran)
                 ->where('kode_rekening', '=', $KodeRekening)
+                ->where('tahun_anggaran', '=', $TahunAnggaran)
                 ->first();
         return $apbd;
     }

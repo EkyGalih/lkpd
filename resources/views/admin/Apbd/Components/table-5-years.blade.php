@@ -115,11 +115,11 @@
                                         {{ number_format($item['jml_anggaran_sebelum']) }}</td>
                                     @foreach ($get_tahun as $key => $tahun2)
                                         @php
-                                            $data2 = App\Models\Apbd::getApbdTahun($get_tahun[$key]['tahun_anggaran'], $item['kode_rekening']);
+                                            $data2 = App\Models\Apbd::getApbdTahun($tahun2['tahun_anggaran'], $item['kode_rekening']);
                                         @endphp
                                         <td
-                                            style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[$key] }};">
-                                            {{ number_format(floatval($data2->jml_anggaran_setelah)) }}
+                                        style="text-align: right; font-size: 14px; background-color: {{ $bgcolor[$key] }};">
+                                            {{ number_format(floatval($data2->jml_anggaran_setelah ?? 0)) }}
                                         </td>
                                     @endforeach
                                     <td style="text-align: right; font-size: 12px; background-color: #FDFF00;">
