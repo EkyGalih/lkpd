@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Pegawai\RealisasiAnggaranController;
+use App\Http\Controllers\Admin\RealisasiAnggaranController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'pegawai', 'middleware' => ['auth', 'pegawai']], function () {

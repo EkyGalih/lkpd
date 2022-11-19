@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Pegawai;
 
 use App\Helper\UserAccess;
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
-use App\Imports\APBD;
-use App\Models\Anggaran;
-use App\Models\Apbd as ModelsApbd;
+use App\Imports\APBD as ImportsAPBD;
+use App\Models\Apbd;
 use App\Models\KodeRekening;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -22,14 +22,26 @@ class AnggaranController extends Controller
      */
     public function index($tahun = null)
     {
+        $tahun = $tahun == null ? date('Y') : $tahun;
 
         $user = User::where('username', '=', Auth::user()->username)->select('id as user_id')->first();
         $kodeRekening = KodeRekening::select('id as kode_rek_id', 'kode_rekening.*')->orderBy('kode_rekening', 'ASC')->get();
-        if ($tahun == null)
-        {
-            $Apbd = ModelsApbd::select('id as apbd_id', 'apbd.*')->orderBy('kode_rekening', 'ASC')->get();
-        } elseif ($tahun != null) {
-            $Apbd = ModelsApbd::select('id as apbd_id', 'apbd.*')->where('tahun_anggaran', '=', $tahun)->orderBy('kode_rekening', 'ASC')->get();
+
+        $CekApbd = Apbd::select('id as apbd_id', 'apbd.*')
+                ->orderBy('kode_rekening', 'ASC')
+                ->where('tahun_anggaran', '=', $tahun)
+                ->get();
+
+        if ($CekApbd->isEmpty()) {
+            $Apbd = Apbd::select('id as apbd_id', 'apbd.*')
+                ->orderBy('kode_rekening', 'ASC')
+                ->where('tahun_anggaran', '=', $tahun-1)
+                ->get();
+        } else {
+            $Apbd = Apbd::select('id as apbd_id', 'apbd.*')
+                ->orderBy('kode_rekening', 'ASC')
+                ->where('tahun_anggaran', '=', $tahun)
+                ->get();
         }
 
         $data = [
@@ -75,6 +87,7 @@ class AnggaranController extends Controller
                             'jml_anggaran_sebelum'  => $val->jml_anggaran_sebelum,
                             'jml_anggaran_setelah'  => $val->jml_anggaran_setelah,
                             'selisih_anggaran'      => $val->selisih_anggaran,
+                            'tahun_anggaran'        => $val->tahun_anggaran,
                             'persen'                => $val->persen
                         ];
                     } else {
@@ -88,6 +101,7 @@ class AnggaranController extends Controller
                             'jml_anggaran_sebelum'  => $val->jml_anggaran_sebelum,
                             'jml_anggaran_setelah'  => $val->jml_anggaran_setelah,
                             'selisih_anggaran'      => $val->selisih_anggaran,
+                            'tahun_anggaran'        => $val->tahun_anggaran,
                             'persen'                => $val->persen
                         ]);
                     }
@@ -95,7 +109,7 @@ class AnggaranController extends Controller
             }
         }
         $Apbd = $data['data'];
-        $get_tahun = ModelsApbd::select('tahun_anggaran')->groupBy('tahun_anggaran')->orderBy('tahun_anggaran', 'DESC')->get();
+        $get_tahun = Apbd::select('tahun_anggaran')->groupBy('tahun_anggaran')->orderBy('tahun_anggaran', 'DESC')->get();
         $tahun_anggaran = isset($data['tahun_anggaran']) ? $data['tahun_anggaran'] : date('Y');
 
         return view('pegawai.Apbd.apbd', compact('user', 'Apbd', 'kodeRekening', 'get_tahun', 'tahun_anggaran'));
@@ -121,11 +135,11 @@ class AnggaranController extends Controller
     {
         if (!isset($request->uraian) && !isset($request->sub_uraian)) {
 
-            $cekData = ModelsApbd::where('kode_rekening', '=', $request->kode_rekening)->first();
+            $cekData = Apbd::where('kode_rekening', '=', $request->kode_rekening)->first();
             if (isset($cekData)) {
                 return redirect()->back()->with(['warning' => 'Kode Rekening is already in use']);
             } else {
-                ModelsApbd::create([
+                Apbd::create([
                     'kode_rekening' => $request->kode_rekening,
                     'nama_rekening' => $request->nama_rekening,
                     'user_id'       => $request->user_id,
@@ -135,12 +149,12 @@ class AnggaranController extends Controller
 
         } elseif (!isset($request->sub_uraian)) {
 
-            $cekData = ModelsApbd::where('kode_rekening', '=', $request->kode_rekening2)->first();
+            $cekData = Apbd::where('kode_rekening', '=', $request->kode_rekening2)->first();
 
             if (isset($cekData)) {
                 return redirect()->back()->with(['warning' => 'Kode Rekening is already in use']);
             } else {
-                ModelsApbd::create([
+                Apbd::create([
                     'kode_rekening' => $request->kode_rekening2,
                     'nama_rekening' => $request->nama_rekening,
                     'uraian'        => $request->uraian,
@@ -155,17 +169,17 @@ class AnggaranController extends Controller
 
         } elseif (isset($request->nama_rekening) && isset($request->uraian) && isset($request->sub_uraian)) {
 
-            $cekData = ModelsApbd::where('kode_rekening', '=', $request->kode_rekening3)->first();
+            $cekData = Apbd::where('kode_rekening', '=', $request->kode_rekening3)->first();
 
             if (isset($cekData)) {
                 return redirect()->back()->with(['warning' => 'Kode Rekening is already in use']);
             } else {
-                $jml_anggaran_sebelum = UserAccess::CurrencyConvertComa($request->jml_anggaran_sebelum);
-                $jml_anggaran_setelah = UserAccess::CurrencyConvertComa($request->jml_anggaran_setelah);
-                $selisih_anggaran = UserAccess::CurrencyConvertComa($request->selisih);
-                $persen = UserAccess::ConvertPersen($request->persen);
+                $jml_anggaran_sebelum = Helpers::CurrencyConvertComa($request->jml_anggaran_sebelum);
+                $jml_anggaran_setelah = Helpers::CurrencyConvertComa($request->jml_anggaran_setelah);
+                $selisih_anggaran = Helpers::CurrencyConvertComa($request->selisih);
+                $persen = Helpers::ConvertPersen($request->persen);
 
-                ModelsApbd::create([
+                Apbd::create([
                     'kode_rekening' => $request->kode_rekening3,
                     'nama_rekening' => $request->nama_rekening,
                     'uraian'        => $request->uraian,
@@ -185,17 +199,6 @@ class AnggaranController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -203,7 +206,8 @@ class AnggaranController extends Controller
      */
     public function edit($id)
     {
-        //
+        $apbd = Apbd::findOrFail($id);
+        return view('pegawai.Apbd.Components.edit', compact('apbd'));
     }
 
     /**
@@ -215,7 +219,14 @@ class AnggaranController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $apbd = Apbd::findOrFail($id);
+        $apbd->update([
+            'jml_anggaran_setelah' => Helpers::CurrencyConvertComa($request->jml_anggaran_setelah),
+            'selisih' => Helpers::CurrencyConvertComa($request->selisih),
+            'persen' => Helpers::ConvertPersen($request->persen)
+        ]);
+
+        return redirect()->route('apbd')->with(['success' => 'Anggaran Berhasil Diubah!']);
     }
 
      /**
@@ -229,7 +240,8 @@ class AnggaranController extends Controller
         $file = $apbd->file('data-apbd');
         $nama_file = rand() . '-' . $file->getCLientOriginalName();
         $file->move('import_data/', $nama_file);
-        Excel::import(new APBD, public_path('import_data/'.$nama_file));
+        Excel::import(new ImportsAPBD, public_path('import_data/'.$nama_file));
+
         return redirect()->route('apbd')->with(['success' => 'APBD berhasil dibuat!']);
      }
 
@@ -241,6 +253,9 @@ class AnggaranController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $SubKegiatan = Apbd::findOrFail($id);
+        $SubKegiatan->delete();
+
+        return redirect()->route('apbd')->with(['success' => 'Sub Kegiatan Berhasil Dihapus!']);
     }
 }
