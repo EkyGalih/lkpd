@@ -58,7 +58,9 @@ class Helpers extends Facade
         return bin2hex(random_bytes($param));
     }
 
-    // function user access
+    // ================================
+    //              USERS
+    // ===============================
     public static function Role()
     {
         $role = User::where('id', '=', Auth::user()->id)->first();
@@ -89,6 +91,11 @@ class Helpers extends Facade
             $persen = round($persen);
         }
         return $persen;
+    }
+
+    public static function Users()
+    {
+        return User::first();
     }
 
     // ================================

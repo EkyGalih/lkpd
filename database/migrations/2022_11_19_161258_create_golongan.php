@@ -13,13 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('program_anggaran_iku', function (Blueprint $table) {
+        Schema::create('golongan', function (Blueprint $table) {
             $table->string('id', 40)->primary();
-            $table->string('program', 150);
-            $table->bigInteger('anggaran');
-            $table->bigInteger('anggaran_terpakai');
-            $table->string('persentase_anggaran', 50);
-            $table->text('keterangan');
+            $table->string('nama_golongan', 100);
             $table->timestamps();
         });
     }
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('program_anggaran_iku');
+        Schema::dropIfExists('golongan');
     }
 };

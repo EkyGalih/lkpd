@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('apbd', function (Blueprint $table) {
             $table->string('id', 40)->primary();
-            $table->string('kode_rekening', 50);
+            $table->string('kode_rekening', 50)->index();
             $table->string('nama_rekening');
             $table->string('uraian')->nullable();
             $table->string('sub_uraian')->nullable();

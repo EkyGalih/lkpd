@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
     *
     * @var string
     */
-    protected $namespace = 'App\Http\Controllers\Admin';
+    protected $namespace = 'App\Http\Controllers';
     public const HOME = '/home';
 
     /**
@@ -37,7 +37,9 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
         $this->mapWebRoutes();
 
-        // routes admin
+        // ================================
+        //      ROUTES ADMIN
+        // ================================
         $this->IkuRealisasiAdmin();
         $this->SasaranStrategisAdmin();
         $this->IndikatorKinerjaAdmin();
@@ -45,19 +47,15 @@ class RouteServiceProvider extends ServiceProvider
         $this->ProgramAnggaranIkuAdmin();
         $this->DivisiAdmin();
         $this->RealisasiAnggaranAdmin();
-        $this->SaldoAnggaranAdmin();
-        $this->NeracaAdmin();
-        $this->OperasionalAdmin();
-        $this->mapArusKasAdminRoutes();
-        $this->EkuitasAdmin();
         $this->AnggaranAdmin();
         $this->ScheduleAdminRoutes();
         $this->UsersAdmin();
-
         $this->KodeRekeningAdmin();
         $this->SubKodeRekeningAdmin();
 
-        // routes pegawai
+        // ================================
+        //      ROUTES PEGAWAI
+        // ================================
         $this->IkuRealisasiPegawai();
         $this->SasaranStrategisPegawai();
         $this->IndikatorKinerjaPegawai();
@@ -71,9 +69,19 @@ class RouteServiceProvider extends ServiceProvider
         $this->KodeRekeningPegawai();
         $this->SubKodeRekeningPegawai();
 
-        // Api routes Admin
+        // ================================
+        //      ROUTES PIMPINAN
+        // ================================
+        $this->AnggaranPimpinan();
+        $this->IkuRealisasiPimpinan();
+        $this->Pegawai();
+        $this->RealisasiAnggaranPimpinan();
+        $this->Jadwal();
+
+        // ================================
+        //      API ROUTES ADMIN
+        // ================================
         $this->KodeRekeningAdminApi();
-        $this->ArusKasAdminApi();
         $this->RealisasiAnggaranAdminApi();
         $this->IkuRealisasiAdminApi();
         $this->ProfileAdminApi();
@@ -178,12 +186,6 @@ class RouteServiceProvider extends ServiceProvider
         ->group(base_path('routes/pegawai/Divisi.php'));
     }
 
-    public function mapArusKasAdminRoutes()
-    {
-        Route::middleware('web')
-        ->namespace($this->namespace)
-        ->group(base_path('routes/admin/ArusKas.php'));
-    }
 
     public function KodeRekeningAdmin()
     {
@@ -211,34 +213,6 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
         ->namespace($this->namespace)
         ->group(base_path('routes/pegawai/RealisasiAnggaran.php'));
-    }
-
-    public function SaldoAnggaranAdmin()
-    {
-        Route::middleware('web')
-        ->namespace($this->namespace)
-        ->group(base_path('routes/admin/SaldoAnggaranLebih.php'));
-    }
-
-    public function NeracaAdmin()
-    {
-        Route::middleware('web')
-        ->namespace($this->namespace)
-        ->group(base_path('routes/admin/Neraca.php'));
-    }
-
-    public function OperasionalAdmin()
-    {
-        Route::middleware('web')
-        ->namespace($this->namespace)
-        ->group(base_path('routes/admin/Operasional.php'));
-    }
-
-    public function EkuitasAdmin()
-    {
-        Route::middleware('web')
-        ->namespace($this->namespace)
-        ->group(base_path('routes/admin/Ekuitas.php'));
     }
 
     public function AnggaranAdmin()
@@ -297,6 +271,41 @@ class RouteServiceProvider extends ServiceProvider
         ->group(base_path('routes/pegawai/SubKodeRekening.php'));
     }
 
+    public function AnggaranPimpinan()
+    {
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/pimpinan/Anggaran.php'));
+    }
+
+    public function IkuRealisasiPimpinan()
+    {
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/pimpinan/IkuRealisasi.php'));
+    }
+
+    public function Pegawai()
+    {
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/pimpinan/Pegawai.php'));
+    }
+
+    public function RealisasiAnggaranPimpinan()
+    {
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/pimpinan/RealisasiAnggaran.php'));
+    }
+
+    public function Jadwal()
+    {
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/pimpinan/Schedule.php'));
+    }
+
     // ROUTEST API
     public function KodeRekeningAdminApi()
     {
@@ -304,14 +313,6 @@ class RouteServiceProvider extends ServiceProvider
         ->prefix('api')
         ->namespace($this->namespace)
         ->group(base_path('routes/admin/api/KodeRekening.php'));
-    }
-
-    public function ArusKasAdminApi()
-    {
-        Route::middleware('api')
-        ->prefix('api')
-        ->namespace($this->namespace)
-        ->group(base_path('routes/admin/api/ArusKas.php'));
     }
 
     public function RealisasiAnggaranAdminApi()

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Pegawai;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
 use App\Models\Apbd;
 use App\Models\IkuRealisasi;
@@ -13,6 +14,7 @@ class PegawaiController extends Controller
 {
     public function index()
     {
+        $User = Helpers::Users();
         $apbd = Apbd::get();
         $iku  = IkuRealisasi::select('indikator_kinerja_id','target','target_tercapai')->get();
 
@@ -70,6 +72,6 @@ class PegawaiController extends Controller
         $BiayaSelisih = array_sum($pagu['pembiayaan']['selisih']);
 
         $jadwals = Schedule::where('user_id', '=', Auth::user()->id)->orderBy('created_at', 'asc')->paginate(4);
-        return view('pegawai.beranda.beranda', compact('jadwals','iku','PadAnggaran','PadPerubahan','PadSelisih','BelanjaAnggaran','BelanjaPerubahan','BelanjaSelisih','BiayaAnggaran','BiayaPerubahan','BiayaSelisih'));
+        return view('pegawai.beranda.beranda', compact('User','jadwals','iku','PadAnggaran','PadPerubahan','PadSelisih','BelanjaAnggaran','BelanjaPerubahan','BelanjaSelisih','BiayaAnggaran','BiayaPerubahan','BiayaSelisih'));
     }
 }

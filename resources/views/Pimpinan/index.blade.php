@@ -5,27 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>LKPD - BPKAD</title>
-    @include('layouts.admin.css')
+    @include('layouts.pimpinan.css')
 </head>
 <body class="light">
     <section id="container">
         <!--header start-->
-        @include('layouts.admin.navbar')
+        @include('layouts.pimpinan.navbar')
         <!--header end-->
 
         <!--sidebar start-->
-        @include('layouts.admin.sidebar')
+        @include('layouts.pimpinan.sidebar')
         <!--sidebar end-->
 
         <!--main content start-->
-        @include('layouts.admin.content')
+        @include('layouts.pimpinan.content')
         <!--main content end-->
 
         {{-- footer start --}}
-        @include('layouts.admin.footer')
+        @include('layouts.pimpinan.footer')
         {{-- footer end --}}
     </section>
 
-    @include('layouts.admin.js')
+    @include('layouts.pimpinan.js')
 </body>
 </html>
