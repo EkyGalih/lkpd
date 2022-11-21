@@ -35,7 +35,8 @@
         <!-- /col-md-4 -->
       </div>
       <!-- /row -->
-      <div class="col-lg-12 mt">
+      <div class="row mt">
+      <div class="col-lg-12">
         <div class="row content-panel">
           <div class="panel-heading">
             <table class="table">
@@ -81,6 +82,7 @@
           <!-- /panel-body -->
         </div>
         <!-- /col-lg-12 -->
+      </div>
       </div>
     </div>
   </div>
