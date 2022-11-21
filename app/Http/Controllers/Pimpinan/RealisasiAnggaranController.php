@@ -113,6 +113,6 @@ class RealisasiAnggaranController extends Controller
         $get_tahun = Apbd::select('tahun_anggaran')->groupBy('tahun_anggaran')->orderBy('tahun_anggaran', 'DESC')->get();
         $tahun_anggaran = isset($data['tahun_anggaran']) ? $data['tahun_anggaran'] : date('Y');
 
-        return view('pimpinan.RealisasiAnggaran.realisasi-anggaran', compact('user', 'Apbd', 'kodeRekening', 'get_tahun', 'tahun_anggaran'));
+        return view('Pimpinan.RealisasiAnggaran.realisasi-anggaran', compact('user', 'Apbd', 'kodeRekening', 'get_tahun', 'tahun_anggaran'));
     }
 }

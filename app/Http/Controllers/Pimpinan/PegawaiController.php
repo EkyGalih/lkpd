@@ -19,6 +19,6 @@ class PegawaiController extends Controller
         ->orderBy('created_at', 'DESC')
         ->paginate(10);
 
-        return view('pimpinan.Pegawai.pegawai', compact('Pegawai', 'Divisi'));
+        return view('Pimpinan.Pegawai.pegawai', compact('Pegawai', 'Divisi'));
     }
 }
