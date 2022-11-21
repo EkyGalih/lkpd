@@ -1,4 +1,4 @@
-@extends('pimpinan.index')
+@extends('Pimpinan.index')
 @section('title', 'Beranda')
 @section('menu-dashboard', 'active')
 @section('content')
