@@ -30,7 +30,7 @@
                 <hr />
                 <div class="row">
                     <div class="col-lg-12">
-                        @include('pimpinan.RealisasiAnggaran.Components.table')
+                        @include('Pimpinan.RealisasiAnggaran.Components.table')
                     </div>
                 </div>
             </div>
@@ -71,5 +71,5 @@
         jumlah_pembiayaan2 = $('#jumlah_pembiayaan2').val();
         selisih_pembiayaan = Math.abs(jumlah_pembiayaan1 - jumlah_pembiayaan2);
     </script>
-    @include('layouts.pimpinan.Script.apbd-chart')
+    @include('layouts.Pimpinan.Script.apbd-chart')
 @endsection

@@ -17,7 +17,7 @@
                 <div class="row">
                     <div class="col-lg-1"></div>
                     <div class="col-lg-10">
-                        @include('pimpinan.iku_realisasi.Addons.IkuRealisasi.table-iku')
+                        @include('Pimpinan.iku_realisasi.Addons.IkuRealisasi.table-iku')
                     </div>
                     <div class="col-lg-1"></div>
                 </div>

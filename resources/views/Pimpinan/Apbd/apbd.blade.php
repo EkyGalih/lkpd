@@ -23,10 +23,10 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                   <div role="tabpanel" class="tab-pane active" id="one-years">
-                      @include('pimpinan.Apbd.Components.table')
+                      @include('Pimpinan.Apbd.Components.table')
                   </div>
                   <div role="tabpanel" class="tab-pane" id="five-years">
-                    @include('pimpinan.Apbd.Components.table-5-years')
+                    @include('Pimpinan.Apbd.Components.table-5-years')
                   </div>
                 </div>
               </div>
@@ -52,7 +52,7 @@
 
         function getApbd(){
             ta = $('#tahun_anggaran').val();
-            window.location.href = window.location.origin + '/index.php/pegawai/apbd/' + ta
+            window.location.href = window.location.origin + '/index.php/pimpinan/apbd/' + ta
         }
 
         // get years
@@ -93,6 +93,6 @@
         data_pembiayaan2_years3 = $('#jumlah_pembiayaan2_'+years3).val();
         data_pembiayaan2_years4 = $('#jumlah_pembiayaan2_'+years4).val();
     </script>
-    @include('layouts.admin.Script.apbd.add-script')
-    @include('layouts.admin.Script.apbd-chart')
+    @include('layouts.Pimpinan.Script.apbd.add-script')
+    @include('layouts.Pimpinan.Script.apbd-chart')
 @endsection

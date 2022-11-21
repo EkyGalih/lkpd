@@ -12,7 +12,7 @@
     <div class="row mt">
         <div class="col-lg-12">
             <div class="content-panel">
-                @include('pimpinan.Schedule.Components.table')
+                @include('Pimpinan.Schedule.Components.table')
             </div>
         </div>
     </div>
