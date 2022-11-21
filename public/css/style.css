@@ -363,6 +363,11 @@ ul.top-menu > li > .sun-mode {
     position: fixed;
     background: #22242a;
 }
+@media only screen and (max-width: 600px) {
+    #sidebar {
+        display: none;
+    }
+}
 
 #sidebar h5 {
     color: #f2f2f2;
