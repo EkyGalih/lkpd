@@ -1,4 +1,4 @@
-@extends('admin.index')
+@extends('Pimpinan.index')
 @section('title', 'APBD')
 
 @section('menu-anggaran', 'active')
@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 @endsection
 @section('content')
-    <h3><a href="{{ route('apbd') }}"><i class="fas fa-journal-whills"></i> APBD PROVINSI NUSA TENGGARA BARAT (NTB)</a></h3>
+    <h3><a href="{{ route('apbdp') }}"><i class="fas fa-journal-whills"></i> APBD PROVINSI NUSA TENGGARA BARAT (NTB)</a></h3>
     <hr />
     <div class="row mt">
         <div class="col-lg-12">
@@ -23,16 +23,14 @@
                 <!-- Tab panes -->
                 <div class="tab-content">
                   <div role="tabpanel" class="tab-pane active" id="one-years">
-                      @include('pegawai.Apbd.Components.table')
+                      @include('pimpinan.Apbd.Components.table')
                   </div>
                   <div role="tabpanel" class="tab-pane" id="five-years">
-                    @include('pegawai.Apbd.Components.table-5-years')
+                    @include('pimpinan.Apbd.Components.table-5-years')
                   </div>
                 </div>
               </div>
         </div>
-        @include('pegawai.Apbd.Components.import')
-        @include('pegawai.Apbd.Components.add')
     </div>
     <div class="row mt">
         <div class="col-lg-6">

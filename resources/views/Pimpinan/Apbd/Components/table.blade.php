@@ -13,16 +13,6 @@
                 @endforeach
             </select>
         </div>
-        <div class="col-lg-1">
-            <button type="button" class="btn btn-success" data-tooltip="tooltip" data-placement="top"
-                title="Upload Data" data-toggle="modal" data-target="#modalImport">
-                <i class="fas fa-file-excel"></i>
-            </button>
-            <div type="button" class="btn btn-theme" data-tooltip="tooltip" data-placement="bottom" title="Tambah Data"
-                data-toggle="modal" data-target="#modalAdd">
-                <i class="fas fa-plus"></i>
-            </div>
-        </div>
         <input type="hidden" value="{{ $get_tahun == null ? date('Y') : $tahun_anggaran }}" id="get_ta">
     </div>
     <hr />
@@ -34,7 +24,6 @@
                     <td style="text-align: center; vertical-align: middle;" rowspan="2">Uraian</td>
                     <td style="text-align: center; vertical-align: middle;" colspan="2">Jumlah (Rp)</td>
                     <td style="text-align: center; vertical-align: middle;" colspan="2">Bertambah/(Berkurang)</td>
-                    <td style="text-align: center; vertical-align: middle;" rowspan="2"></td>
                 </tr>
                 <tr>
                     <td style="text-align: center; vertical-align: middle;">MURNI ({{ date('Y') }})</td>
@@ -91,21 +80,7 @@
                                         {{ number_format($item['selisih_anggaran']) }}</td>
                                     <td style="text-align: right; font-size: 12px;">{{ $item['persen'] }}%</td>
                                 @endif
-                                <td style="text-align: center;">
-                                    @if (strlen($item['kode_rekening']) == 6)
-                                        <button type="button" class="btn btn-danger btn-sm" data-tooltip="tooltip"
-                                            data-placement="left" title="Hapus Sub Kegiatan"
-                                            onclick="deleteData('{{ route('pegawai-apbd.destroy', $item['apbd_id']) }}')">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                        <a class="btn btn-warning btn-sm" data-tooltip="tooltip" data-placement="left"
-                                            title="Ubah Anggaran" href="{{ route('pegawai-apbd.edit', $item['apbd_id']) }}">
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </a>
-                                    @endif
-                                </td>
                             </tr>
-                            {{-- @include('admin.Apbd.Components.edit') --}}
                         @endif
                         @php
                             if (strlen($item['kode_rekening']) == 3 && $item['nama_rekening'] == strtoupper('pendapatan daerah')) {
@@ -150,7 +125,6 @@
                                 <strong>{{ number_format(abs($selisih_pendapatan1)) }}</strong>
                             </td>
                             <td style="text-align: right;"><strong>{{ $persen_pendapatan1 }}%</strong></td>
-                            <td></td>
                         @elseif ($apbd['nama_rekening'] == 'BELANJA')
                             <td></td>
                             <td><strong>JUMLAH BELANJA</strong></td>
@@ -177,7 +151,6 @@
                                 <strong>{{ number_format(abs($selisih_belanja)) }}</strong>
                             </td>
                             <td style="text-align: right"><strong>{{ $persen_belanja }}%</strong></td>
-                            <td></td>
                         @endif
                     </tr>
                     <tr>
@@ -205,7 +178,6 @@
                                 <strong>{{ number_format($total_defisit) }}</strong>
                             </td>
                             <td style="text-align: right;"><strong>{{ $persen_defisit }}%</strong></td>
-                            <td></td>
                         @endif
                     </tr>
                     <tr>
@@ -244,7 +216,6 @@
                                 <strong>{{ number_format($selisih_pembiayaan1) }}</strong>
                             </td>
                             <td style="text-align: right"><strong>{{ $persen_pembiayaan1 }}%</strong></td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -273,7 +244,6 @@
                                 <strong>{{ number_format($selisih_pembiayaan2) }}</strong>
                             </td>
                             <td style="text-align: right;"><strong>{{ $persen_pembiayaan2 }}%</strong></td>
-                            <td></td>
                         </tr>
                         <tr>
                             <td></td>
@@ -299,7 +269,6 @@
                                 <strong>{{ number_format($selisih_neto) }}</strong>
                             </td>
                             <td style="text-align: right; font-size: 14px;"><strong>{{ $persen_neto }}%</strong></td>
-                            <td></td>
                         </tr>
                     @endif
                 @endforeach

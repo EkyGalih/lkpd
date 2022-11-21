@@ -47,34 +47,34 @@
                         </a>
                     </td>
                     <td style="text-align: center;">
-                        <a href="{{ route('apbd') }}">
+                        <a href="{{ route('apbdp') }}">
                             <img src="{{ asset('images/apbd.png') }}" alt="APBD">
                         </a>
                     </td>
                 </tr>
                 <tr>
                     <td style="text-align: center;">
-                        <a href="{{ route('realisasi-anggaran-pegawai') }}">
+                        <a href="{{ route('realisasi-anggaran-pimpinan') }}">
                             <img src="{{ asset('images/realisasi.png') }}" alt="Realisasi Anggaran">
                         </a>
                     </td>
                     <td style="text-align: center;">
-                        <a href="{{ route('pegawai-pengguna') }}">
+                        <a href="{{ route('pimpinan-pegawai') }}">
                             <img src="{{ asset('images/pegawai.png') }}" alt="Pegawai">
                         </a>
                     </td>
                 </tr>
                 <tr>
                     <td style="text-align: center;">
-                        <a href="{{ route('pegawai.jadwal') }}">
+                        <a href="{{ route('pimpinan.jadwal') }}">
                             <img src="{{ asset('images/jadwal.png') }}" alt="Jadwal">
                         </a>
                     </td>
-                    <td style="text-align: center;">
+                    {{-- <td style="text-align: center;">
                         <a href="{{ route('kode-rekening-pegawai') }}">
                             <img src="{{ asset('images/kode-rekening.png') }}" alt="Pegawai">
                         </a>
-                    </td>
+                    </td> --}}
                 </tr>
             </table>
           </div>
