@@ -94,9 +94,9 @@ class Helpers extends Facade
         return $persen;
     }
 
-    public static function Users()
+    public static function Users($id)
     {
-        return User::first();
+        return User::where('id', '=', $id)->first();
     }
 
     public static function NIP()
