@@ -93,6 +93,6 @@
         data_pembiayaan2_years3 = $('#jumlah_pembiayaan2_'+years3).val();
         data_pembiayaan2_years4 = $('#jumlah_pembiayaan2_'+years4).val();
     </script>
-    @include('layouts.Pimpinan.Script.apbd.add-script')
-    @include('layouts.Pimpinan.Script.apbd-chart')
+    @include('layouts.pimpinan.Script.apbd.add-script')
+    @include('layouts.pimpinan.Script.apbd-chart')
 @endsection
