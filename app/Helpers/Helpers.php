@@ -7,6 +7,7 @@ use App\Models\Divisi;
 use App\Models\IndikatorKinerja;
 use App\Models\KodeRekening;
 use App\Models\LaporanRealisasiAnggaran;
+use App\Models\Pegawai;
 use App\Models\ProgramAnggaran;
 use App\Models\SasaranStrategis;
 use App\Models\User;
@@ -96,6 +97,16 @@ class Helpers extends Facade
     public static function Users()
     {
         return User::first();
+    }
+
+    public static function NIP()
+    {
+        $GetNip = Pegawai::where('user_id', '=', Auth::user()->id)->select('nip')->first();
+        $nip1 = substr($GetNip->nip,0,8);
+        $nip2 = substr($GetNip->nip, 9,5);
+        $nip3 = substr($GetNip->nip, 14,1);
+        $nip4 = substr($GetNip->nip, 15,3);
+        return $nip1.' '.$nip2.' '.$nip3.' '.$nip4;
     }
 
     // ================================
