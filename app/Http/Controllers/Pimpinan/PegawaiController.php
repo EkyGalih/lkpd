@@ -15,6 +15,7 @@ class PegawaiController extends Controller
      */
     public function index()
     {
+        $Divisi = Divisi::all();
         $Pegawai = User::select('id as user_id', 'users.*')
         ->orderBy('created_at', 'DESC')
         ->paginate(10);
