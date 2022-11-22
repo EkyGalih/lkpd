@@ -18,7 +18,7 @@
         <!-- /col-md-4 -->
         <div class="col-md-4 profile-text">
           <h3>{{ $User->nama }}</h3>
-          <h6 style="color: #4C5270">{{ Helpers::NIP() }}</h6>
+          <h6 style="color: #4C5270">{{ Helpers::NIP($User->Pegawai->nip) }}</h6>
           <p>{{ $User->Pegawai->jabatan }}</p>
           <br>
           <p><button class="btn btn-theme"><i class="fa fa-envelope"></i> {{ $User->email }}</button></p>

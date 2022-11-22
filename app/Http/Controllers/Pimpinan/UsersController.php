@@ -18,12 +18,11 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $Pengguna = User::select('id as user_id', 'users.*')
+        $Pegawai = User::select('id as user_id', 'users.*')
         ->orderBy('created_at', 'DESC')
         ->paginate(10);
-        $Divisi = Divisi::select('id as divisi_id', 'divisi.nama_divisi', 'divisi.alias_divisi')->get();
 
-        return view('Pimpinan.Pengguna.pengguna', compact('Pengguna', 'Divisi'));
+        return view('Pimpinan.Pegawai.pengguna', compact('Pegawai'));
     }
 
 

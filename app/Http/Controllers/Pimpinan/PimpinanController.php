@@ -12,7 +12,7 @@ class PimpinanController extends Controller
 {
     public function index()
     {
-        $User = Helpers::Users(Auth::user()->id);
+        $User = Helpers::UsersById(Auth::user()->id);
         $jadwal = Schedule::where('user_id', '=', Auth::user()->id)->get();
         return view('Pimpinan.beranda.beranda', compact('jadwal', 'User'));
     }

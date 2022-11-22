@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('batas_pensiun')->nullable();
             $table->string('golongan_id', 40)->index()->nullable();
             $table->string('pangkat_id', 40)->index()->nullable();
+            $table->string('bidang_id', 40)->index()->nullable();
             $table->timestamps();
         });
     }

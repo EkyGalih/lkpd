@@ -94,18 +94,23 @@ class Helpers extends Facade
         return $persen;
     }
 
-    public static function Users($id)
+    public static function UsersById($id)
     {
         return User::where('id', '=', $id)->first();
     }
 
-    public static function NIP()
+    public static function UsersLimit($limit)
     {
-        $GetNip = Pegawai::where('user_id', '=', Auth::user()->id)->select('nip')->first();
-        $nip1 = substr($GetNip->nip,0,8);
-        $nip2 = substr($GetNip->nip, 9,5);
-        $nip3 = substr($GetNip->nip, 14,1);
-        $nip4 = substr($GetNip->nip, 15,3);
+        return User::limit($limit)->get();
+    }
+
+    public static function NIP($GetNip)
+    {
+        $NIP = strval($GetNip);
+        $nip1 = substr($NIP,0,8);
+        $nip2 = substr($NIP, 9,5);
+        $nip3 = substr($NIP, 14,1);
+        $nip4 = substr($NIP, 15,3);
         return $nip1.' '.$nip2.' '.$nip3.' '.$nip4;
     }
 

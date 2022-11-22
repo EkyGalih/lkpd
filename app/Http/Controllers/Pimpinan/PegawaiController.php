@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Pimpinan;
 
+use App\Helpers\Helpers;
 use App\Http\Controllers\Controller;
-use App\Models\Divisi;
-use App\Models\User;
 
 class PegawaiController extends Controller
 {
@@ -15,11 +14,8 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $Divisi = Divisi::all();
-        $Pegawai = User::select('id as user_id', 'users.*')
-        ->orderBy('created_at', 'DESC')
-        ->paginate(10);
+        $Pegawai = Helpers::UsersLimit(10);
 
-        return view('Pimpinan.Pegawai.pegawai', compact('Pegawai', 'Divisi'));
+        return view('Pimpinan.Pegawai.pegawai', compact('Pegawai'));
     }
 }

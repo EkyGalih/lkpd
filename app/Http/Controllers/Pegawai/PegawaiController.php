@@ -14,7 +14,7 @@ class PegawaiController extends Controller
 {
     public function index()
     {
-        $User = Helpers::Users(Auth::user()->id);
+        $User = Helpers::UsersById(Auth::user()->id);
         $apbd = Apbd::get();
         $iku  = IkuRealisasi::select('indikator_kinerja_id','target','target_tercapai')->get();
 

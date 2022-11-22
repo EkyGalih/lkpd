@@ -37,4 +37,9 @@ class Pegawai extends Model
     {
         return $this->belongsTo(Golongan::class);
     }
+
+    public function Divisi()
+    {
+        return $this->belongsTo(Divisi::class);
+    }
 }
