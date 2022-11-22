@@ -18,6 +18,7 @@
                 </ul>
             </div>
         </div>
+        <hr/>
         @include('Pimpinan.Pegawai.Addons.detail')
     @endforeach
 </div>
