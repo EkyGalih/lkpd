@@ -2,6 +2,7 @@
     aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
         <div class="well profile">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <div class="col-sm-12">
                 <div class="col-xs-12 col-sm-8">
                     <h2>{{ $user->nama }}</h2>
