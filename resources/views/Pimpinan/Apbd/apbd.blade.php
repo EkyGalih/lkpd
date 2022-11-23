@@ -52,7 +52,7 @@
 
         function getApbd(){
             ta = $('#tahun_anggaran').val();
-            window.location.href = window.location.origin + '/index.php/pimpinan/apbd/' + ta
+            window.location.href = window.location.origin + '/index.php/pimpinan/apbdp/' + ta
         }
 
         // get years
