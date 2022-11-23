@@ -17,14 +17,14 @@
                     <div class="col-lg-8" style="text-align: center;">
                         <h4 class="title" style="color: #000000; font-weight: bold;">LAPORAN REALISASI ANGGARAN PENDAPATAN DAN BELANJA DAERAH (KONSOLIDASI)<br/> TAHUN ANGGARAN {{ date('Y') }}<br/>01 Januari {{ date('Y') }} Sampai {{ date('d F Y') }}</h4>
                     </div>
-                    <div class="col-lg-2">
+                    {{-- <div class="col-lg-2">
                         <select id="tahun_anggaran" class="form-control" onchange="getApbd()">
                             <option>Pilih Tahun Anggaran</option>
                             @foreach ($get_tahun as $ta)
                                 <option value="{{ $ta->tahun_anggaran }}" {{ $ta->tahun_anggaran == $tahun_anggaran ? 'selected' : '' }}>{{ $ta->tahun_anggaran }}</option>
                             @endforeach
                         </select>
-                    </div>
+                    </div> --}}
                     <input type="hidden" value="{{ $get_tahun == null ? date('Y') : $tahun_anggaran }}" id="get_ta">
                 </div>
                 <hr />
