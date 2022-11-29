@@ -4,6 +4,7 @@ namespace App\Helpers;
 
 use App\Models\Apbd;
 use App\Models\Divisi;
+use App\Models\FileIku;
 use App\Models\IndikatorKinerja;
 use App\Models\KodeRekening;
 use App\Models\LaporanRealisasiAnggaran;
@@ -229,9 +230,14 @@ class Helpers extends Facade
         ->get();
     }
 
-    public static function GetSubKegiatan($kode_kegiatan)
+    public static function GetSubKegiatanAll($kode_kegiatan)
     {
         return SubKegiatanIku::where('kode_kegiatan_iku', '=', $kode_kegiatan)->get();
+    }
+
+    public static function GetSubKegiatan($kode_kegiatan)
+    {
+        return SubKegiatanIku::where('kode_kegiatan_iku', '=', $kode_kegiatan)->first();
     }
 
     public static function GetPersentase($kode_kegiatan)
@@ -240,6 +246,19 @@ class Helpers extends Facade
         return $persentase->persentase;
     }
 
+    public static function GetAllPersentase($kode_kegiatan)
+    {
+        $persentases   = SubKegiatanIku::where('kode_kegiatan_iku', '=', $kode_kegiatan)->select('persentase')->count();
+        $persentase    = SubKegiatanIku::where('kode_kegiatan_iku', '=', $kode_kegiatan)->where('persentase', '=', 100)->select('persentase')->count();
+
+        return round(($persentase/$persentases) * 100, 2);
+    }
+
+    public static function GetListFile($id)
+    {
+        $file = FileIku::where('sub_kegiatan_iku_id', '=', $id)->select('nama_file')->paginate(10);
+        return $file;
+    }
     // ================================
     //              TOOLS
     // ===============================

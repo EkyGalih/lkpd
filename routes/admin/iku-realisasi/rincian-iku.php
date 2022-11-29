@@ -10,8 +10,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'admin']], function 
         Route::post('store', [RincianIkuController::class, 'store'])->name('rincian-iku-admin.store');
         Route::get('edit/{id}', [RincianIkuController::class, 'edit'])->name('rincian-iku-admin.edit');
         Route::put('update/{id}', [RincianIkuController::class, 'update'])->name('rincian-iku-admin.update');
+        Route::get('show/{id}', [RincianIkuController::class, 'show'])->name('rincian-iku-admin.show');
         Route::get('destroy/{id}', [RincianIkuController::class, 'destroy'])->name('rincian-iku-admin.destroy');
         Route::post('import', [RincianIkuController::class, 'import'])->name('rincian-iku-admin.import');
-        Route::post('upload/{id}', [RincianIkuController::class, 'upload'])->name('rincian-iku-admin.upload');
+        Route::post('upload', [RincianIkuController::class, 'upload'])->name('rincian-iku-admin.upload');
     });
 });

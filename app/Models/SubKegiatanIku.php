@@ -22,10 +22,10 @@ class SubKegiatanIku extends Model
             $model->id = (string)Uuid::generate(4);
         });
     }
-    
+
     public function KegiatanIku()
     {
-        return $this->belongsTo(KegiatanIku::class);
+        return $this->belongsTo(KegiatanIku::class,);
     }
 
     public function FileIku()
