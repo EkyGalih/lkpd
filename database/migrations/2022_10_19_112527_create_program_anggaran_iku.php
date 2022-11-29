@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('program_anggaran_iku', function (Blueprint $table) {
             $table->string('id', 40)->primary();
             $table->string('program', 150);
+            $table->string('kode_program', 10);
             $table->bigInteger('anggaran');
             $table->bigInteger('anggaran_terpakai');
             $table->string('persentase_anggaran', 50);

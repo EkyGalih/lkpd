@@ -19,7 +19,9 @@
                     <li class="@yield('iku-realisasi')"><a href="{{ route('iku-realisasi.index') }}"><i class="fas fa-book"></i> Iku & Realisasi</a></li>
                     <li class="@yield('iku-sasaran')"><a href="{{ route('iku-sasaran') }}"><i class="fas fa-dot-circle"></i> Sasaran Strategis</a></li>
                     <li class="@yield('iku-indikator')"><a href="{{ route('iku-indikator') }}"><i class="fas fa-tachometer-alt"></i> Indikator Kinerja</a></li>
-                    <li class="@yield('iku-formulasi')"><a href="{{ route('iku-formulasi') }}"><i class="fas fa-file-code"></i> Formulasi</a></li>
+                    <li class="@yield('iku-formulasi')"><a href="{{ route('iku-formulasi') }}"><i class="fas fa-file-code"></i> Formulasi</a></li>`
+                    <li class="divider"></li>
+                    <li class="@yield('rincian-iku')"><a href="{{route('rincian-iku-admin')}}"><i class="fas fa-info"></i> Rincian Iku </a></li>
                 </ul>
             </li>
             <li class="">

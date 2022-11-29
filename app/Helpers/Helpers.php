@@ -10,6 +10,7 @@ use App\Models\LaporanRealisasiAnggaran;
 use App\Models\Pegawai;
 use App\Models\ProgramAnggaran;
 use App\Models\SasaranStrategis;
+use App\Models\SubKegiatanIku;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Facade;
@@ -226,6 +227,17 @@ class Helpers extends Facade
         ->where('created_at', 'LIKE', $years.'%')
         ->orderBy('created_at', 'ASC')
         ->get();
+    }
+
+    public static function GetSubKegiatan($kode_kegiatan)
+    {
+        return SubKegiatanIku::where('kode_kegiatan_iku', '=', $kode_kegiatan)->get();
+    }
+
+    public static function GetPersentase($kode_kegiatan)
+    {
+        $persentase = SubKegiatanIku::where('kode_kegiatan_iku', '=', $kode_kegiatan)->select('persentase')->first();
+        return $persentase->persentase;
     }
 
     // ================================

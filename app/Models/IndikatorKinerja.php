@@ -10,6 +10,7 @@ class IndikatorKinerja extends Model
 {
     use HasFactory;
 
+    public $incrementing = false;
     protected $table = 'indikator_kinerja';
     protected $guarded = ['created_at', 'updated_at'];
 
@@ -30,5 +31,10 @@ class IndikatorKinerja extends Model
     public function IkuRealisasi()
     {
         return $this->hasOne(IkuRealisasi::class, 'id');
+    }
+
+    public function RealisasiCapaian()
+    {
+        return $this->hasMany(RealisasiCapaian::class);
     }
 }

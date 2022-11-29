@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('indikator_kinerja', function (Blueprint $table) {
             $table->string('id', 40)->primary();
             $table->text('indikator_kinerja');
+            $table->string('kode_indikator', 10);
             $table->timestamps();
         });
     }
