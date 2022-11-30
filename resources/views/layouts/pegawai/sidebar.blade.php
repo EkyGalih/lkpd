@@ -22,6 +22,8 @@
                     <li class="@yield('iku-sasaran')"><a href="{{ route('iku-sasaran-pegawai') }}"><i class="fas fa-dot-circle"></i> Sasaran Strategis</a></li>
                     <li class="@yield('iku-indikator')"><a href="{{ route('iku-indikator-pegawai') }}"><i class="fas fa-tachometer-alt"></i> Indikator Kinerja</a></li>
                     <li class="@yield('iku-formulasi')"><a href="{{ route('iku-formulasi-pegawai') }}"><i class="fas fa-file-code"></i> Formulasi</a></li>
+                    <li class="divider"></li>
+                    <li class="@yield('rincian-iku')"><a href="{{route('rincian-iku-pegawai')}}"><i class="fas fa-info"></i> Rincian Iku </a></li>
                 </ul>
             <li class="">
                 <a class="@yield('menu-anggaran')" href="{{ route('pegawai-apbd') }}">

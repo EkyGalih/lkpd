@@ -69,6 +69,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->UsersPegawai();
         $this->KodeRekeningPegawai();
         $this->SubKodeRekeningPegawai();
+        $this->RincianIkuPegawai();
 
         // ================================
         //      ROUTES PIMPINAN
@@ -164,6 +165,13 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
         ->namespace($this->namespace)
         ->group(base_path('routes/admin/iku-realisasi/rincian-iku.php'));
+    }
+
+    public function RincianIkuPegawai()
+    {
+        Route::middleware('web')
+        ->namespace($this->namespace)
+        ->group(base_path('routes/pegawai/iku-realisasi/rincian-iku.php'));
     }
 
     public function ProgramAnggaranIkuAdmin()
