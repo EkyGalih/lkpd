@@ -21,7 +21,7 @@
                     <li class="@yield('iku-indikator')"><a href="{{ route('iku-indikator') }}"><i class="fas fa-tachometer-alt"></i> Indikator Kinerja</a></li>
                     <li class="@yield('iku-formulasi')"><a href="{{ route('iku-formulasi') }}"><i class="fas fa-file-code"></i> Formulasi</a></li>`
                     <li class="divider"></li>
-                    <li class="@yield('rincian-iku')"><a href="{{route('rincian-iku-admin')}}"><i class="fas fa-info"></i> Rincian Iku </a></li>
+                    <li class="@yield('rincian-iku')"><a href="{{route('rincian-iku-admin')}}"><i class="fas fa-info"></i> Data Kinerja </a></li>
                 </ul>
             </li>
             <li class="">

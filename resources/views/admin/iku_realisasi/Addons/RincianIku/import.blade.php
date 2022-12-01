@@ -1,4 +1,4 @@
-<div class="modal fade" id="ModalUpload" tabindex="-1" role="dialog" aria-labelledby="modalimport" aria-hidden="true">
+<div class="modal fade" id="ModalImport" tabindex="-1" role="dialog" aria-labelledby="modalimport" aria-hidden="true">
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-header">

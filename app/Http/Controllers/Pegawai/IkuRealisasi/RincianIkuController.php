@@ -100,7 +100,7 @@ class RincianIkuController extends Controller
         $file->move('import_data/iku', $nama_file);
         Excel::import(new RincianIkuImports, public_path('import_data/iku/'.$nama_file));
 
-        return redirect()->route('rincian-iku-pegawai')->with(['success' => 'Rincian Iku berhasil diupload!']);
+        return redirect()->route('rincian-iku-admin')->with(['success' => 'Rincian Iku berhasil diupload!']);
     }
 
     public function upload(Request $request)

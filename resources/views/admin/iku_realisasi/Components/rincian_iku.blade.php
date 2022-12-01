@@ -2,6 +2,9 @@
 @section('title', 'Rincian Iku Realisasi')
 @section('menu-iku-realisasi', 'active')
 @section('rincian-iku', 'active')
+@section('css-additional')
+<link rel="stylesheet" href="{{ asset('lib/bootstrap-fileupload/bootstrap-fileupload.css') }}">
+@endsection
 @section('content')
     <h3><a href="{{ route('rincian-iku-admin') }}"><i class="fas fa-info"></i> Rincian Iku Realisasi</a></h3>
     <hr />
@@ -76,6 +79,7 @@
     </div>
 @endsection
 @section('js-additional')
+<script src="{{ asset('lib/bootstrap-fileupload/bootstrap-fileupload.js') }}"></script>
     <script>
         function toggleIcon(e) {
             $(e.target)
